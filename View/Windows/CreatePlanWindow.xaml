@@ -1,0 +1,300 @@
+﻿<Window x:Class="PLANSA.View.Windows.CreatePlanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLANSA.View.Windows" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:vm="clr-namespace:PLANSA.ViewModel.Windows"
+        mc:Ignorable="d"
+        Title="CreatePlanWindow" 
+        
+        Height="1000" 
+        Width="800"   
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <vm:CreatePlanViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="4"                
+                Background="#212121"
+                MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Margin="10,0,0,0"
+                       Foreground="White"
+                       FontFamily="Bahnschrift"
+                       FontSize="27"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Content="ПЛАНИРОВАНИЕ"/>
+
+                <StackPanel Grid.Column="1"
+                            Margin="0,0,10,0"
+                            Orientation="Horizontal"
+                            FlowDirection="RightToLeft">
+                    <Button Grid.Column="1"                          
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="50"
+                            Height="50"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Padding="0"
+                            Command="{Binding CloseWindow}">
+                        <materialDesign:PackIcon    Kind="Close"
+                                                    Width="45"
+                                                    Height="45"
+                                                    Foreground="White"/>
+                    </Button>
+
+                    <Button Grid.Column="1"                          
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="50"
+                            Height="50"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Padding="0"
+                            Command="{Binding Maximize}">
+                        <materialDesign:PackIcon    Kind="WindowMaximize"
+                                                    Width="45"
+                                                    Height="45"
+                                                    Foreground="White"/>
+                    </Button>
+
+                    <Button Grid.Column="1"                          
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="50"
+                            Height="50"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Padding="0"
+                            Command="{Binding Minimize}">
+                        <materialDesign:PackIcon    Kind="WindowMinimize"
+                                                    Width="45"
+                                                    Height="45"
+                                                    Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="#323232">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="80"/>
+                    <RowDefinition  Height="80"/>
+                    <RowDefinition  Height="80"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="10"
+                            Grid.Row="0">
+                    <Button Background="#0D7377"
+                            materialDesign:ButtonAssist.CornerRadius="100"
+                            Width="55"
+                            Height="55"
+                            Padding="0"
+                            BorderThickness="0"
+                            Command="{Binding CreatePlan}">
+                        <materialDesign:PackIcon    Kind="Check"
+                                                    Width="45"
+                                                    Height="45"/>
+                    </Button>
+
+                    <Button Background="#0D7377"
+                            materialDesign:ButtonAssist.CornerRadius="100"
+                            Width="55"
+                            Height="55"
+                            Padding="0"
+                            BorderThickness="0"
+                            Margin="15,0,0,0">
+                        <materialDesign:PackIcon    Kind="VolumeMedium"
+                                                    Width="45"
+                                                    Height="45"/>
+                    </Button>
+
+                    <Button Background="#0D7377"
+                            materialDesign:ButtonAssist.CornerRadius="100"
+                            Width="55"
+                            Height="55"
+                            Padding="0"
+                            BorderThickness="0"
+                            Margin="15,0,0,0">
+                        <materialDesign:PackIcon    Kind="Message"
+                                                    Width="35"
+                                                    Height="35"/>
+                    </Button>
+
+                    <Button Background="#0D7377"
+                            materialDesign:ButtonAssist.CornerRadius="100"
+                            Width="55"
+                            Height="55"
+                            Padding="0"
+                            BorderThickness="0"
+                            Margin="15,0,0,0">
+                        <materialDesign:PackIcon    Kind="OpenInApp"
+                                                    Width="45"
+                                                    Height="45"/>
+                    </Button>
+
+                    <Button Background="#0D7377"
+                            materialDesign:ButtonAssist.CornerRadius="100"
+                            Width="55"
+                            Height="55"
+                            Padding="0"
+                            BorderThickness="0"
+                            Margin="15,0,0,0"
+                            Command="{Binding ClearCommand}">
+                        <materialDesign:PackIcon    Kind="Remove"
+                                                    Width="45"
+                                                    Height="45"/>
+                    </Button>
+                </StackPanel>
+
+                <Border Background="White"
+                        Margin="10"
+                        Grid.Row="1">
+                    <TextBox    Margin="5"
+                                Foreground="Black"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Заголовок..."
+                                FontFamily="Bahnschrift"
+                                FontSize="25"
+                                materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                Padding="0"
+                                BorderThickness="0"
+                                Text="{Binding HeaderPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+
+                <Border Background="White"
+                        Margin="10"
+                        Grid.Row="2">
+                    <TextBox    Margin="5"
+                                Foreground="Black"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Hint="Срок выполнения(ЧЧ/ДД/ММ/ГГГГ)..."
+                                FontFamily="Bahnschrift"
+                                FontSize="25"
+                                materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                Padding="0"
+                                BorderThickness="0"
+                                Text="{Binding DateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+
+                <Grid   Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition   Width="500"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Calendar                                          
+                        Grid.Row="0"
+                        Height="auto"
+                        Width="auto"
+                        Margin="10"
+                        Grid.Column="1"
+                        Background="White"
+                        VerticalAlignment="Top"
+                        BorderThickness="0"
+                        materialDesign:CalendarAssist.HeaderBackground="#0D7377"
+                        materialDesign:CalendarAssist.HeaderForeground="White"
+                        materialDesign:CalendarAssist.IsHeaderVisible="True"
+                        materialDesign:CalendarAssist.Orientation="Vertical"
+                        materialDesign:CalendarAssist.SelectionColor="#252A34"
+                        materialDesign:CalendarAssist.SelectionForegroundColor="#252A34"
+                        Language="ru-Ru"
+                        SelectedDate="{Binding DateForComplete, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        <Calendar.Resources>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#62D2A2"/>
+                            <SolidColorBrush x:Key="MaterialDesignBody" Color="Black"/>
+                        </Calendar.Resources>
+                    </Calendar>
+
+                    <Border Margin="10"
+                            Background="White">
+                        <TextBox    Margin="10"
+                                    Foreground="Black"
+                                    VerticalContentAlignment="Top"
+                                    materialDesign:HintAssist.Hint="Какой у нас план?.."
+                                    FontFamily="Bahnschrift"
+                                    FontSize="25"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                    Padding="0"
+                                    BorderThickness="0"
+                                    Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="4"
+                        Background="White"
+                        Margin="10">
+                    <Grid>
+                        <ListBox     Width="auto"
+                                     Height="auto"
+                                     HorizontalAlignment="Left"
+                                     ItemsSource="{Binding Files}"
+                                     Grid.Row="2"
+                                     Grid.Column="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Folder"
+                                                                     VerticalAlignment="Center"
+                                                                     Height="25"
+                                                                     Width="25"/>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                Text="{Binding files}"
+                                                Foreground="Black"
+                                                FontSize="20"
+                                                FontFamily="Bahnschrift">
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <materialDesign:PackIcon     Kind="File"
+                                                     Width="100"
+                                                     Height="100"
+                                                     Foreground="#0D7377" 
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"
+                                                     Visibility="{Binding VisibleIcon, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <Button Width="auto"
+                                Height="auto"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding AddFile}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>
