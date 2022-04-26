@@ -74,6 +74,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand OpenFile { get; set; }
         public RelayCommand LeftPlan { get; set; }
         public RelayCommand RightPlan { get; set; }
+        public RelayCommand OpenSettings { get; set; }
         public RelayCommand CreatePlanOpenWindow { get; set; }
 
         public ObservableCollection<FileItem> Files { get; set; }
@@ -198,6 +199,11 @@ namespace PLANSA.ViewModel.Windows
                     TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                     CalculateDeadLine();
                 }
+            });
+
+            OpenSettings = new RelayCommand(o =>
+            {
+                
             });
             #endregion
         }

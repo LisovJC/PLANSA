@@ -150,7 +150,8 @@
                             Foreground="White"
                             FontFamily="Bahnschrift"
                             FontSize="25"
-                            Content="НАСТРОЙКИ"/>
+                            Content="НАСТРОЙКИ"
+                            Command="{Binding OpenSettings}"/>
 
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
                             Height="50"
