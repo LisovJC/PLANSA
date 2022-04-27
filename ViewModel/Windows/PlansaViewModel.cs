@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using PLANSA.Model;
 using PLANSA.Services;
 using PLANSA.View.Windows;
 using System;
@@ -137,7 +138,12 @@ namespace PLANSA.ViewModel.Windows
 
             Minimize = new RelayCommand(o =>
             {
-                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                var notify1 = new ToastContentBuilder();
+                notify1.AddText("PLANSA находится в трее!");
+                notify1.AddAppLogoOverride(new Uri($"{Environment.CurrentDirectory}\\PLANSA.ico"));
+                notify1.AddButton("Перейти", );
+                notify1.Show();
+                Application.Current.MainWindow.Hide();
             });
 
             CreatePlanOpenWindow = new RelayCommand(o =>
