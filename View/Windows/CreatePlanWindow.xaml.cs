@@ -14,6 +14,6 @@ namespace PLANSA.View.Windows
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-        }
+        }     
     }
 }

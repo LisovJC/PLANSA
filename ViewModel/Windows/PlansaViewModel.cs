@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using PLANSA.Model;
 using PLANSA.Services;
 using PLANSA.View.Windows;
 using System;
@@ -137,7 +138,10 @@ namespace PLANSA.ViewModel.Windows
 
             Minimize = new RelayCommand(o =>
             {
-                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                Application.Current.MainWindow.Hide();
+                var notify1 = new ToastContentBuilder();
+                notify1.AddText("PLANSA свёрнута в трей!");
+                notify1.Show();
             });
 
             CreatePlanOpenWindow = new RelayCommand(o =>

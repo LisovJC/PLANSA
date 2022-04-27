@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLANSA.View.Windows" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        xmlns:vm="clr-namespace:PLANSA.ViewModel.Windows"
+        xmlns:vm="clr-namespace:PLANSA.ViewModel.Windows" xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="CreatePlanWindow" 
         

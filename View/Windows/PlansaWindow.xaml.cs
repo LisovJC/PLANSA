@@ -15,5 +15,10 @@ namespace PLANSA
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        {
+            this.Show();
+        }
     }
 }
