@@ -100,15 +100,18 @@ namespace PLANSA.ViewModel.Windows
             
             Files = new ObservableCollection<FileItem>();
             TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();            
-            for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+            TaskItems = DataSaveLoad.LoadJson();
+            if(TaskItems.Count > 0)
             {
-                Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+                {
+                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                }
+                PlanContent = TaskItems[NumberPlan].PlanContent;
+                DeadLine = TaskItems[NumberPlan].DateComplete;
+                TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                CalculateDeadLine();
             }
-            PlanContent = TaskItems[NumberPlan].PlanContent;
-            DeadLine = TaskItems[NumberPlan].DateComplete;
-            TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-            CalculateDeadLine();
 
             Instance = this;
 
