@@ -2,7 +2,7 @@
 
 namespace PLANSA.Model
 {
-    internal class FileItem : Observer
+    public class FileItem : Observer
     {
         private string _files;
 

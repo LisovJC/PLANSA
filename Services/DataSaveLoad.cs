@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PLANSA.Services
 {
-    internal class DataSaveLoad
+    public class DataSaveLoad
     {
         public static string JsonPath = $"{Environment.CurrentDirectory}\\Tasks.json";
         public static void Serialize(object o)

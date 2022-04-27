@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PLANSA.Services
 {
-    internal class ObservableCollectionEX<T> : ObservableCollection<T>
+    public class ObservableCollectionEX<T> : ObservableCollection<T>
     {
         public ObservableCollectionEX() : base()
         {

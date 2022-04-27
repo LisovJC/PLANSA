@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace PLANSA.ViewModel.Windows
 {
-    internal class PlansaViewModel : Observer
+    public class PlansaViewModel : Observer
     {
         public static PlansaViewModel Instance { get; set; }
 
@@ -338,6 +338,7 @@ namespace PLANSA.ViewModel.Windows
 
                 CreatePlanOpenWindow = new RelayCommand(o =>
                 {
+                    Debug.WriteLine("Click");
                     CreatePlanWindow window = new CreatePlanWindow();
                     window.Owner = Application.Current.MainWindow;
                     window.Show();
@@ -490,7 +491,7 @@ namespace PLANSA.ViewModel.Windows
                 #endregion
             }
 
-             void CalculateDeadLine()
+            void CalculateDeadLine()
             {
                 double value;
                 value = Math.Round((DeadLine - DateTime.Now).TotalHours, 1);
@@ -515,7 +516,7 @@ namespace PLANSA.ViewModel.Windows
                 }
             }
 
-             void CalculateDeadLine_2()
+            void CalculateDeadLine_2()
             {
                 double value;
                 value = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1);

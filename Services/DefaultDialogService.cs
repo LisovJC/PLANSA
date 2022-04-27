@@ -2,7 +2,7 @@
 
 namespace PLANSA.Services
 {
-    internal class DefaultDialogService
+    public class DefaultDialogService
     {
         public static string FilePath { get; set; }
 

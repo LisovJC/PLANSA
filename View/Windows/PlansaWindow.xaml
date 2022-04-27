@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PLANSA" 
+        xmlns:tb="http://www.hardcodet.net/taskbar" 
         xmlns:vm="clr-namespace:PLANSA.ViewModel.Windows"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"        
         Title="PLANSA" 
         
