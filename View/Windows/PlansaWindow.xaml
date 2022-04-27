@@ -163,7 +163,8 @@
                             Foreground="White"
                             FontFamily="Bahnschrift"
                             FontSize="25"
-                            Content="ОЧИСТИТЬ"/>
+                            Content="ОЧИСТИТЬ"
+                            Command="{Binding ClearAll}"/>
                 </StackPanel>
 
                 <Border Grid.Column="0"
@@ -194,7 +195,8 @@
                                         Margin="5,0,0,0"
                                         Foreground="White"
                                         Padding="0"
-                                        Command="{Binding LeftPlan}">
+                                        Command="{Binding LeftPlan}"
+                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <materialDesign:PackIcon    Kind="ArrowLeft"
                                                             Width="40"
                                                             Height="40"/>
@@ -204,7 +206,8 @@
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,5,10,0"
                                     Grid.Column="1"
-                                    HorizontalAlignment="Right">
+                                    HorizontalAlignment="Right"
+                                    FlowDirection="RightToLeft">
                             <Button     materialDesign:ButtonAssist.CornerRadius="50"
                                         Height="50"
                                         Width="50"
@@ -213,10 +216,28 @@
                                         Margin="0,0,5,0"
                                         Foreground="White"
                                         Padding="0"
-                                        Command="{Binding RightPlan}">
+                                        Command="{Binding RightPlan}"
+                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <materialDesign:PackIcon    Kind="ArrowRight"
                                                             Width="40"
                                                             Height="40"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="10,0,10,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding ClipPlan_1}">
+
+                                <materialDesign:PackIcon Kind="Paperclip"
+                                                         Foreground="{Binding ClipColor_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="50"
+                                                         Width="50"/>
                             </Button>
                         </StackPanel>
 
@@ -401,7 +422,9 @@
                                         BorderThickness="0"
                                         Margin="5,0,0,0"
                                         Foreground="White"
-                                        Padding="0">
+                                        Padding="0"
+                                        Command="{Binding LeftPlan_2}"
+                                        IsEnabled="{Binding Clip_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <materialDesign:PackIcon    Kind="ArrowLeft"
                                                             Width="40"
                                                             Height="40"/>
@@ -411,7 +434,8 @@
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,5,10,0"
                                     Grid.Column="1"
-                                    HorizontalAlignment="Right">
+                                    HorizontalAlignment="Right"
+                                    FlowDirection="RightToLeft">
                             <Button     materialDesign:ButtonAssist.CornerRadius="50"
                                         Height="50"
                                         Width="50"
@@ -419,10 +443,29 @@
                                         BorderThickness="0"
                                         Margin="0,0,5,0"
                                         Foreground="White"
-                                        Padding="0">
+                                        Padding="0"
+                                        Command="{Binding RightPlan_2}"
+                                        IsEnabled="{Binding Clip_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <materialDesign:PackIcon    Kind="ArrowRight"
                                                             Width="40"
                                                             Height="40"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="10,0,10,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding ClipPlan_2}">
+
+                                <materialDesign:PackIcon Kind="Paperclip"
+                                                         Foreground="{Binding ClipColor_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="50"
+                                                         Width="50"/>
                             </Button>
                         </StackPanel>
 
@@ -452,11 +495,21 @@
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
                                             Content="ПРИОРИТЕТ:"
-                                            Margin="0,0,120,0"/>
+                                            Margin="0,0,45,0"/>
                                     <Ellipse    Width="25"
                                                 Height="25"
-                                                Fill="Green"
+                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Right"/>
+                                    <Ellipse    Width="25"
+                                                Height="25"
+                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                HorizontalAlignment="Right"
+                                                Margin="10,0,0,0"/>
+                                    <Ellipse    Width="25"
+                                                Height="25"
+                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                HorizontalAlignment="Right"
+                                                Margin="10,0,0,0"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"
@@ -465,7 +518,13 @@
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
                                             Content="ОСТАЛОСЬ:"
-                                            Margin="0,0,180,0"/>
+                                            Margin="0,0,0,0"/>
+
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="{Binding TimeOF_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,0,0,0"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"
@@ -474,7 +533,13 @@
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
                                             Content="СРОК СДАЧИ:"
-                                            Margin="0,0,180,0"/>
+                                            Margin="0,0,0,0"/>
+
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="{Binding DeadLine_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,0,0,0"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"
@@ -514,11 +579,11 @@
                                 Margin="10"
                                 Background="#323232"
                                 CornerRadius="30">
-                            <ListBox     Width="auto"
+                            <ListBox     Width="790"
                                          Height="auto"
                                          HorizontalAlignment="Center"
                                          Margin="10"
-                                         ItemsSource="{Binding FileItems}"
+                                         ItemsSource="{Binding Files_2}"
                                          Grid.Row="2"
                                          Grid.Column="0"
                                          SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -526,10 +591,12 @@
                                     <DataTemplate>
                                         <Grid>
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Folder"
+                                                <materialDesign:PackIcon 
+                                                         Kind="Folder"
                                                          VerticalAlignment="Center"
                                                          Height="25"
-                                                         Width="25"/>
+                                                         Width="25"
+                                                         Foreground="Yellow"/>
                                                 <TextBlock
                                                    Margin="5,0,0,0"
                                                    Text="{Binding files}"
