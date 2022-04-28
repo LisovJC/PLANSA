@@ -28,6 +28,16 @@ namespace PLANSA.ViewModel.Windows
 
 
         #region ForFirstFlat
+
+        private string _header;
+
+        public string Header
+        {
+            get => _header;
+            set { _header = value; OnPropertyChanged(); }
+        }
+
+
         private int _index;
 
         public int SelectedIndex
@@ -81,6 +91,15 @@ namespace PLANSA.ViewModel.Windows
         #endregion
 
         #region ForSecondFlat
+
+        private string _header_2;
+
+        public string Header_2
+        {
+            get => _header_2;
+            set { _header_2 = value; OnPropertyChanged(); }
+        }
+
         private int _index_2;
 
         public int SelectedIndex_2
@@ -229,6 +248,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent = TaskItems[NumberPlan].PlanContent;
                 DeadLine = TaskItems[NumberPlan].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
             }           
           
@@ -258,6 +278,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
                 DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
             }
             #endregion
@@ -324,6 +345,8 @@ namespace PLANSA.ViewModel.Windows
                     DeadLine = DateTime.MinValue;
                     TimeOF = String.Empty;
                     Files_2.Clear();
+                    Header = String.Empty;
+                    Header_2 = String.Empty;
                     ClearDeadLine();
                     File.Delete(pathTonumberPlan_2);
                     File.Delete(pathTonumberPlan);
@@ -396,6 +419,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent = TaskItems[valuePlan].PlanContent;
                         DeadLine = TaskItems[valuePlan].DateComplete;
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                        Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
@@ -418,6 +442,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent = TaskItems[valuePlan].PlanContent;
                         DeadLine = TaskItems[valuePlan].DateComplete;
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                        Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
@@ -441,6 +466,7 @@ namespace PLANSA.ViewModel.Windows
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                         CalculateDeadLine_2();
+                        Header_2 = TaskItems[valuePlan].HeaderPlan;
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -463,6 +489,7 @@ namespace PLANSA.ViewModel.Windows
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                         CalculateDeadLine_2();
+                        Header_2 = TaskItems[valuePlan].HeaderPlan;
                         TaskItems = DataSaveLoad.LoadJson();
 
                     }
@@ -518,22 +545,61 @@ namespace PLANSA.ViewModel.Windows
                 }
                 else
                 {
-                    Files_temp = new ObservableCollection<FileItem>();
-                    Task_temp = new ObservableCollection<TaskItem>();
-                    Files_temp = Files;
-                    Files_temp.Add(new FileItem() { files = DefaultDialogService.FilePath });
-                    
-                    List<string> tempList = new List<string>();
-                    for (int i = 0; i < Files_temp.Count; i++)
+                    if(Files.Count > 0)
                     {
-                        tempList.Add(Files_temp[i].files);
-                    }
+                        Files_temp = new ObservableCollection<FileItem>();
+                        Task_temp = new ObservableCollection<TaskItem>();
+                        Files_temp = Files;
+                        Files_temp.Add(new FileItem() { files = DefaultDialogService.FilePath });
 
-                    int number = NumberPlan;
-                    Task_temp.Add(new TaskItem() { ColorPriority = TaskItems[number].ColorPriority, DateAdd = TaskItems[number].DateAdd, DateComplete = TaskItems[number].DateComplete,
-                    PlanContent = TaskItems[number].PlanContent, HeaderPlan = TaskItems[number].HeaderPlan, Status = TaskItems[number].Status, Failed = TaskItems[number].Failed, files = tempList});
-                    TaskItems.RemoveAt(number);
-                    TaskItems.Insert(number, Task_temp[0]);
+                        List<string> tempList = new List<string>();
+                        for (int i = 0; i < Files_temp.Count; i++)
+                        {
+                            tempList.Add(Files_temp[i].files);
+                        }
+
+                        int number = int.Parse(File.ReadAllText(pathTonumberPlan));
+                        Task_temp.Add(new TaskItem()
+                        {
+                            ColorPriority = TaskItems[number].ColorPriority,
+                            DateAdd = TaskItems[number].DateAdd,
+                            DateComplete = TaskItems[number].DateComplete,
+                            PlanContent = TaskItems[number].PlanContent,
+                            HeaderPlan = TaskItems[number].HeaderPlan,
+                            Status = TaskItems[number].Status,
+                            Failed = TaskItems[number].Failed,
+                            files = tempList
+                        });
+                        TaskItems[number] = Task_temp[0];
+                        LoadMainData();
+                    }
+                    else
+                    {
+                        Files_temp = new ObservableCollection<FileItem>();
+                        Task_temp = new ObservableCollection<TaskItem>();                       
+                        Files_temp.Add(new FileItem() { files = DefaultDialogService.FilePath });
+
+                        List<string> tempList = new List<string>();
+                        for (int i = 0; i < Files_temp.Count; i++)
+                        {
+                            tempList.Add(Files_temp[i].files);
+                        }
+
+                        int number = int.Parse(File.ReadAllText(pathTonumberPlan));
+                        Task_temp.Add(new TaskItem()
+                        {
+                            ColorPriority = TaskItems[number].ColorPriority,
+                            DateAdd = TaskItems[number].DateAdd,
+                            DateComplete = TaskItems[number].DateComplete,
+                            PlanContent = TaskItems[number].PlanContent,
+                            HeaderPlan = TaskItems[number].HeaderPlan,
+                            Status = TaskItems[number].Status,
+                            Failed = TaskItems[number].Failed,
+                            files = tempList
+                        });
+                        TaskItems[number] = Task_temp[0];
+                        LoadMainData();
+                    }                    
                 }
             });
             #endregion
@@ -614,7 +680,7 @@ namespace PLANSA.ViewModel.Windows
             }
 
 
-            Files = new ObservableCollection<FileItem>();
+            Files.Clear();
             TaskItems = new ObservableCollectionEX<TaskItem>();
             TaskItems = DataSaveLoad.LoadJson();
             if (TaskItems.Count > 0)
@@ -626,10 +692,11 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent = TaskItems[NumberPlan].PlanContent;
                 DeadLine = TaskItems[NumberPlan].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
             }
 
-            Files_2 = new ObservableCollection<FileItem>();
+            Files_2.Clear();
             if (File.Exists(pathTonumberPlan_2))
             {
                 NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
@@ -655,6 +722,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
                 DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
             }
             #endregion

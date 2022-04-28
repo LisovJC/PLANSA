@@ -284,7 +284,7 @@
                                 Background="Transparent"
                                 BorderThickness="0">
 
-                                <materialDesign:PackIcon Kind="VolumeHigh"
+                                <materialDesign:PackIcon Kind="Message"
                                                          Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
@@ -302,6 +302,22 @@
 
                                 <materialDesign:PackIcon Kind="Eye"
                                                          Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Remove"
+                                                         Foreground="#E23E57"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
@@ -408,6 +424,12 @@
                                         FontSize="25"
                                         FontFamily="Bahnschrift"
                                         Content="СОДЕРЖАНИЕ ЗАДАЧИ"
+                                        HorizontalAlignment="Center"/>
+
+                                <Label  Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="{Binding Header, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Center"/>
 
                                 <TextBlock  
@@ -576,7 +598,7 @@
                                 Background="Transparent"
                                 BorderThickness="0">
 
-                                <materialDesign:PackIcon Kind="VolumeHigh"
+                                <materialDesign:PackIcon Kind="Message"
                                                          Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
@@ -594,6 +616,22 @@
 
                                 <materialDesign:PackIcon Kind="Eye"
                                                          Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Remove"
+                                                         Foreground="#E23E57"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
@@ -696,11 +734,18 @@
                                         Content="СОДЕРЖАНИЕ ЗАДАЧИ"
                                         HorizontalAlignment="Center"/>
 
+                                <Label  Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="{Binding Header_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        HorizontalAlignment="Center"/>
+
                                 <TextBlock  
                                         Foreground="White"
                                         FontSize="20"
                                         FontFamily="Bahnschrift"
-                                        Margin="5"/>
+                                        Margin="5"
+                                        Text="{Binding PlanContent_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </Border>
 
