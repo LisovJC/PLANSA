@@ -166,6 +166,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand ClipPlan_2 { get; set; }
         public RelayCommand ClearAll { get; set; }
         public RelayCommand AddFile { get; set; }
+        public RelayCommand DeletePlan { get; set; }
 
         public ObservableCollection<FileItem> Files { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
@@ -334,26 +335,22 @@ namespace PLANSA.ViewModel.Windows
                     Application.Current.Shutdown();
                 });
 
-                ClearAll = new RelayCommand(o =>
+            DeletePlan = new RelayCommand(o =>
+            {
+                try
                 {
-                    Files.Clear();
-                    TaskItems.Clear();
-                    PlanContent_2 = String.Empty;
-                    DeadLine_2 = DateTime.MinValue;
-                    TimeOF_2 = String.Empty;
-                    PlanContent = String.Empty;
-                    DeadLine = DateTime.MinValue;
-                    TimeOF = String.Empty;
-                    Files_2.Clear();
-                    Header = String.Empty;
-                    Header_2 = String.Empty;
-                    ClearDeadLine();
-                    File.Delete(pathTonumberPlan_2);
-                    File.Delete(pathTonumberPlan);
-                    File.Delete(Color_2);
-                    File.Delete(Color_1);
-                    File.Delete(Clipping_1);
-                    File.Delete(Clipping_2);
+                    DeleteElement(int.Parse(File.ReadAllText(pathTonumberPlan)));
+                }
+                catch (Exception e)
+                {
+
+                    Debug.WriteLine(e.Message);
+                }
+            });
+
+            ClearAll = new RelayCommand(o =>
+                {
+                    AllClear();
 
                 });
 
@@ -605,7 +602,7 @@ namespace PLANSA.ViewModel.Windows
             #endregion
         }
 
-            #region Methods
+     #region Methods
         void CalculateDeadLine()
             {
                 double value;
@@ -631,7 +628,7 @@ namespace PLANSA.ViewModel.Windows
                 }
             }
 
-            void CalculateDeadLine_2()
+        void CalculateDeadLine_2()
             {
                 double value;
                 value = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1);
@@ -656,7 +653,7 @@ namespace PLANSA.ViewModel.Windows
                 }
             }
 
-            void ClearDeadLine()
+        void ClearDeadLine()
             {                            
                 ColorPriority = (Brush)new BrushConverter().ConvertFrom("#FFFFFF");
                 ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#FFFFFF");
@@ -777,6 +774,58 @@ namespace PLANSA.ViewModel.Windows
                 {
                     LoadMainData();
                 }
+        }
+
+        void DeleteElement(int numberElement)
+        {
+            
+            if(TaskItems.Count > 0)
+            {
+                TaskItems.RemoveAt(numberElement);
+
+                if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
+                {
+                    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
+                }
+
+                //if (numberElement == TaskItems.Count && (TaskItems.Count > 0))
+                //{
+                //    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
+                //}
+                //else if (-1 < numberElement - 1 && (TaskItems.Count > 0))
+                //{
+                //    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
+                //}               
+            }
+
+            if (TaskItems.Count <= 0)
+            {
+                AllClear();
+            }
+
+            LoadMainData();
+        }
+
+        void AllClear()
+        {
+            Files.Clear();
+            TaskItems.Clear();
+            PlanContent_2 = String.Empty;
+            DeadLine_2 = DateTime.MinValue;
+            TimeOF_2 = String.Empty;
+            PlanContent = String.Empty;
+            DeadLine = DateTime.MinValue;
+            TimeOF = String.Empty;
+            Files_2.Clear();
+            Header = String.Empty;
+            Header_2 = String.Empty;
+            ClearDeadLine();
+            File.Delete(pathTonumberPlan_2);
+            File.Delete(pathTonumberPlan);
+            File.Delete(Color_2);
+            File.Delete(Color_1);
+            File.Delete(Clipping_1);
+            File.Delete(Clipping_2);
         }
         #endregion
     }

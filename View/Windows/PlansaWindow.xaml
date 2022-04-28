@@ -314,7 +314,8 @@
                                 Padding="0"
                                 materialDesign:ButtonAssist.CornerRadius="100"
                                 Background="Transparent"
-                                BorderThickness="0">
+                                BorderThickness="0"
+                                Command="{Binding DeletePlan}">
 
                                 <materialDesign:PackIcon Kind="Remove"
                                                          Foreground="#E23E57"
