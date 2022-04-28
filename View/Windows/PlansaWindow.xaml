@@ -14,7 +14,8 @@
         Width="1700"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Visibility="{Binding Visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
     <Window.DataContext>
         <vm:PlansaViewModel/>
@@ -234,8 +235,73 @@
                                 BorderThickness="0"
                                 Command="{Binding ClipPlan_1}">
 
-                                <materialDesign:PackIcon Kind="Paperclip"
+                                <materialDesign:PackIcon Kind="Lock"
                                                          Foreground="{Binding ClipColor_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding AddFile}">
+
+                                <materialDesign:PackIcon Kind="Paperclip"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Check"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="VolumeHigh"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Eye"
+                                                         Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
@@ -462,8 +528,72 @@
                                 BorderThickness="0"
                                 Command="{Binding ClipPlan_2}">
 
-                                <materialDesign:PackIcon Kind="Paperclip"
+                                <materialDesign:PackIcon Kind="Lock"
                                                          Foreground="{Binding ClipColor_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Paperclip"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Check"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="VolumeHigh"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Eye"
+                                                         Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
