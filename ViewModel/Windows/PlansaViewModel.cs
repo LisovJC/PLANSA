@@ -785,17 +785,9 @@ namespace PLANSA.ViewModel.Windows
 
                 if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
                 {
-                    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
-                }
-
-                //if (numberElement == TaskItems.Count && (TaskItems.Count > 0))
-                //{
-                //    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
-                //}
-                //else if (-1 < numberElement - 1 && (TaskItems.Count > 0))
-                //{
-                //    File.WriteAllText(pathTonumberPlan, numberElement--.ToString());
-                //}               
+                    numberElement--;
+                    File.WriteAllText(pathTonumberPlan, numberElement.ToString());
+                }         
             }
 
             if (TaskItems.Count <= 0)
