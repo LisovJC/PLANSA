@@ -374,7 +374,7 @@ namespace PLANSA.ViewModel.Windows
 
                 });
 
-                Maximize = new RelayCommand(o =>
+            Maximize = new RelayCommand(o =>
                 {
                     if (WindowStateFlag)
                     {
@@ -388,7 +388,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                Minimize = new RelayCommand(o =>
+            Minimize = new RelayCommand(o =>
                 {
                     var notify1 = new ToastContentBuilder();
                     notify1.AddText("PLANSA находится в трее!");
@@ -397,7 +397,7 @@ namespace PLANSA.ViewModel.Windows
                     Application.Current.MainWindow.Hide();
                 });
 
-                CreatePlanOpenWindow = new RelayCommand(o =>
+            CreatePlanOpenWindow = new RelayCommand(o =>
                 {                  
                     CreatePlanWindow window = new CreatePlanWindow();
                     window.Owner = Application.Current.MainWindow;
@@ -405,7 +405,7 @@ namespace PLANSA.ViewModel.Windows
                     Application.Current.MainWindow.Hide();
                 });
 
-                OpenFile = new RelayCommand(o =>
+            OpenFile = new RelayCommand(o =>
                 {
                     if (SelectedIndex == -1)
                     {
@@ -419,7 +419,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                RightPlan = new RelayCommand(o =>
+            RightPlan = new RelayCommand(o =>
                 {
                     int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan)), limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
@@ -443,7 +443,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                LeftPlan = new RelayCommand(o =>
+            LeftPlan = new RelayCommand(o =>
                 {
                     int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan));
                     if (valuePlan > 0)
@@ -467,7 +467,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                RightPlan_2 = new RelayCommand(o =>
+            RightPlan_2 = new RelayCommand(o =>
                 {
                     int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan_2)), limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
@@ -491,7 +491,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                LeftPlan_2 = new RelayCommand(o =>
+            LeftPlan_2 = new RelayCommand(o =>
                 {
                     int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan_2));
                     if (valuePlan > 0)
@@ -516,7 +516,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                ClipPlan_1 = new RelayCommand(o =>
+            ClipPlan_1 = new RelayCommand(o =>
                 {
                     if(Clip_1)
                     {
@@ -534,7 +534,7 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                ClipPlan_2 = new RelayCommand(o =>
+            ClipPlan_2 = new RelayCommand(o =>
                 {
                     if (Clip_2)
                     {
@@ -552,10 +552,13 @@ namespace PLANSA.ViewModel.Windows
                     }
                 });
 
-                OpenSettings = new RelayCommand(o =>
-                {
-
-                });
+            OpenSettings = new RelayCommand(o =>
+             {
+                 SettingsWindow window = new SettingsWindow();
+                 window.Owner = Application.Current.MainWindow;
+                 window.Show();
+                 Application.Current.MainWindow.Hide();
+             });
 
             AddFile = new RelayCommand(o =>
             {
