@@ -70,6 +70,14 @@ namespace PLANSA.ViewModel.Windows
             set { _TimeOF = value; OnPropertyChanged(); }
         }
 
+        private string _TimeOFDay;
+
+        public string TimeOFDay
+        {
+            get => _TimeOFDay;
+            set { _TimeOFDay = value; OnPropertyChanged(); }
+        }
+
         private DateTime _dateComplete;
 
         public DateTime DeadLine
@@ -130,6 +138,14 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _TimeOF_2;
             set { _TimeOF_2 = value; OnPropertyChanged(); }
+        }
+        
+        private string _TimeOFDay_2;
+
+        public string TimeOFDay_2
+        {
+            get => _TimeOFDay_2;
+            set { _TimeOFDay_2 = value; OnPropertyChanged(); }
         }
 
         private DateTime _dateComplete_2;
@@ -249,6 +265,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent = TaskItems[NumberPlan].PlanContent;
                 DeadLine = TaskItems[NumberPlan].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
             }           
@@ -279,6 +296,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
                 DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
             }
@@ -689,6 +707,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent = TaskItems[NumberPlan].PlanContent;
                 DeadLine = TaskItems[NumberPlan].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
             }
@@ -719,6 +738,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
                 DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
             }

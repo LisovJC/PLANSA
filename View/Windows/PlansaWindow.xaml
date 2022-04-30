@@ -387,13 +387,13 @@
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="СРОК СДАЧИ:"
+                                            Content="ОСТАЛОСЬ:"
                                             Margin="0,0,0,0"/>
 
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="{Binding DeadLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Content="{Binding TimeOFDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,0,0,0"/>
                                 </StackPanel>
 
@@ -402,13 +402,13 @@
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="ТИП:"
+                                            Content="СРОК СДАЧИ:"
                                             Margin="0,0,0,0"/>
-                                    
+
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Content="{Binding DeadLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
@@ -438,6 +438,7 @@
                                         FontSize="20"
                                         FontFamily="Bahnschrift"
                                         Margin="5"
+                                        TextWrapping="Wrap"
                                         Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </Border>
@@ -701,13 +702,13 @@
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="СРОК СДАЧИ:"
+                                            Content="ОСТАЛОСЬ:"
                                             Margin="0,0,0,0"/>
 
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="{Binding DeadLine_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Content="{Binding TimeOFDay_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,0,0,0"/>
                                 </StackPanel>
 
@@ -716,8 +717,14 @@
                                     <Label  Foreground="White"
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
-                                            Content="ТИП:"
-                                            Margin="0,0,180,0"/>
+                                            Content="СРОК СДАЧИ:"
+                                            Margin="0,0,0,0"/>
+
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="{Binding DeadLine_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -746,6 +753,7 @@
                                         FontSize="20"
                                         FontFamily="Bahnschrift"
                                         Margin="5"
+                                        TextWrapping="Wrap"
                                         Text="{Binding PlanContent_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </Border>
