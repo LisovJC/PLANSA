@@ -10,6 +10,8 @@ namespace PLANSA.ViewModel.Windows
 {
     internal class SettingsViewModel
     {
+        public static string settingsPath = $"{Environment.CurrentDirectory}\\Setiings\\Settings.json";
+
         public RelayCommand CloseWindow { get; set; }
         public SettingsViewModel()
         {

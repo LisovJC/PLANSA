@@ -10,6 +10,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PLANSA.ViewModel.Windows
 {
@@ -236,7 +238,10 @@ namespace PLANSA.ViewModel.Windows
 
         public PlansaViewModel()
         {
+            await PushNotyAsync();
             PropertyChanged += PlansaViewModel_PropertyChanged;
+
+            CreateSettingsFolder();         
 
             #region LoadMainDatas
             if (File.Exists(pathTonumberPlan))
@@ -862,6 +867,75 @@ namespace PLANSA.ViewModel.Windows
             }
 
             Temp.Clear();
+        }
+
+        void CreateSettingsFolder()
+        {
+            if(Directory.Exists($"{Environment.CurrentDirectory}\\Settings"))
+            {
+
+            }
+            else
+            {
+                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Settings");
+            }            
+        }
+
+        void PushNoty()
+        {
+            while(true)
+            {
+                Thread.Sleep(1000000);
+                if (File.Exists(SettingsViewModel.settingsPath))
+                {
+                    ObservableCollectionEX<Settings> settings = new ObservableCollectionEX<Settings>();
+                    settings = DataSaveLoad.LoadSettings();
+
+                    for (int i = 0; i < TaskItems.Count; i++)
+                    {
+                        if (TaskItems[i].Noty)
+                        {
+                            if (settings[0].Hours1)
+                            {
+                                if ((TaskItems[i].DateComplete - DateTime.Now).TotalMinutes < 60)
+                                {
+                                    var notify1 = new ToastContentBuilder();
+                                    notify1.AddText($"Посмотри, до выполнения задачи {TaskItems[i].HeaderPlan}, осталось менее часа!");
+                                    notify1.AddAppLogoOverride(new Uri($"{Environment.CurrentDirectory}\\PLANSA.ico"));
+                                    notify1.Show();
+                                }
+                            }
+
+                            if (settings[0].Hours3)
+                            {
+                                if ((TaskItems[i].DateComplete - DateTime.Now).TotalMinutes < 180)
+                                {
+                                    var notify1 = new ToastContentBuilder();
+                                    notify1.AddText($"Посмотри, до выполнения задачи {TaskItems[i].HeaderPlan}, осталось менее 3х часов!");
+                                    notify1.AddAppLogoOverride(new Uri($"{Environment.CurrentDirectory}\\PLANSA.ico"));
+                                    notify1.Show();
+                                }
+                            }
+
+                            if (settings[0].Hours5)
+                            {
+                                if ((TaskItems[i].DateComplete - DateTime.Now).TotalMinutes < 350)
+                                {
+                                    var notify1 = new ToastContentBuilder();
+                                    notify1.AddText($"Посмотри, до выполнения задачи {TaskItems[i].HeaderPlan}, осталось менее 5-ти часов!");
+                                    notify1.AddAppLogoOverride(new Uri($"{Environment.CurrentDirectory}\\PLANSA.ico"));
+                                    notify1.Show();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        async Task PushNotyAsync()
+        {
+            await Task.Run(() => PushNoty());
         }
         #endregion
     }

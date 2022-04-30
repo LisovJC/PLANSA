@@ -71,5 +71,14 @@ namespace PLANSA.Model
             get { return _files; }
             set { _files = value; OnPropertyChanged(); }
         }
+
+        private bool _noty;
+
+        public bool Noty
+        {
+            get => _noty;
+            set { _noty = value; OnPropertyChanged(); }
+        }
+
     }
 }
