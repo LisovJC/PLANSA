@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Linq;
 
 namespace PLANSA.ViewModel.Windows
 {
@@ -299,6 +300,7 @@ namespace PLANSA.ViewModel.Windows
                 TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
+                Sorting();
             }
             #endregion
 
@@ -434,6 +436,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent = TaskItems[valuePlan].PlanContent;
                         DeadLine = TaskItems[valuePlan].DateComplete;
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                        TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
                         TaskItems = DataSaveLoad.LoadJson();
@@ -458,6 +461,7 @@ namespace PLANSA.ViewModel.Windows
                         DeadLine = TaskItems[valuePlan].DateComplete;
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                         Header = TaskItems[valuePlan].HeaderPlan;
+                        TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
@@ -480,6 +484,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent_2 = TaskItems[valuePlan].PlanContent;
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                        TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         TaskItems = DataSaveLoad.LoadJson();
@@ -503,6 +508,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent_2 = TaskItems[valuePlan].PlanContent;
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                        TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         TaskItems = DataSaveLoad.LoadJson();
@@ -587,6 +593,7 @@ namespace PLANSA.ViewModel.Windows
                         });
                         TaskItems[number] = Task_temp[0];
                         LoadMainData();
+                        Sorting();
                     }
                     else
                     {
@@ -614,6 +621,7 @@ namespace PLANSA.ViewModel.Windows
                         });
                         TaskItems[number] = Task_temp[0];
                         LoadMainData();
+                        Sorting();
                     }                    
                 }
             });
@@ -793,6 +801,7 @@ namespace PLANSA.ViewModel.Windows
                 if (e.PropertyName is nameof(System.Windows.Visibility) && Visibility is System.Windows.Visibility.Visible)
                 {
                     LoadMainData();
+                    Sorting();
                 }
         }
 
@@ -838,6 +847,18 @@ namespace PLANSA.ViewModel.Windows
             File.Delete(Color_1);
             File.Delete(Clipping_1);
             File.Delete(Clipping_2);
+        }
+
+        void Sorting()
+        {
+            ObservableCollection<TaskItem> Temp = new ObservableCollection<TaskItem>(TaskItems.OrderBy(p => p.DateComplete));
+
+            for (int i = 0; i < Temp.Count; i++)
+            {
+                TaskItems[i] = Temp[i];
+            }
+
+            Temp.Clear();
         }
         #endregion
     }
