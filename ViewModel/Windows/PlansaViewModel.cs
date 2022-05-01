@@ -97,6 +97,14 @@ namespace PLANSA.ViewModel.Windows
             set { _color = value; OnPropertyChanged(); }
         }
 
+        private Brush _colorNoty;
+
+        public Brush ColorNoty
+        {
+            get => _colorNoty;
+            set { _colorNoty = value; OnPropertyChanged(); }
+        }
+
         public static readonly string pathTonumberPlan = $"{Environment.CurrentDirectory}\\numberPlan.txt";
 
         #endregion
@@ -186,6 +194,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand ClearAll { get; set; }
         public RelayCommand AddFile { get; set; }
         public RelayCommand DeletePlan { get; set; }
+        public RelayCommand NotyOnOff { get; set; }
 
         public ObservableCollection<FileItem> Files { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
@@ -238,7 +247,7 @@ namespace PLANSA.ViewModel.Windows
 
         public PlansaViewModel()
         {
-            await PushNotyAsync();
+            PushNotyAsync();
             PropertyChanged += PlansaViewModel_PropertyChanged;
 
             CreateSettingsFolder();         
@@ -274,6 +283,7 @@ namespace PLANSA.ViewModel.Windows
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
+                colorNoty();
             }           
           
             Files_2 = new ObservableCollection<FileItem>();
@@ -401,6 +411,11 @@ namespace PLANSA.ViewModel.Windows
                     notify1.Show();
                     Application.Current.MainWindow.Hide();
                 });
+
+            NotyOnOff = new RelayCommand(o =>
+            {
+                colorNotyClick();
+            });
 
             CreatePlanOpenWindow = new RelayCommand(o =>
                 {                  
@@ -879,13 +894,12 @@ namespace PLANSA.ViewModel.Windows
             {
                 Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Settings");
             }            
-        }
+        }       
 
-        void PushNoty()
+        public void PushNoty()
         {
-            while(true)
+            while (true)
             {
-                Thread.Sleep(1000000);
                 if (File.Exists(SettingsViewModel.settingsPath))
                 {
                     ObservableCollectionEX<Settings> settings = new ObservableCollectionEX<Settings>();
@@ -930,12 +944,40 @@ namespace PLANSA.ViewModel.Windows
                         }
                     }
                 }
+                Thread.Sleep(60000);
             }
         }
 
-        async Task PushNotyAsync()
+
+        public async void PushNotyAsync()
         {
             await Task.Run(() => PushNoty());
+        }
+
+        void colorNotyClick()
+        {
+            if (!TaskItems[NumberPlan].Noty)
+            {
+                TaskItems[NumberPlan].Noty = true;
+                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+            }
+            else
+            {
+                TaskItems[NumberPlan].Noty = false;
+                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+            }
+        }
+
+        void colorNoty()
+        {
+            if (!TaskItems[NumberPlan].Noty)
+            {               
+                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+            }
+            else
+            {               
+                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+            }
         }
         #endregion
     }
