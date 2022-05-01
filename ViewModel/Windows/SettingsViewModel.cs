@@ -28,7 +28,6 @@ namespace PLANSA.ViewModel.Windows
                     }
                 }
             });
-
         }
 
         public static void CreateSettingsJSON()

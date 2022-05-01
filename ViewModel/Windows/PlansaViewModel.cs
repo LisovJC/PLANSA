@@ -183,6 +183,14 @@ namespace PLANSA.ViewModel.Windows
             set { _numbLab = value; OnPropertyChanged(); }
         }
 
+        private string _numbLab_2;
+
+        public string NumberLabel_2
+        {
+            get => _numbLab_2;
+            set { _numbLab_2 = value; OnPropertyChanged(); }
+        }
+
         public static readonly string pathTonumberPlan_2 = $"{Environment.CurrentDirectory}\\numberPlan_2.txt";
         #endregion
 
@@ -324,6 +332,7 @@ namespace PLANSA.ViewModel.Windows
                 CalculateDeadLine_2();
                 Sorting();
                 PushNotyAsync();
+                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
             }
             #endregion
 
@@ -519,6 +528,7 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
+                        NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -543,6 +553,7 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
+                        NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
                         TaskItems = DataSaveLoad.LoadJson();
 
                     }
@@ -785,6 +796,7 @@ namespace PLANSA.ViewModel.Windows
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                 TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
+                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
             }
             #endregion
@@ -946,7 +958,7 @@ namespace PLANSA.ViewModel.Windows
                         }
                     }
                 }
-                Thread.Sleep(100000);
+                Thread.Sleep(50000);
             }
         }
 

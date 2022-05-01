@@ -243,10 +243,27 @@
                                 BorderThickness="0"
                                 Command="{Binding ClipPlan_1}">
 
-                                <materialDesign:PackIcon Kind="Lock"
+                                <materialDesign:PackIcon Kind="Link"
                                                          Foreground="{Binding ClipColor_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                          Height="50"
                                                          Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding NotyOnOff}">
+
+                                <materialDesign:PackIcon Kind="MessageAlertOutline"
+                                                         Foreground="{Binding ColorNoty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="45"
+                                                         Width="45"/>
                             </Button>
 
                             <Button 
@@ -276,25 +293,8 @@
                                 Background="Transparent"
                                 BorderThickness="0">
 
-                                <materialDesign:PackIcon Kind="Check"
+                                <materialDesign:PackIcon Kind="Eye"
                                                          Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding NotyOnOff}">
-
-                                <materialDesign:PackIcon Kind="Message"
-                                                         Foreground="{Binding ColorNoty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
@@ -309,7 +309,7 @@
                                 Background="Transparent"
                                 BorderThickness="0">
 
-                                <materialDesign:PackIcon Kind="Eye"
+                                <materialDesign:PackIcon Kind="Done"
                                                          Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
@@ -528,6 +528,14 @@
                                                             Width="40"
                                                             Height="40"/>
                             </Button>
+
+                            <Label  Content="{Binding NumberLabel_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="15,0,0,0"
+                                    Foreground="Black"
+                                    FontFamily="Bahnschrift"
+                                    FontSize="25"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
@@ -561,10 +569,26 @@
                                 BorderThickness="0"
                                 Command="{Binding ClipPlan_2}">
 
-                                <materialDesign:PackIcon Kind="Lock"
+                                <materialDesign:PackIcon Kind="Link"
                                                          Foreground="{Binding ClipColor_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                          Height="50"
                                                          Width="50"/>
+                            </Button>
+
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="MessageAlertOutline"
+                                                         Foreground="#0D7377"
+                                                         Height="45"
+                                                         Width="45"/>
                             </Button>
 
                             <Button 
@@ -593,44 +617,28 @@
                                 Background="Transparent"
                                 BorderThickness="0">
 
-                                <materialDesign:PackIcon Kind="Check"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0">
-
-                                <materialDesign:PackIcon Kind="Message"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0">
-
                                 <materialDesign:PackIcon Kind="Eye"
                                                          Foreground="#0D7377"
                                                          Height="50"
                                                          Width="50"/>
                             </Button>
 
+                            <Button 
+                                Grid.ColumnSpan="2"
+                                Width="60"
+                                Height="60"
+                                Margin="0,0,0,0"
+                                Padding="0"
+                                materialDesign:ButtonAssist.CornerRadius="100"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <materialDesign:PackIcon Kind="Done"
+                                                         Foreground="#0D7377"
+                                                         Height="50"
+                                                         Width="50"/>
+                            </Button>
+                           
                             <Button 
                                 Grid.ColumnSpan="2"
                                 Width="60"
