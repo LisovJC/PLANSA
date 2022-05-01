@@ -458,6 +458,7 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
+                        colorNoty();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -482,6 +483,7 @@ namespace PLANSA.ViewModel.Windows
                         Header = TaskItems[valuePlan].HeaderPlan;
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine();
+                        colorNoty();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -740,6 +742,7 @@ namespace PLANSA.ViewModel.Windows
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
+                colorNoty();
             }
 
             Files_2.Clear();
@@ -931,7 +934,7 @@ namespace PLANSA.ViewModel.Windows
                         }
                     }
                 }
-                Thread.Sleep(60000);
+                Thread.Sleep(100000);
             }
         }
 
@@ -942,9 +945,9 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNotyClick()
         {
-            if (!TaskItems[NumberPlan].Noty)
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
             {
-                TaskItems[NumberPlan].Noty = true;
+                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty = true;
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
             }
             else
@@ -956,7 +959,7 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNoty()
         {
-            if (!TaskItems[NumberPlan].Noty)
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
             {               
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
             }
