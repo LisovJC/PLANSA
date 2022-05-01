@@ -202,6 +202,14 @@
                                                             Width="40"
                                                             Height="40"/>
                             </Button>
+
+                            <Label  Content="{Binding NumberLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="15,0,0,0"
+                                    Foreground="Black"
+                                    FontFamily="Bahnschrift"
+                                    FontSize="25"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"

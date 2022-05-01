@@ -175,6 +175,14 @@ namespace PLANSA.ViewModel.Windows
             set { _color_2 = value; OnPropertyChanged(); }
         }
 
+        private string _numbLab;
+
+        public string NumberLabel
+        {
+            get => _numbLab; 
+            set { _numbLab = value; OnPropertyChanged(); }
+        }
+
         public static readonly string pathTonumberPlan_2 = $"{Environment.CurrentDirectory}\\numberPlan_2.txt";
         #endregion
 
@@ -282,6 +290,7 @@ namespace PLANSA.ViewModel.Windows
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
                 colorNoty();
+                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
             }           
           
             Files_2 = new ObservableCollection<FileItem>();
@@ -459,6 +468,7 @@ namespace PLANSA.ViewModel.Windows
                         Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
                         colorNoty();
+                        NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -484,6 +494,7 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine();
                         colorNoty();
+                        NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -657,22 +668,22 @@ namespace PLANSA.ViewModel.Windows
             {
                 double value;
                 value = Math.Round((DeadLine - DateTime.Now).TotalHours, 1);
-                if (value > 100)
+                if (value > 264)
                 {
                     ColorPriority = (Brush)new BrushConverter().ConvertFrom("#2EB872");
                 }
 
-                if (value < 100 && value > 48)
+                if (value < 264 && value > 72)
                 {
                     ColorPriority = (Brush)new BrushConverter().ConvertFrom("#F7F48B");
                 }
 
-                if (value < 48 && value > 24)
+                if (value < 72 && value > 48)
                 {
                     ColorPriority = (Brush)new BrushConverter().ConvertFrom("#F38181");
                 }
 
-                if (value < 24)
+                if (value < 48)
                 {
                     ColorPriority = (Brush)new BrushConverter().ConvertFrom("#A40A3C");
                 }
@@ -743,6 +754,7 @@ namespace PLANSA.ViewModel.Windows
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 CalculateDeadLine();
                 colorNoty();
+                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
             }
 
             Files_2.Clear();
