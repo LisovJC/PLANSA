@@ -420,6 +420,21 @@
                                             Content="{Binding DeadLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,0,0,0"/>
                                 </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,20,0,0">
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="СТАТУС:"
+                                            Margin="0,0,0,0"/>
+
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="{Binding Status_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,0,0,0"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 
@@ -583,10 +598,11 @@
                                 Padding="0"
                                 materialDesign:ButtonAssist.CornerRadius="100"
                                 Background="Transparent"
-                                BorderThickness="0">
+                                BorderThickness="0"
+                                Command="{Binding NotyOnOff_2}">
 
                                 <materialDesign:PackIcon Kind="MessageAlertOutline"
-                                                         Foreground="#0D7377"
+                                                         Foreground="{Binding ColorNoty_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                          Height="45"
                                                          Width="45"/>
                             </Button>
@@ -599,7 +615,8 @@
                                 Padding="0"
                                 materialDesign:ButtonAssist.CornerRadius="100"
                                 Background="Transparent"
-                                BorderThickness="0">
+                                BorderThickness="0"
+                                Command="{Binding AddFile_2}">
 
                                 <materialDesign:PackIcon Kind="Paperclip"
                                                          Foreground="#0D7377"
@@ -647,7 +664,8 @@
                                 Padding="0"
                                 materialDesign:ButtonAssist.CornerRadius="100"
                                 Background="Transparent"
-                                BorderThickness="0">
+                                BorderThickness="0"
+                                Command="{Binding DeletePlan_2}">
 
                                 <materialDesign:PackIcon Kind="Remove"
                                                          Foreground="#E23E57"
@@ -741,6 +759,21 @@
                                             FontSize="25"
                                             FontFamily="Bahnschrift"
                                             Content="{Binding DeadLine_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="0,0,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,20,0,0">
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="СТАТУС:"
+                                            Margin="0,0,0,0"/>
+
+                                    <Label  Foreground="White"
+                                            FontSize="25"
+                                            FontFamily="Bahnschrift"
+                                            Content="{Binding Status_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>

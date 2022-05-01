@@ -17,6 +17,7 @@ namespace PLANSA.ViewModel.Windows
 {
     public class PlansaViewModel : Observer
     {
+        #region Properties
         public static PlansaViewModel Instance { get; set; }
 
         private bool WindowStateFlag { get; set; } = true;
@@ -103,6 +104,14 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _colorNoty;
             set { _colorNoty = value; OnPropertyChanged(); }
+        }
+
+        private Brush _colorNoty_2;
+
+        public Brush ColorNoty_2
+        {
+            get => _colorNoty_2;
+            set { _colorNoty_2 = value; OnPropertyChanged(); }
         }
 
         public static readonly string pathTonumberPlan = $"{Environment.CurrentDirectory}\\numberPlan.txt";
@@ -209,8 +218,11 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand ClipPlan_2 { get; set; }
         public RelayCommand ClearAll { get; set; }
         public RelayCommand AddFile { get; set; }
+        public RelayCommand AddFile_2 { get; set; }
         public RelayCommand DeletePlan { get; set; }
+        public RelayCommand DeletePlan_2 { get; set; }
         public RelayCommand NotyOnOff { get; set; }
+        public RelayCommand NotyOnOff_2 { get; set; }
 
         public ObservableCollection<FileItem> Files { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
@@ -260,6 +272,7 @@ namespace PLANSA.ViewModel.Windows
         public static readonly string Color_2 = $"{Environment.CurrentDirectory}\\Color_2.txt";
         #endregion
 
+        #endregion
 
         public PlansaViewModel()
         {
@@ -400,6 +413,19 @@ namespace PLANSA.ViewModel.Windows
                 }
             });
 
+            DeletePlan_2 = new RelayCommand(o =>
+            {
+                try
+                {
+                    DeleteElement_2(int.Parse(File.ReadAllText(pathTonumberPlan_2)));
+                }
+                catch (Exception e)
+                {
+
+                    Debug.WriteLine(e.Message);
+                }
+            });
+
             ClearAll = new RelayCommand(o =>
                 {
                     AllClear();
@@ -432,6 +458,11 @@ namespace PLANSA.ViewModel.Windows
             NotyOnOff = new RelayCommand(o =>
             {
                 colorNotyClick();
+            });
+
+            NotyOnOff_2 = new RelayCommand(o =>
+            {
+                colorNotyClick_2();
             });
 
             CreatePlanOpenWindow = new RelayCommand(o =>
@@ -671,6 +702,75 @@ namespace PLANSA.ViewModel.Windows
                     }                    
                 }
             });
+
+            AddFile_2 = new RelayCommand(o =>
+            {
+                DefaultDialogService.OpenFileDialog();
+                if (DefaultDialogService.FilePath == null)
+                {
+
+                }
+                else
+                {
+                    if (Files_2.Count > 0)
+                    {
+                        Files_temp = new ObservableCollection<FileItem>();
+                        Task_temp = new ObservableCollection<TaskItem>();
+                        Files_temp = Files_2;
+                        Files_temp.Add(new FileItem() { files = DefaultDialogService.FilePath });
+
+                        List<string> tempList = new List<string>();
+                        for (int i = 0; i < Files_temp.Count; i++)
+                        {
+                            tempList.Add(Files_temp[i].files);
+                        }
+
+                        int number = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                        Task_temp.Add(new TaskItem()
+                        {
+                            ColorPriority = TaskItems[number].ColorPriority,
+                            DateAdd = TaskItems[number].DateAdd,
+                            DateComplete = TaskItems[number].DateComplete,
+                            PlanContent = TaskItems[number].PlanContent,
+                            HeaderPlan = TaskItems[number].HeaderPlan,
+                            Status = TaskItems[number].Status,
+                            Failed = TaskItems[number].Failed,
+                            files = tempList
+                        });
+                        TaskItems[number] = Task_temp[0];
+                        LoadMainData();
+                        Sorting();
+                    }
+                    else
+                    {
+                        Files_temp = new ObservableCollection<FileItem>();
+                        Task_temp = new ObservableCollection<TaskItem>();
+                        Files_temp.Add(new FileItem() { files = DefaultDialogService.FilePath });
+
+                        List<string> tempList = new List<string>();
+                        for (int i = 0; i < Files_temp.Count; i++)
+                        {
+                            tempList.Add(Files_temp[i].files);
+                        }
+
+                        int number = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                        Task_temp.Add(new TaskItem()
+                        {
+                            ColorPriority = TaskItems[number].ColorPriority,
+                            DateAdd = TaskItems[number].DateAdd,
+                            DateComplete = TaskItems[number].DateComplete,
+                            PlanContent = TaskItems[number].PlanContent,
+                            HeaderPlan = TaskItems[number].HeaderPlan,
+                            Status = TaskItems[number].Status,
+                            Failed = TaskItems[number].Failed,
+                            files = tempList
+                        });
+                        TaskItems[number] = Task_temp[0];
+                        LoadMainData();
+                        Sorting();
+                    }
+                }
+            });
             #endregion
         }
 
@@ -863,9 +963,31 @@ namespace PLANSA.ViewModel.Windows
 
                 if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
                 {
-                    numberElement--;
+                    numberElement--;                    
                     File.WriteAllText(pathTonumberPlan, numberElement.ToString());
                 }         
+            }
+
+            if (TaskItems.Count <= 0)
+            {
+                AllClear();
+            }
+
+            LoadMainData();
+        }
+
+        void DeleteElement_2(int numberElement)
+        {
+
+            if (TaskItems.Count > 0)
+            {
+                TaskItems.RemoveAt(numberElement);
+
+                if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
+                {
+                    numberElement--;
+                    File.WriteAllText(pathTonumberPlan_2, numberElement.ToString());
+                }
             }
 
             if (TaskItems.Count <= 0)
@@ -981,15 +1103,38 @@ namespace PLANSA.ViewModel.Windows
             }
         }
 
+        void colorNotyClick_2()
+        {
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+            {
+                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty = true;
+                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+            }
+            else
+            {
+                TaskItems[NumberPlan_2].Noty = false;
+                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+            }
+        }
+
         void colorNoty()
         {
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
             {               
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
             }
             else
             {               
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+            }
+
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+            {
+                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+            }
+            else
+            {
+                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
             }
         }
         #endregion
