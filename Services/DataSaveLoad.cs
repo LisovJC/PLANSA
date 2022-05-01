@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using PLANSA.Model;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace PLANSA.Services
@@ -87,18 +88,18 @@ namespace PLANSA.Services
             }
         }
 
-        public static ObservableCollectionEX<Settings> LoadSettings()
+        public static ObservableCollection<Settings> LoadSettings()
         {
             if (IsValidJson(JsonPathSettings))
             {
-                ObservableCollectionEX<Settings> Items = new ObservableCollectionEX<Settings>();
+                ObservableCollection<Settings> Items = new ObservableCollection<Settings>();
                 string json = File.ReadAllText(JsonPathSettings);
-                Items = JsonConvert.DeserializeObject<ObservableCollectionEX<Settings>>(json);
+                Items = JsonConvert.DeserializeObject<ObservableCollection<Settings>>(json);
                 return Items;
             }
             else
             {
-                ObservableCollectionEX<Settings> Items = new ObservableCollectionEX<Settings>();
+                ObservableCollection<Settings> Items = new ObservableCollection<Settings>();
                 return Items;
             }
         }

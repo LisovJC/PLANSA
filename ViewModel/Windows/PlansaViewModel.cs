@@ -247,10 +247,8 @@ namespace PLANSA.ViewModel.Windows
 
         public PlansaViewModel()
         {
-            PushNotyAsync();
-            PropertyChanged += PlansaViewModel_PropertyChanged;
-
-            CreateSettingsFolder();         
+            SettingsViewModel.CreateSettingsJSON();
+            PropertyChanged += PlansaViewModel_PropertyChanged;         
 
             #region LoadMainDatas
             if (File.Exists(pathTonumberPlan))
@@ -316,6 +314,7 @@ namespace PLANSA.ViewModel.Windows
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 CalculateDeadLine_2();
                 Sorting();
+                PushNotyAsync();
             }
             #endregion
 
@@ -882,19 +881,7 @@ namespace PLANSA.ViewModel.Windows
             }
 
             Temp.Clear();
-        }
-
-        void CreateSettingsFolder()
-        {
-            if(Directory.Exists($"{Environment.CurrentDirectory}\\Settings"))
-            {
-
-            }
-            else
-            {
-                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Settings");
-            }            
-        }       
+        }          
 
         public void PushNoty()
         {
@@ -902,7 +889,7 @@ namespace PLANSA.ViewModel.Windows
             {
                 if (File.Exists(SettingsViewModel.settingsPath))
                 {
-                    ObservableCollectionEX<Settings> settings = new ObservableCollectionEX<Settings>();
+                    ObservableCollection<Settings> settings = new ObservableCollection<Settings>();
                     settings = DataSaveLoad.LoadSettings();
 
                     for (int i = 0; i < TaskItems.Count; i++)
@@ -947,7 +934,6 @@ namespace PLANSA.ViewModel.Windows
                 Thread.Sleep(60000);
             }
         }
-
 
         public async void PushNotyAsync()
         {
