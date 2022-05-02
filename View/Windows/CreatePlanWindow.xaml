@@ -130,33 +130,9 @@
                             Padding="0"
                             BorderThickness="0"
                             Margin="15,0,0,0">
-                        <materialDesign:PackIcon    Kind="VolumeMedium"
-                                                    Width="45"
-                                                    Height="45"/>
-                    </Button>
-
-                    <Button Background="#0D7377"
-                            materialDesign:ButtonAssist.CornerRadius="100"
-                            Width="55"
-                            Height="55"
-                            Padding="0"
-                            BorderThickness="0"
-                            Margin="15,0,0,0">
-                        <materialDesign:PackIcon    Kind="Message"
+                        <materialDesign:PackIcon    Kind="MessageAlertOutline"
                                                     Width="35"
                                                     Height="35"/>
-                    </Button>
-
-                    <Button Background="#0D7377"
-                            materialDesign:ButtonAssist.CornerRadius="100"
-                            Width="55"
-                            Height="55"
-                            Padding="0"
-                            BorderThickness="0"
-                            Margin="15,0,0,0">
-                        <materialDesign:PackIcon    Kind="OpenInApp"
-                                                    Width="45"
-                                                    Height="45"/>
                     </Button>
 
                     <Button Background="#0D7377"
