@@ -136,7 +136,8 @@
                             Foreground="White"
                             FontFamily="Bahnschrift"
                             FontSize="25"
-                            Content="ОБЗОР"/>
+                            Content="ОБЗОР"
+                            Command="{Binding OpenReviewWindow}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0"

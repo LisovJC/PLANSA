@@ -223,6 +223,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand DeletePlan_2 { get; set; }
         public RelayCommand NotyOnOff { get; set; }
         public RelayCommand NotyOnOff_2 { get; set; }
+        public RelayCommand OpenReviewWindow { get; set; }
 
         public ObservableCollection<FileItem> Files { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
@@ -633,6 +634,14 @@ namespace PLANSA.ViewModel.Windows
                  window.Show();
                  Application.Current.MainWindow.Hide();
              });
+
+            OpenReviewWindow = new RelayCommand(o =>
+            {
+                ReviewWindow window = new ReviewWindow();
+                window.Owner = Application.Current.MainWindow;
+                window.Show();
+                Application.Current.MainWindow.Hide();
+            });
 
             AddFile = new RelayCommand(o =>
             {
