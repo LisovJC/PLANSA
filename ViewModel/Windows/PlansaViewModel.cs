@@ -29,9 +29,9 @@ namespace PLANSA.ViewModel.Windows
             get => _visibility;
             set { _visibility = value; OnPropertyChanged(); }
         }
+        #endregion
 
-
-        #region ForFirstFlat
+        #region Flat_1
 
         private string _header;
 
@@ -50,6 +50,7 @@ namespace PLANSA.ViewModel.Windows
             set { _index = value; OnPropertyChanged(); }
         }
 
+       
         private int _numberPlan;
 
         public int NumberPlan
@@ -58,6 +59,7 @@ namespace PLANSA.ViewModel.Windows
             set { _numberPlan = value; OnPropertyChanged(); }
         }
 
+        
         private string _planContent;
 
         public string PlanContent
@@ -66,6 +68,7 @@ namespace PLANSA.ViewModel.Windows
             set { _planContent = value; OnPropertyChanged(); }
         }
 
+        
         private string _TimeOF;
 
         public string TimeOF
@@ -74,6 +77,7 @@ namespace PLANSA.ViewModel.Windows
             set { _TimeOF = value; OnPropertyChanged(); }
         }
 
+        
         private string _TimeOFDay;
 
         public string TimeOFDay
@@ -82,6 +86,7 @@ namespace PLANSA.ViewModel.Windows
             set { _TimeOFDay = value; OnPropertyChanged(); }
         }
 
+        
         private DateTime _dateComplete;
 
         public DateTime DeadLine
@@ -90,6 +95,7 @@ namespace PLANSA.ViewModel.Windows
             set { _dateComplete = value; OnPropertyChanged(); }
         }
 
+        
         private Brush _color;
 
         public Brush ColorPriority
@@ -98,6 +104,7 @@ namespace PLANSA.ViewModel.Windows
             set { _color = value; OnPropertyChanged(); }
         }
 
+        
         private Brush _colorNoty;
 
         public Brush ColorNoty
@@ -106,19 +113,19 @@ namespace PLANSA.ViewModel.Windows
             set { _colorNoty = value; OnPropertyChanged(); }
         }
 
-        private Brush _colorNoty_2;
+        private string _numbLab;
 
-        public Brush ColorNoty_2
+        public string NumberLabel
         {
-            get => _colorNoty_2;
-            set { _colorNoty_2 = value; OnPropertyChanged(); }
+            get => _numbLab;
+            set { _numbLab = value; OnPropertyChanged(); }
         }
 
         public static readonly string pathTonumberPlan = $"{Environment.CurrentDirectory}\\numberPlan.txt";
 
         #endregion
 
-        #region ForSecondFlat
+        #region Flat_2
 
         private string _header_2;
 
@@ -152,6 +159,7 @@ namespace PLANSA.ViewModel.Windows
             set { _planContent_2 = value; OnPropertyChanged(); }
         }
 
+        
         private string _TimeOF_2;
 
         public string TimeOF_2
@@ -159,6 +167,7 @@ namespace PLANSA.ViewModel.Windows
             get => _TimeOF_2;
             set { _TimeOF_2 = value; OnPropertyChanged(); }
         }
+        
         
         private string _TimeOFDay_2;
 
@@ -168,6 +177,7 @@ namespace PLANSA.ViewModel.Windows
             set { _TimeOFDay_2 = value; OnPropertyChanged(); }
         }
 
+       
         private DateTime _dateComplete_2;
 
         public DateTime DeadLine_2
@@ -176,6 +186,7 @@ namespace PLANSA.ViewModel.Windows
             set { _dateComplete_2 = value; OnPropertyChanged(); }
         }
 
+        
         private Brush _color_2;
 
         public Brush ColorPriority_2
@@ -184,14 +195,7 @@ namespace PLANSA.ViewModel.Windows
             set { _color_2 = value; OnPropertyChanged(); }
         }
 
-        private string _numbLab;
-
-        public string NumberLabel
-        {
-            get => _numbLab; 
-            set { _numbLab = value; OnPropertyChanged(); }
-        }
-
+        
         private string _numbLab_2;
 
         public string NumberLabel_2
@@ -200,6 +204,15 @@ namespace PLANSA.ViewModel.Windows
             set { _numbLab_2 = value; OnPropertyChanged(); }
         }
 
+        
+        private Brush _colorNoty_2;
+
+        public Brush ColorNoty_2
+        {
+            get => _colorNoty_2;
+            set { _colorNoty_2 = value; OnPropertyChanged(); }
+        }
+        
         public static readonly string pathTonumberPlan_2 = $"{Environment.CurrentDirectory}\\numberPlan_2.txt";
         #endregion
 
@@ -224,7 +237,9 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand NotyOnOff { get; set; }
         public RelayCommand NotyOnOff_2 { get; set; }
         public RelayCommand OpenReviewWindow { get; set; }
+        #endregion
 
+        #region Collections
         public ObservableCollection<FileItem> Files { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
 
@@ -242,6 +257,7 @@ namespace PLANSA.ViewModel.Windows
             set { _clipColor_1 = value; OnPropertyChanged(); }
         }
 
+       
         private Brush _clipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0000");
 
         public Brush ClipColor_2
@@ -250,6 +266,7 @@ namespace PLANSA.ViewModel.Windows
             set { _clipColor_2 = value; OnPropertyChanged(); }
         }
 
+        
         private bool _clip_1 = true;
 
         public bool Clip_1
@@ -258,6 +275,7 @@ namespace PLANSA.ViewModel.Windows
             set { _clip_1 = value; OnPropertyChanged(); }
         }
 
+        
         private bool _clip_2 = true;
 
         public bool Clip_2
@@ -273,127 +291,14 @@ namespace PLANSA.ViewModel.Windows
         public static readonly string Color_2 = $"{Environment.CurrentDirectory}\\Color_2.txt";
         #endregion
 
-        #endregion
-
         public PlansaViewModel()
         {
             SettingsViewModel.CreateSettingsJSON();
-            PropertyChanged += PlansaViewModel_PropertyChanged;         
-
-            #region LoadMainDatas
-            if (File.Exists(pathTonumberPlan))
-            {
-                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
-                if (NumberPlan == -1)
-                {
-                    NumberPlan = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan, "0");
-                NumberPlan = 0;
-            }
-
-
-            Files = new ObservableCollection<FileItem>();
-            TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
-            if (TaskItems.Count > 0)
-            {
-                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
-                {
-                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
-                }
-                PlanContent = TaskItems[NumberPlan].PlanContent;
-                DeadLine = TaskItems[NumberPlan].DateComplete;
-                TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header = TaskItems[NumberPlan].HeaderPlan;
-                CalculateDeadLine();
-                colorNoty();
-                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
-            }           
-          
-            Files_2 = new ObservableCollection<FileItem>();
-            if (File.Exists(pathTonumberPlan_2))
-            {
-                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
-                if (NumberPlan_2 == -1)
-                {
-                    NumberPlan_2 = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan_2, "0");
-                NumberPlan_2 = 0;
-            }
-            
-            TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
-            if (TaskItems.Count > 0)
-            {
-                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
-                {
-                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
-                }
-                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
-                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
-                TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
-                CalculateDeadLine_2();
-                Sorting();
-                PushNotyAsync();
-                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
-            }
-            #endregion
-
-            #region Clipping
-            if (File.Exists(Clipping_1))
-                {
-                    Clip_1 = bool.Parse(File.ReadAllText(Clipping_1));
-                }
-                else
-                {
-                    Clip_1 = true;
-                    File.WriteAllText(Clipping_1, "false");
-                }
-
-                if (File.Exists(Clipping_2))
-                {
-                    Clip_2 = bool.Parse(File.ReadAllText(Clipping_2));
-                }
-                else
-                {
-                    Clip_2 = true;
-                    File.WriteAllText(Clipping_2, "false");
-                }
-
-                
-                if (File.Exists(Color_1))
-                {
-                    ClipColor_1 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_1));
-                }
-                else
-                {
-                    ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                    File.WriteAllText(Color_1, "#0D7377");
-                }
-
-                if (File.Exists(Color_2))
-                {
-                    ClipColor_2 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_2));
-                }
-                else
-                {
-                    ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                    File.WriteAllText(Color_2, "#0D7377");
-                }
-            #endregion
-
+            PropertyChanged += PlansaViewModel_PropertyChanged;
             Instance = this;
+
+            StartApp();
+            Clips();
 
             #region Commands
             CloseApp = new RelayCommand(o =>
@@ -783,7 +688,212 @@ namespace PLANSA.ViewModel.Windows
             #endregion
         }
 
-     #region Methods
+        #region Methods
+
+        #region LoadOperaions
+        void StartApp()
+        {
+            #region Flat_1
+            if (File.Exists(pathTonumberPlan))
+            {
+                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
+                if (NumberPlan == -1)
+                {
+                    NumberPlan = 0;
+                }
+            }
+            else
+            {
+                File.WriteAllText(pathTonumberPlan, "0");
+                NumberPlan = 0;
+            }
+
+            Files = new ObservableCollection<FileItem>();
+            TaskItems = new ObservableCollectionEX<TaskItem>();
+            TaskItems = DataSaveLoad.LoadJson();
+            if (TaskItems.Count > 0)
+            {
+                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+                {
+                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                }
+                PlanContent = TaskItems[NumberPlan].PlanContent;
+                DeadLine = TaskItems[NumberPlan].DateComplete;
+                TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                Header = TaskItems[NumberPlan].HeaderPlan;
+                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
+                CalculateDeadLine();
+                colorNoty();
+            }
+            #endregion
+
+            #region Flat_2
+            Files_2 = new ObservableCollection<FileItem>();
+            TaskItems = DataSaveLoad.LoadJson();
+            if (File.Exists(pathTonumberPlan_2))
+            {
+                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                if (NumberPlan_2 == -1)
+                {
+                    NumberPlan_2 = 0;
+                }
+            }
+            else
+            {
+                File.WriteAllText(pathTonumberPlan_2, "0");
+                NumberPlan_2 = 0;
+            }
+
+            if (TaskItems.Count > 0)
+            {
+                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
+                {
+                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
+                }
+                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
+                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
+                TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
+                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                CalculateDeadLine_2();
+
+                Sorting();
+                PushNotyAsync();
+            }
+                #endregion
+
+        }
+
+        void Clips()
+        {
+            if (File.Exists(Clipping_1))
+            {
+                Clip_1 = bool.Parse(File.ReadAllText(Clipping_1));
+            }
+            else
+            {
+                Clip_1 = true;
+                File.WriteAllText(Clipping_1, "false");
+            }
+
+            if (File.Exists(Clipping_2))
+            {
+                Clip_2 = bool.Parse(File.ReadAllText(Clipping_2));
+            }
+            else
+            {
+                Clip_2 = true;
+                File.WriteAllText(Clipping_2, "false");
+            }
+
+
+            if (File.Exists(Color_1))
+            {
+                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_1));
+            }
+            else
+            {
+                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                File.WriteAllText(Color_1, "#0D7377");
+            }
+
+            if (File.Exists(Color_2))
+            {
+                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_2));
+            }
+            else
+            {
+                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                File.WriteAllText(Color_2, "#0D7377");
+            }
+        }
+
+        public void LoadMainData()
+        {
+            #region Flat_1
+            if (File.Exists(pathTonumberPlan))
+            {
+                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
+                if (NumberPlan == -1)
+                {
+                    NumberPlan = 0;
+                }
+            }
+            else
+            {
+                File.WriteAllText(pathTonumberPlan, "0");
+                NumberPlan = 0;
+            }
+
+
+            Files.Clear();
+            TaskItems = DataSaveLoad.LoadJson();
+            if (TaskItems.Count > 0)
+            {
+                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+                {
+                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                }
+                PlanContent = TaskItems[NumberPlan].PlanContent;
+                DeadLine = TaskItems[NumberPlan].DateComplete;
+                TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                Header = TaskItems[NumberPlan].HeaderPlan;
+                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
+                CalculateDeadLine();
+                colorNoty();
+            }
+            #endregion
+
+            #region Flat_2
+            if (File.Exists(pathTonumberPlan_2))
+            {
+                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                if (NumberPlan_2 == -1)
+                {
+                    NumberPlan_2 = 0;
+                }
+            }
+            else
+            {
+                File.WriteAllText(pathTonumberPlan_2, "0");
+                NumberPlan_2 = 0;
+            }
+
+            Files_2.Clear();
+            TaskItems = DataSaveLoad.LoadJson();
+            if (TaskItems.Count > 0)
+            {
+                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
+                {
+                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
+                }
+                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
+                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
+                TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
+                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
+                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                CalculateDeadLine_2();
+            }
+            #endregion
+
+            Clips();
+        }
+
+        private void PlansaViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName is nameof(System.Windows.Visibility) && Visibility is System.Windows.Visibility.Visible)
+            {
+                LoadMainData();
+                Sorting();
+            }
+        }
+        #endregion
+
+        #region DeadLinesOperations
         void CalculateDeadLine()
             {
                 double value;
@@ -839,129 +949,7 @@ namespace PLANSA.ViewModel.Windows
                 ColorPriority = (Brush)new BrushConverter().ConvertFrom("#FFFFFF");
                 ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#FFFFFF");
             }
-
-        public void LoadMainData()
-        {
-            #region LoadMainDatas
-            if (File.Exists(pathTonumberPlan))
-            {
-                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
-                if (NumberPlan == -1)
-                {
-                    NumberPlan = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan, "0");
-                NumberPlan = 0;
-            }
-
-
-            Files.Clear();
-            TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
-            if (TaskItems.Count > 0)
-            {
-                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
-                {
-                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
-                }
-                PlanContent = TaskItems[NumberPlan].PlanContent;
-                DeadLine = TaskItems[NumberPlan].DateComplete;
-                TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header = TaskItems[NumberPlan].HeaderPlan;
-                CalculateDeadLine();
-                colorNoty();
-                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
-            }
-
-            Files_2.Clear();
-            if (File.Exists(pathTonumberPlan_2))
-            {
-                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
-                if (NumberPlan_2 == -1)
-                {
-                    NumberPlan_2 = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan_2, "0");
-                NumberPlan_2 = 0;
-            }
-
-            TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
-            if (TaskItems.Count > 0)
-            {
-                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
-                {
-                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
-                }
-                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
-                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
-                TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
-                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
-                CalculateDeadLine_2();
-            }
-            #endregion
-
-            #region Clipping
-            if (File.Exists(Clipping_1))
-            {
-                Clip_1 = bool.Parse(File.ReadAllText(Clipping_1));
-            }
-            else
-            {
-                Clip_1 = true;
-                File.WriteAllText(Clipping_1, "false");
-            }
-
-            if (File.Exists(Clipping_2))
-            {
-                Clip_2 = bool.Parse(File.ReadAllText(Clipping_2));
-            }
-            else
-            {
-                Clip_2 = true;
-                File.WriteAllText(Clipping_2, "false");
-            }
-
-
-            if (File.Exists(Color_1))
-            {
-                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_1));
-            }
-            else
-            {
-                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                File.WriteAllText(Color_1, "#0D7377");
-            }
-
-            if (File.Exists(Color_2))
-            {
-                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_2));
-            }
-            else
-            {
-                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                File.WriteAllText(Color_2, "#0D7377");
-            }
-            #endregion
-        }
-
-        private void PlansaViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName is nameof(System.Windows.Visibility) && Visibility is System.Windows.Visibility.Visible)
-                {
-                    LoadMainData();
-                    Sorting();
-                }
-        }
+        #endregion
 
         void DeleteElement(int numberElement)
         {
