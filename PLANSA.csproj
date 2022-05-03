@@ -75,12 +75,19 @@
     <Compile Include="Model\Settings.cs" />
     <Compile Include="ViewModel\Windows\ReviewViewModel.cs" />
     <Compile Include="ViewModel\Windows\SettingsViewModel.cs" />
+    <Compile Include="View\Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\ReviewWindow.xaml.cs">
       <DependentUpon>ReviewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\CreatePlanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Pages\" />
-    <Folder Include="View\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf">

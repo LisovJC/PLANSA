@@ -143,6 +143,10 @@
                             Content="РЕДАКТОР"
                             Command="{Binding OpenReviewWindow}"/>
                 </StackPanel>
+
+                <Frame  Grid.Row="0"
+                        NavigationUIVisibility="Hidden"
+                        Content="{Binding ChoicePage}"/>
             </Grid>
         </Border>
     </Grid>
