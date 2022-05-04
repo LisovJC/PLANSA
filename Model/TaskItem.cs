@@ -80,5 +80,20 @@ namespace PLANSA.Model
             set { _noty = value; OnPropertyChanged(); }
         }
 
+        private string _TimeOF;
+
+        public string TimeOF
+        {
+            get => _TimeOF;
+            set { _TimeOF = Math.Round((DateComplete - DateTime.Now).TotalHours, 1).ToString(); OnPropertyChanged(); }
+        }
+
+        private string _TimeOFDay;
+
+        public string TimeOFDay
+        {
+            get => _TimeOFDay;
+            set { _TimeOFDay = Math.Round((DateComplete - DateTime.Now).TotalDays, 1).ToString(); OnPropertyChanged(); }
+        }
     }
 }

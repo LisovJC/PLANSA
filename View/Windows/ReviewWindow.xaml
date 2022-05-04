@@ -117,7 +117,7 @@
                             FontFamily="Bahnschrift"
                             FontSize="25"
                             Content="ГЛАВНАЯ"
-                            Command="{Binding OpenReviewWindow}"/>
+                            Command="{Binding MainPage}"/>
 
                     <Button materialDesign:ButtonAssist.CornerRadius="20,20,0,0"
                             Height="50"
@@ -129,7 +129,7 @@
                             FontFamily="Bahnschrift"
                             FontSize="25"
                             Content="МОИ ПЛАНЫ"
-                            Command="{Binding OpenReviewWindow}"/>
+                            Command="{Binding MyPlansPage}"/>
 
                     <Button materialDesign:ButtonAssist.CornerRadius="20,20,0,0"
                             Height="50"

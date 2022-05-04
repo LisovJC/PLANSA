@@ -1,0 +1,49 @@
+﻿<Page x:Class="PLANSA.View.Pages.MyPlansPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PLANSA.View.Pages" 
+      xmlns:pages="clr-namespace:PLANSA.ViewModel.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" 
+      d:DesignWidth="1700"
+      Title="MyPlansPage">
+
+    <Page.DataContext>
+        <pages:MyPlansViewModel/>
+    </Page.DataContext>
+
+    <Grid   Background="#323232">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Margin="10"
+                  Grid.Row="0"
+                  Grid.ColumnSpan="3"
+                  Height="880"  
+                  VerticalAlignment="Top"
+                  ItemsSource="{Binding TaskItems}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  CanUserDeleteRows="False"
+                  
+                  SelectedIndex="{Binding numberTask, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Задача" Width="400" Binding="{Binding HeaderPlan}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Дата добавления" Width="180" Binding="{Binding DateAdd}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Срок выполнения" Width="180" Binding="{Binding DateComplete}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Осталось дней" Width="180" Binding="{Binding TimeOFDay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Осталось часов" Width="180" Binding="{Binding TimeOF}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Статус выполнения" Width="200" Binding="{Binding Status}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Цветовой приоритет выполнения" Width="*" Binding="{Binding ColorPriority}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -40,6 +40,13 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="100">
+
+                        <Label  HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                FontSize="35"
+                                FontFamily="Bahnschrift"
+                                Content="СТАТИСТИКА ЗА МЕСЯЦ"/>
                     </Border>
 
                     <Border Grid.Column="0"
@@ -71,6 +78,13 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="100">
+
+                        <Label  HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                FontSize="35"
+                                FontFamily="Bahnschrift"
+                                Content="ОБРАТИТЕ ВНИМАНИЕ"/>
                     </Border>
 
                     <Border Grid.Column="0"
@@ -102,6 +116,13 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="100">
+
+                        <Label  HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                FontSize="35"
+                                FontFamily="Bahnschrift"
+                                Content="СТАТИСТИКА ЗА ВСЁ ВРЕМЯ"/>
                     </Border>
 
                     <Border Grid.Column="0"
@@ -114,5 +135,31 @@
                 </StackPanel>
             </Border>
         </StackPanel>
+
+        <Border Background="White"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="1"
+                CornerRadius="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="1200"
+                Height="120">
+
+            <Border CornerRadius="30"
+                    Background="#323232"
+                    Width="1150"
+                    Height="100">
+                <Label  HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="1"
+                        Foreground="White"
+                        FontSize="55"
+                        FontFamily="Bahnschrift"
+                        Content="PLANSA - ЗАБОТИТСЯ О ВАШЕМ ВРЕМЕНИ"/>
+            </Border>
+        </Border>
     </Grid>
 </Page>
