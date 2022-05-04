@@ -10,6 +10,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand CloseWindow { get; set; }
         public RelayCommand MainPage { get; set; }
         public RelayCommand MyPlansPage { get; set; }
+        public RelayCommand EditPage { get; set; }
 
         private Page _choicePage = new MainPage();
         public Page ChoicePage
@@ -43,6 +44,11 @@ namespace PLANSA.ViewModel.Windows
             MyPlansPage = new RelayCommand(o =>
             {
                 ChoicePage = new MyPlansPage();
+            });
+
+            EditPage = new RelayCommand(o =>
+            {
+                ChoicePage = new EditPage();
             });
         }
     }

@@ -141,7 +141,7 @@
                             FontFamily="Bahnschrift"
                             FontSize="25"
                             Content="РЕДАКТОР"
-                            Command="{Binding OpenReviewWindow}"/>
+                            Command="{Binding EditPage}"/>
                 </StackPanel>
 
                 <Frame  Grid.Row="0"
