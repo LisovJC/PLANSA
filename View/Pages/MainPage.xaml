@@ -148,7 +148,7 @@
 
             <Border CornerRadius="30"
                     Background="#323232"
-                    Width="1150"
+                    Width="1170"
                     Height="100">
                 <Label  HorizontalAlignment="Center"
                         VerticalAlignment="Center"
