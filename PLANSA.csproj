@@ -76,6 +76,9 @@
     <Compile Include="ViewModel\Pages\MyPlansViewModel.cs" />
     <Compile Include="ViewModel\Windows\ReviewViewModel.cs" />
     <Compile Include="ViewModel\Windows\SettingsViewModel.cs" />
+    <Compile Include="View\Pages\EditPage.xaml.cs">
+      <DependentUpon>EditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
     <Compile Include="View\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Pages\EditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
