@@ -466,6 +466,7 @@ namespace PLANSA.ViewModel.Windows
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                        colorNoty();
                         TaskItems = DataSaveLoad.LoadJson();
                     }
                 });
@@ -491,6 +492,7 @@ namespace PLANSA.ViewModel.Windows
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                        colorNoty();
                         TaskItems = DataSaveLoad.LoadJson();
 
                     }
@@ -724,7 +726,6 @@ namespace PLANSA.ViewModel.Windows
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
                 CalculateDeadLine();
-                colorNoty();
             }
             #endregion
 
@@ -761,6 +762,7 @@ namespace PLANSA.ViewModel.Windows
 
                 Sorting();
                 PushNotyAsync();
+                colorNoty();
             }
                 #endregion
 
@@ -842,8 +844,7 @@ namespace PLANSA.ViewModel.Windows
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[NumberPlan].HeaderPlan;
                 NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
-                CalculateDeadLine();
-                colorNoty();
+                CalculateDeadLine();               
             }
             #endregion
 
@@ -881,6 +882,7 @@ namespace PLANSA.ViewModel.Windows
             #endregion
 
             Clips();
+            colorNoty();
         }
 
         private void PlansaViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -1092,11 +1094,13 @@ namespace PLANSA.ViewModel.Windows
             {
                 TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty = true;
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                LoadMainData();
             }
             else
             {
-                TaskItems[NumberPlan].Noty = false;
+                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty = false;
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                LoadMainData();
             }
         }
 
@@ -1106,17 +1110,19 @@ namespace PLANSA.ViewModel.Windows
             {
                 TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty = true;
                 ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                LoadMainData();
             }
             else
             {
-                TaskItems[NumberPlan_2].Noty = false;
+                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty = false;
                 ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                LoadMainData();
             }
         }
 
         void colorNoty()
         {
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
             {               
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
             }
