@@ -29,7 +29,7 @@
 
             <Border Grid.Column="0"
                     Grid.Row="0"
-                    Margin="10"
+                    Margin="10,25,10,10"
                     CornerRadius="30"
                     Background="White"
                     Height="550">
@@ -187,7 +187,15 @@
                                         FontSize="25"
                                         FontFamily="Bahnschrift"
                                         Content="ИСТЕКАЕТ СРОК:"/>
-                                <Label/>
+                                <Button Margin="20,0,0,0"
+                                        Width="130"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПОКАЗАТЬ"
+                                        FontSize="20"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
@@ -202,7 +210,15 @@
                                         FontSize="25"
                                         FontFamily="Bahnschrift"
                                         Content="СРЕДНИЙ ПРИОРИТЕТ:"/>
-                                <Label/>
+                                <Button Margin="20,0,0,0"
+                                        Width="130"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПОКАЗАТЬ"
+                                        FontSize="20"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
@@ -217,7 +233,15 @@
                                         FontSize="25"
                                         FontFamily="Bahnschrift"
                                         Content="ПРОСРОЧЕНО:"/>
-                                <Label/>
+                                <Button Margin="20,0,0,0"
+                                        Width="130"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПОКАЗАТЬ"
+                                        FontSize="20"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
@@ -242,7 +266,7 @@
 
         <StackPanel Orientation="Vertical"
                     Grid.Column="2"
-                    Margin="10">
+                    Margin="10,25,10,10">
 
             <Border Grid.Column="0"
                     Grid.Row="0"
