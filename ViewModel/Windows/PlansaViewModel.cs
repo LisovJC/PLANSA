@@ -925,22 +925,22 @@ namespace PLANSA.ViewModel.Windows
             {
                 double value;
                 value = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1);
-                if (value > 100)
+                if (value > 264)
                 {
                     ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#2EB872");
                 }
 
-                if (value < 100 && value > 48)
+                if (value < 264 && value > 72)
                 {
                     ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#F7F48B");
                 }
 
-                if (value < 48 && value > 24)
+                if (value < 72 && value > 48)
                 {
                     ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#F38181");
                 }
 
-                if (value < 24)
+                if (value < 48)
                 {
                     ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#A40A3C");
                 }

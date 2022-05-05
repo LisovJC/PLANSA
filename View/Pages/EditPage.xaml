@@ -17,10 +17,124 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition  Height="600"/>
+            <RowDefinition  Height="80"/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-       
+        <Border Background="White"
+                CornerRadius="30"
+                Margin="10"
+                Width="1680"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Left">
+
+            <Label  HorizontalAlignment="Center"
+                    Foreground="Black"
+                    FontSize="40"
+                    FontFamily="Bahnschrift"
+                    VerticalAlignment="Center"
+                    Content="ЗАГОЛОВОК"/>
+        </Border>
+
+        <Border Grid.Column="0"
+                Grid.Row="1"
+                CornerRadius="30"
+                Grid.ColumnSpan="2"
+                Width="830"
+                HorizontalAlignment="Left"
+                Margin="10,10,0,10"
+                Background="White">
+
+            <StackPanel Orientation="Vertical">
+                <Border Background="#323232"
+                        Height="70"
+                        CornerRadius="30"
+                        Margin="10">
+                    
+                </Border>
+
+                <Border Background="#323232"
+                        Height="280"
+                        CornerRadius="30"
+                        Margin="10">
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                CornerRadius="30"
+                Grid.ColumnSpan="2"
+                Width="830"
+                HorizontalAlignment="Right"
+                Margin="10,10,0,10"
+                Background="White">
+
+            <StackPanel Orientation="Vertical">
+                <Border Background="#323232"
+                        Height="70"
+                        CornerRadius="30"
+                        Margin="10">
+
+                </Border>
+
+                <Border Background="#323232"
+                        Height="280"
+                        CornerRadius="30"
+                        Margin="10">
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0"
+                Grid.Row="2"
+                CornerRadius="30"
+                Grid.ColumnSpan="2"
+                Width="830"
+                HorizontalAlignment="Left"
+                Margin="10,10,0,10"
+                Background="White">
+
+            <StackPanel Orientation="Vertical">
+                <Border Background="#323232"
+                        Height="70"
+                        CornerRadius="30"
+                        Margin="10">
+
+                </Border>
+
+                <Border Background="#323232"
+                        Height="280"
+                        CornerRadius="30"
+                        Margin="10">
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="2"
+                CornerRadius="30"
+                Grid.ColumnSpan="2"
+                Width="830"
+                HorizontalAlignment="Right"
+                Margin="10,10,0,10"
+                Background="White">
+
+            <StackPanel Orientation="Vertical">
+                <Border Background="#323232"
+                        Height="70"
+                        CornerRadius="30"
+                        Margin="10">
+
+                </Border>
+
+                <Border Background="#323232"
+                        Height="280"
+                        CornerRadius="30"
+                        Margin="10">
+                </Border>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
