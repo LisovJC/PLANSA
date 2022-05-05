@@ -462,7 +462,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent_2 = TaskItems[valuePlan].PlanContent;
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                        TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                        TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
@@ -488,7 +488,7 @@ namespace PLANSA.ViewModel.Windows
                         PlanContent_2 = TaskItems[valuePlan].PlanContent;
                         DeadLine_2 = TaskItems[valuePlan].DateComplete;
                         TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                        TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                        TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
@@ -874,7 +874,7 @@ namespace PLANSA.ViewModel.Windows
                 PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
                 DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
-                TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
                 NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
