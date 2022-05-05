@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PLANSA.View.Pages"
+      xmlns:local="clr-namespace:PLANSA.View.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="900" 
       d:DesignWidth="1700"
@@ -41,7 +41,7 @@
                 Grid.Row="1"
                 CornerRadius="30"
                 Grid.ColumnSpan="2"
-                Width="830"
+                Width="780"
                 HorizontalAlignment="Left"
                 Margin="10,10,0,10"
                 Background="White">
@@ -51,7 +51,23 @@
                         Height="70"
                         CornerRadius="30"
                         Margin="10">
-                    
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                FlowDirection="RightToLeft">
+                        <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="40"
+                                        FontFamily="Bahnschrift"
+                                        Content="СОДЕРЖАНИЕ ПЛАНА"/>
+
+                        <materialDesign:PackIcon    Kind="TextSubject"
+                                                    Width="60"
+                                                    Height="60"
+                                                    Foreground="White"
+                                                    VerticalAlignment="Center"/>
+                    </StackPanel>
+
                 </Border>
 
                 <Border Background="#323232"
@@ -66,9 +82,9 @@
                 Grid.Row="1"
                 CornerRadius="30"
                 Grid.ColumnSpan="2"
-                Width="830"
+                Width="780"
                 HorizontalAlignment="Right"
-                Margin="10,10,0,10"
+                Margin="10,10,10,10"
                 Background="White">
 
             <StackPanel Orientation="Vertical">
@@ -76,6 +92,23 @@
                         Height="70"
                         CornerRadius="30"
                         Margin="10">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                FlowDirection="RightToLeft">
+                        <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="40"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПРИКРЕПЛЕННЫЕ ФАЙЛЫ"/>
+
+                        <materialDesign:PackIcon    Kind="Files"
+                                                    Width="50"
+                                                    Height="50"
+                                                    Foreground="White"
+                                                    VerticalAlignment="Center"/>
+                    </StackPanel>
 
                 </Border>
 
@@ -91,7 +124,7 @@
                 Grid.Row="2"
                 CornerRadius="30"
                 Grid.ColumnSpan="2"
-                Width="830"
+                Width="780"
                 HorizontalAlignment="Left"
                 Margin="10,10,0,10"
                 Background="White">
@@ -101,6 +134,23 @@
                         Height="70"
                         CornerRadius="30"
                         Margin="10">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                FlowDirection="RightToLeft">
+                        <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="40"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПОДЗАДАЧИ ПЛАНА"/>
+
+                        <materialDesign:PackIcon    Kind="CheckboxesMarked"
+                                                    Width="60"
+                                                    Height="60"
+                                                    Foreground="White"
+                                                    VerticalAlignment="Center"/>
+                    </StackPanel>
 
                 </Border>
 
@@ -116,9 +166,9 @@
                 Grid.Row="2"
                 CornerRadius="30"
                 Grid.ColumnSpan="2"
-                Width="830"
+                Width="780"
                 HorizontalAlignment="Right"
-                Margin="10,10,0,10"
+                Margin="10,10,10,10"
                 Background="White">
 
             <StackPanel Orientation="Vertical">
@@ -126,6 +176,23 @@
                         Height="70"
                         CornerRadius="30"
                         Margin="10">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                FlowDirection="RightToLeft">
+                        <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="40"
+                                        FontFamily="Bahnschrift"
+                                        Content="ИНФОРМАЦИЯ О ПЛАНЕ"/>
+
+                        <materialDesign:PackIcon    Kind="Information"
+                                                    Width="60"
+                                                    Height="60"
+                                                    Foreground="White"
+                                                    VerticalAlignment="Center"/>
+                    </StackPanel>
 
                 </Border>
 
@@ -135,6 +202,75 @@
                         Margin="10">
                 </Border>
             </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Background="White"
+                Width="90"
+                CornerRadius="30"
+                Margin="10">
+
+            <StackPanel Orientation="Vertical">
+                <Button     materialDesign:ButtonAssist.CornerRadius="50"
+                                        Height="70"
+                                        Width="70"
+                                        Background="#0D7377"
+                                        BorderThickness="0"
+                                        Margin="0,10,0,0"
+                                        Foreground="White"
+                                        Padding="0"
+                                        Command="{Binding RightPlan}"
+                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:PackIcon    Kind="Check"
+                                                Width="50"
+                                                Height="50"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"/>
+                </Button>
+
+                <Button     materialDesign:ButtonAssist.CornerRadius="50"
+                                        Height="70"
+                                        Width="70"
+                                        Background="#0D7377"
+                                        BorderThickness="0"
+                                        Margin="0,10,0,0"
+                                        Foreground="White"
+                                        Padding="0"
+                                        Command="{Binding RightPlan}"
+                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:PackIcon    Kind="Paperclip"
+                                                Width="50"
+                                                Height="50"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"/>
+                </Button>
+
+                <Button     materialDesign:ButtonAssist.CornerRadius="50"
+                                        Height="70"
+                                        Width="70"
+                                        Background="#0D7377"
+                                        BorderThickness="0"
+                                        Margin="0,10,0,0"
+                                        Foreground="White"
+                                        Padding="0"
+                                        Command="{Binding RightPlan}"
+                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:PackIcon    Kind="Plus"
+                                                Width="50"
+                                                Height="50"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"/>
+                </Button>
+            </StackPanel>
+            
         </Border>
     </Grid>
 </Page>

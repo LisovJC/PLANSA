@@ -372,7 +372,15 @@
                                         FontSize="25"
                                         FontFamily="Bahnschrift"
                                         Content="СООБЩИТЬ ОБ ОШИБКЕ:"/>
-                                <Label/>
+                                <Button Margin="20,0,0,0"
+                                        Width="120"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
+                                        FontFamily="Bahnschrift"
+                                        Content="ЖАЛОБА"
+                                        FontSize="20"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
