@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLANSA.View.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       
       d:DesignHeight="900" 
@@ -55,6 +56,84 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="400">
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="Assignment"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВСЕГО ПЛАНОВ:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="AssignmentTurnedIn"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВЫПОЛНЕНО УСПЕШНО:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="AssignmentLate"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВЫПОЛНЕНО С ОПАЗДАНИЕМ:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="Dangerous"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПРОСРОЧЕНО:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="TrendingUp"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ТЕНДЕНЦИЯ:"/>
+                                <Label/>
+                            </StackPanel>
+                        </StackPanel>
                     </Border>
                 </StackPanel>
             </Border>
@@ -93,6 +172,69 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="400">
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="FireCircle"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ИСТЕКАЕТ СРОК:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="AlertBox"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="СРЕДНИЙ ПРИОРИТЕТ:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="Dangerous"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПРОСРОЧЕНО:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="TrendingUp"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ТЕНДЕНЦИЯ:"/>
+                                <Label/>
+                            </StackPanel>
+                        </StackPanel>
                     </Border>
                 </StackPanel>
             </Border>
@@ -131,6 +273,84 @@
                             CornerRadius="30"
                             Background="#323232"
                             Height="400">
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="Assignment"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВСЕГО ПЛАНОВ:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="AssignmentTurnedIn"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВЫПОЛНЕНО УСПЕШНО:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="AssignmentLate"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ВЫПОЛНЕНО С ОПАЗДАНИЕМ:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="Dangerous"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="ПРОСРОЧЕНО:"/>
+                                <Label/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <materialDesign:PackIcon    Kind="HelpCircle"
+                                                            Width="50"
+                                                            Height="50"
+                                                            Foreground="White"/>
+                                <Label  HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        FontSize="25"
+                                        FontFamily="Bahnschrift"
+                                        Content="СООБЩИТЬ ОБ ОШИБКЕ:"/>
+                                <Label/>
+                            </StackPanel>
+                        </StackPanel>
                     </Border>
                 </StackPanel>
             </Border>
