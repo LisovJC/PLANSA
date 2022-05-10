@@ -1010,6 +1010,8 @@ namespace PLANSA.ViewModel.Windows
             Files_2.Clear();
             Header = String.Empty;
             Header_2 = String.Empty;
+            NumberLabel = "0";
+            NumberLabel_2 = "0";
             ClearDeadLine();
             File.Delete(pathTonumberPlan_2);
             File.Delete(pathTonumberPlan);
@@ -1122,22 +1124,30 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNoty()
         {
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
-            {               
-                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-            }
-            else
-            {               
-                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
-            }
+            try
+            {
+                if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
+                {
+                    ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                }
+                else
+                {
+                    ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                }
 
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
-            {
-                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+                {
+                    ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                }
+                else
+                {
+                    ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                }
             }
-            else
+            catch (Exception e)
             {
-                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+
+                Debug.WriteLine(e.Message);
             }
         }
         #endregion

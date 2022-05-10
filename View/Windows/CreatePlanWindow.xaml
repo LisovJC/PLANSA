@@ -129,18 +129,6 @@
                             Height="55"
                             Padding="0"
                             BorderThickness="0"
-                            Margin="15,0,0,0">
-                        <materialDesign:PackIcon    Kind="MessageAlertOutline"
-                                                    Width="35"
-                                                    Height="35"/>
-                    </Button>
-
-                    <Button Background="#0D7377"
-                            materialDesign:ButtonAssist.CornerRadius="100"
-                            Width="55"
-                            Height="55"
-                            Padding="0"
-                            BorderThickness="0"
                             Margin="15,0,0,0"
                             Command="{Binding ClearCommand}">
                         <materialDesign:PackIcon    Kind="Remove"
@@ -213,12 +201,15 @@
                         <TextBox    Margin="10"
                                     Foreground="Black"
                                     VerticalContentAlignment="Top"
+                                    HorizontalContentAlignment="Left"
                                     materialDesign:HintAssist.Hint="Какой у нас план?.."
                                     FontFamily="Bahnschrift"
                                     FontSize="25"
                                     materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                     Padding="0"
+                                    TextWrapping="Wrap"
                                     BorderThickness="0"
+                                    AcceptsReturn="True"
                                     Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </Grid>
