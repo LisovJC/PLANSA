@@ -1,4 +1,5 @@
-﻿using PLANSA.Services;
+﻿using PLANSA.Model;
+using PLANSA.Services;
 using PLANSA.View.Pages;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand MainPage { get; set; }
         public RelayCommand MyPlansPage { get; set; }
         public RelayCommand EditPage { get; set; }
+        public ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
 
         private Page _choicePage = new MainPage();
         public Page ChoicePage
@@ -20,9 +22,19 @@ namespace PLANSA.ViewModel.Windows
         }
         public ReviewViewModel()
         {
-            ChoicePage = new MainPage();
+            CurrentDatas = new ObservableCollectionEX<CurrentData>();
+            CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
+            if((CurrentDatas[0].numberPlanEdit > -1))
+            {
+                ChoicePage = new EditPage();
+            }
+            else
+            {
+                ChoicePage = new MainPage();
+            }
             CloseWindow = new RelayCommand(o =>
             {
+                CurrentDatas[0].numberPlanEdit = -1;
                 foreach (Window window in Application.Current.Windows)
                 {
                     if (window.Title == "ReviewWindow")

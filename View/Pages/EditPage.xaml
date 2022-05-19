@@ -33,12 +33,15 @@
                 Grid.ColumnSpan="3"
                 HorizontalAlignment="Left">
 
-            <Label  HorizontalAlignment="Center"
+            <TextBox  HorizontalAlignment="Center"
                     Foreground="Black"
                     FontSize="40"
                     FontFamily="Bahnschrift"
                     VerticalAlignment="Center"
-                    Content="ЗАГОЛОВОК"/>
+                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                    Padding="0"
+                    BorderThickness="0"
+                    Text="{Binding PlanLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Border>
 
         <Border Grid.Column="0"

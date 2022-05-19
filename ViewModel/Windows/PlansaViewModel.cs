@@ -215,6 +215,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand NotyOnOff { get; set; }
         public RelayCommand NotyOnOff_2 { get; set; }
         public RelayCommand OpenReviewWindow { get; set; }
+        public RelayCommand OpenEditPlan_1 { get; set; }
         #endregion
 
         #region Collections
@@ -269,8 +270,8 @@ namespace PLANSA.ViewModel.Windows
         {
             CurrentDatas = new ObservableCollectionEX<CurrentData>();
             CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
-            if(CurrentDatas.Count == 0)
-            CurrentDatas.Add(new CurrentData() { Clipping_1 = true, Clipping_2 = true, Color_1 = "#0D7377" , Color_2 = "#0D7377" });
+            if (CurrentDatas.Count == 0)
+                CurrentDatas.Add(new CurrentData() { Clipping_1 = true, Clipping_2 = true, Color_1 = "#0D7377", Color_2 = "#0D7377", numberPlanEdit = -1 });
             
             SettingsViewModel.CreateSettingsJSON();
             PropertyChanged += PlansaViewModel_PropertyChanged;
@@ -289,8 +290,7 @@ namespace PLANSA.ViewModel.Windows
             {
                 try
                 {
-                    DeleteElement(CurrentDatas[0].SelectedPlan_1);
-                    //DeleteElement(int.Parse(File.ReadAllText(pathTonumberPlan)));
+                    DeleteElement(CurrentDatas[0].SelectedPlan_1);                   
                 }
                 catch (Exception e)
                 {
@@ -302,8 +302,7 @@ namespace PLANSA.ViewModel.Windows
             DeletePlan_2 = new RelayCommand(o =>
             {
                 try
-                {
-                    //DeleteElement_2(int.Parse(File.ReadAllText(pathTonumberPlan_2)));
+                {                   
                     DeleteElement(CurrentDatas[0].SelectedPlan_2);
                 }
                 catch (Exception e)
@@ -529,6 +528,15 @@ namespace PLANSA.ViewModel.Windows
 
             OpenReviewWindow = new RelayCommand(o =>
             {
+                ReviewWindow window = new ReviewWindow();
+                window.Owner = Application.Current.MainWindow;
+                window.Show();
+                Application.Current.MainWindow.Hide();
+            });
+
+            OpenEditPlan_1 = new RelayCommand(o =>
+            {
+                CurrentDatas[0].numberPlanEdit = CurrentDatas[0].SelectedPlan_1;
                 ReviewWindow window = new ReviewWindow();
                 window.Owner = Application.Current.MainWindow;
                 window.Show();

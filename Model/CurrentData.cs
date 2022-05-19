@@ -51,5 +51,14 @@ namespace PLANSA.Model
             get => _color_2;
             set { _color_2 = value; OnPropertyChanged(); }
         }
+
+        private int _numberPlanEdit;
+
+        public int numberPlanEdit
+        {
+            get => _numberPlanEdit;
+            set { _numberPlanEdit = value; OnPropertyChanged(); }
+        }
+
     }
 }
