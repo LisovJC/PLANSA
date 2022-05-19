@@ -5,10 +5,10 @@ using System.ComponentModel;
 namespace PLANSA.Services
 {
     public class ObservableCollectionEX<T> : ObservableCollection<T>
-    {
+    {       
         public ObservableCollectionEX() : base()
         {
-            CollectionChanged += ObservableCollection_CollectionChanged;
+            CollectionChanged += ObservableCollection_CollectionChanged;           
         }
         private void ObservableCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\CheckBoxItem.cs" />
+    <Compile Include="Model\CurrentData.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="ViewModel\Pages\EditPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\MyPlansViewModel.cs" />

@@ -1,35 +1,63 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PLANSA.Model;
+using PLANSA.ViewModel.Windows;
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
 
 namespace PLANSA.Services
 {
     public class DataSaveLoad
     {
-        public static string JsonPath = $"{Environment.CurrentDirectory}\\Tasks.json";
-        public static string JsonPathSettings = $"{Environment.CurrentDirectory}\\Setiings\\Settings.json";
+        public static string JsonPathTasks = $"{Environment.CurrentDirectory}\\Data\\UserData\\plansData.json";
+        public static string JsonPathSettings = $"{Environment.CurrentDirectory}\\Setiings\\settingsData.json";
+        public static string JsonPathCurrentData = $"{Environment.CurrentDirectory}\\Data\\CurrentData\\currentData.json";
+
         public static void Serialize(object o)
         {
-            if (JsonPath != null)
+            if(PlansaViewModel.TaskItems != null)
             {
-                string dir = Path.GetDirectoryName(JsonPath);
+                if (o.GetType() == PlansaViewModel.TaskItems.GetType())
+                {
+                    SaveDatas(JsonPathTasks, o);
+                }
+            }
+
+            if (SettingsViewModel.settingsObj != null)
+            {
+                if (o.GetType() == SettingsViewModel.settingsObj.GetType())
+                {
+                    SaveDatas(JsonPathSettings, o);
+                }
+            }
+
+            if (PlansaViewModel.CurrentDatas != null)
+            {
+                if (o.GetType() == PlansaViewModel.CurrentDatas.GetType())
+                {
+                    SaveDatas(JsonPathCurrentData, o);
+                }
+            }
+        }
+
+        private static void SaveDatas(string path, object o)
+        {
+            if (path != null)
+            {
+                string dir = Path.GetDirectoryName(path);
                 if (!Directory.Exists(dir))
                 {
                     _ = Directory.CreateDirectory(dir);
                 }
 
-                using (StreamWriter file = File.CreateText(JsonPath))
+                using (StreamWriter file = File.CreateText(path))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Formatting = Formatting.Indented;
                     serializer.Serialize(file, o);
                 }
-            }           
+            }
         }
-
+     
         public static bool IsValidJson(string stringValue)
         {
             if (File.Exists(stringValue))
@@ -52,58 +80,16 @@ namespace PLANSA.Services
             return false;
         }
 
-        public static ObservableCollectionEX<TaskItem> LoadJson()
+        public static ObservableCollectionEX<T> LoadData<T>(string path)
         {
-            if (IsValidJson(JsonPath))
+            if (!IsValidJson(path))
             {
-                ObservableCollectionEX<TaskItem> Items = new ObservableCollectionEX<TaskItem>();
-                string json = File.ReadAllText(JsonPath);
-                Items = JsonConvert.DeserializeObject<ObservableCollectionEX<TaskItem>>(json);
-                return Items;
+                ObservableCollectionEX<T> objects = new ObservableCollectionEX<T>();
+                return objects;
             }
-            else
-            {
-                ObservableCollectionEX<TaskItem> Items = new ObservableCollectionEX<TaskItem>();
-                return Items;
-            }
+
+            string json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<ObservableCollectionEX<T>>(json);
         }
-
-        #region Settings
-        public static void SaveSettings(object o)
-        {
-            if (JsonPathSettings != null)
-            {
-                string dir = Path.GetDirectoryName(JsonPathSettings);
-                if (!Directory.Exists(dir))
-                {
-                    _ = Directory.CreateDirectory(dir);
-                }
-
-                using (StreamWriter file = File.CreateText(JsonPathSettings))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Formatting = Formatting.Indented;
-                    serializer.Serialize(file, o);
-                }
-            }
-        }
-
-        public static ObservableCollection<Settings> LoadSettings()
-        {
-            if (IsValidJson(JsonPathSettings))
-            {
-                ObservableCollection<Settings> Items = new ObservableCollection<Settings>();
-                string json = File.ReadAllText(JsonPathSettings);
-                Items = JsonConvert.DeserializeObject<ObservableCollection<Settings>>(json);
-                return Items;
-            }
-            else
-            {
-                ObservableCollection<Settings> Items = new ObservableCollection<Settings>();
-                return Items;
-            }
-        }
-
-        #endregion
     }
 }

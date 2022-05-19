@@ -48,17 +48,7 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _index;
             set { _index = value; OnPropertyChanged(); }
-        }
-
-       
-        private int _numberPlan;
-
-        public int NumberPlan
-        {
-            get => _numberPlan;
-            set { _numberPlan = value; OnPropertyChanged(); }
-        }
-
+        }         
         
         private string _planContent;
 
@@ -119,9 +109,7 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _numbLab;
             set { _numbLab = value; OnPropertyChanged(); }
-        }
-
-        public static readonly string pathTonumberPlan = $"{Environment.CurrentDirectory}\\numberPlan.txt";
+        }        
 
         #endregion
 
@@ -141,15 +129,7 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _index_2;
             set { _index_2 = value; OnPropertyChanged(); }
-        }
-
-        private int _numberPlan_2;
-
-        public int NumberPlan_2
-        {
-            get => _numberPlan_2;
-            set { _numberPlan_2 = value; OnPropertyChanged(); }
-        }
+        }    
 
         private string _planContent_2;
 
@@ -211,9 +191,7 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _colorNoty_2;
             set { _colorNoty_2 = value; OnPropertyChanged(); }
-        }
-        
-        public static readonly string pathTonumberPlan_2 = $"{Environment.CurrentDirectory}\\numberPlan_2.txt";
+        }             
         #endregion
 
         #region Commands
@@ -241,15 +219,17 @@ namespace PLANSA.ViewModel.Windows
 
         #region Collections
         public ObservableCollection<FileItem> Files { get; set; }
-        public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
+        public static ObservableCollectionEX<TaskItem> TaskItems { get; set; }
 
         public ObservableCollection<FileItem> Files_2 { get; set; }
         public ObservableCollection<FileItem> Files_temp { get; set; }
         public ObservableCollection<TaskItem> Task_temp { get; set; }
+
+        public static ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
         #endregion
 
         #region Clipping
-        private Brush _clipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0000");
+        private Brush _clipColor_1;
 
         public Brush ClipColor_1
         {
@@ -258,7 +238,7 @@ namespace PLANSA.ViewModel.Windows
         }
 
        
-        private Brush _clipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0000");
+        private Brush _clipColor_2;
 
         public Brush ClipColor_2
         {
@@ -267,7 +247,7 @@ namespace PLANSA.ViewModel.Windows
         }
 
         
-        private bool _clip_1 = true;
+        private bool _clip_1;
 
         public bool Clip_1
         {
@@ -276,28 +256,27 @@ namespace PLANSA.ViewModel.Windows
         }
 
         
-        private bool _clip_2 = true;
+        private bool _clip_2;
 
         public bool Clip_2
         {
             get => _clip_2;
             set { _clip_2 = value; OnPropertyChanged(); }
-        }
-       
-        public static readonly string Clipping_1 = $"{Environment.CurrentDirectory}\\Clipping_1.txt";
-        public static readonly string Clipping_2 = $"{Environment.CurrentDirectory}\\Clipping_2.txt";
-
-        public static readonly string Color_1 = $"{Environment.CurrentDirectory}\\Color_1.txt";
-        public static readonly string Color_2 = $"{Environment.CurrentDirectory}\\Color_2.txt";
+        }               
         #endregion
 
         public PlansaViewModel()
         {
+            CurrentDatas = new ObservableCollectionEX<CurrentData>();
+            CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
+            if(CurrentDatas.Count == 0)
+            CurrentDatas.Add(new CurrentData() { Clipping_1 = true, Clipping_2 = true, Color_1 = "#0D7377" , Color_2 = "#0D7377" });
+            
             SettingsViewModel.CreateSettingsJSON();
             PropertyChanged += PlansaViewModel_PropertyChanged;
             Instance = this;
 
-            StartApp();
+            StartApp();            
             Clips();
 
             #region Commands
@@ -310,7 +289,8 @@ namespace PLANSA.ViewModel.Windows
             {
                 try
                 {
-                    DeleteElement(int.Parse(File.ReadAllText(pathTonumberPlan)));
+                    DeleteElement(CurrentDatas[0].SelectedPlan_1);
+                    //DeleteElement(int.Parse(File.ReadAllText(pathTonumberPlan)));
                 }
                 catch (Exception e)
                 {
@@ -323,7 +303,8 @@ namespace PLANSA.ViewModel.Windows
             {
                 try
                 {
-                    DeleteElement_2(int.Parse(File.ReadAllText(pathTonumberPlan_2)));
+                    //DeleteElement_2(int.Parse(File.ReadAllText(pathTonumberPlan_2)));
+                    DeleteElement(CurrentDatas[0].SelectedPlan_2);
                 }
                 catch (Exception e)
                 {
@@ -395,13 +376,14 @@ namespace PLANSA.ViewModel.Windows
 
             RightPlan = new RelayCommand(o =>
                 {
-                    int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan)), limitRight = TaskItems.Count;
+                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan))*/ CurrentDatas[0].SelectedPlan_1, limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
                     {
                         valuePlan++;
-                        File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        //File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        CurrentDatas[0].SelectedPlan_1 = valuePlan;
 
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                         Files.Clear();
                         for (int i = 0; i < TaskItems[valuePlan].files.Count; i++)
                         {
@@ -414,20 +396,21 @@ namespace PLANSA.ViewModel.Windows
                         Header = TaskItems[valuePlan].HeaderPlan;
                         CalculateDeadLine();
                         colorNoty();
-                        NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
-                        TaskItems = DataSaveLoad.LoadJson();
+                        NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                     }
                 });
 
             LeftPlan = new RelayCommand(o =>
                 {
-                    int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan));
+                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan))*/ CurrentDatas[0].SelectedPlan_1;
                     if (valuePlan > 0)
                     {
                         valuePlan--;
-                        File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        //File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        CurrentDatas[0].SelectedPlan_1 = valuePlan;
 
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                         Files.Clear();
                         for (int i = 0; i < TaskItems[valuePlan].files.Count; i++)
                         {
@@ -440,20 +423,21 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine();
                         colorNoty();
-                        NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
-                        TaskItems = DataSaveLoad.LoadJson();
+                        NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                     }
                 });
 
             RightPlan_2 = new RelayCommand(o =>
                 {
-                    int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan_2)), limitRight = TaskItems.Count;
+                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan_2))*/ CurrentDatas[0].SelectedPlan_2, limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
                     {
                         valuePlan++;
-                        File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
+                        //File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
+                        CurrentDatas[0].SelectedPlan_2 = valuePlan;
 
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                         Files_2.Clear();
                         for (int i = 0; i < TaskItems[valuePlan].files.Count; i++)
                         {
@@ -465,21 +449,22 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
-                        NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                        NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                         colorNoty();
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                     }
                 });
 
             LeftPlan_2 = new RelayCommand(o =>
                 {
-                    int valuePlan = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan_2))*/ CurrentDatas[0].SelectedPlan_2;
                     if (valuePlan > 0)
                     {
                         valuePlan--;
-                        File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
+                        //File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
+                        CurrentDatas[0].SelectedPlan_2 = valuePlan;
 
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                         Files_2.Clear();
                         for (int i = 0; i < TaskItems[valuePlan].files.Count; i++)
                         {
@@ -491,9 +476,9 @@ namespace PLANSA.ViewModel.Windows
                         TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
-                        NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                        NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                         colorNoty();
-                        TaskItems = DataSaveLoad.LoadJson();
+                        TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
 
                     }
                 });
@@ -503,16 +488,16 @@ namespace PLANSA.ViewModel.Windows
                     if(Clip_1)
                     {
                         Clip_1 = false;
-                        File.WriteAllText(Clipping_1, "false");
+                        CurrentDatas[0].Clipping_1 = false;
                         ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
-                        File.WriteAllText(Color_1, "#E23E57");
+                        CurrentDatas[0].Color_1 = "#E23E57";
                     }
                     else
                     {
                         Clip_1 = true;
-                        File.WriteAllText(Clipping_1, "true");
+                        CurrentDatas[0].Clipping_1 = true;
                         ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                        File.WriteAllText(Color_1, "#0D7377");
+                        CurrentDatas[0].Color_1 = "#0D7377";
                     }
                 });
 
@@ -521,16 +506,16 @@ namespace PLANSA.ViewModel.Windows
                     if (Clip_2)
                     {
                         Clip_2 = false;
-                        File.WriteAllText(Clipping_2, "false");
+                        CurrentDatas[0].Clipping_2 = false;
                         ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
-                        File.WriteAllText(Color_2, "#E23E57");
+                        CurrentDatas[0].Color_2 = "#E23E57";
                     }
                     else
                     {
                         Clip_2 = true;
-                        File.WriteAllText(Clipping_2, "true");
+                        CurrentDatas[0].Clipping_2 = true;
                         ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                        File.WriteAllText(Color_2, "#0D7377");
+                        CurrentDatas[0].Color_2 = "#0D7377";
                     }
                 });
 
@@ -572,7 +557,7 @@ namespace PLANSA.ViewModel.Windows
                             tempList.Add(Files_temp[i].files);
                         }
 
-                        int number = int.Parse(File.ReadAllText(pathTonumberPlan));
+                        int number = CurrentDatas[0].SelectedPlan_1;
                         Task_temp.Add(new TaskItem()
                         {
                             ColorPriority = TaskItems[number].ColorPriority,
@@ -600,7 +585,7 @@ namespace PLANSA.ViewModel.Windows
                             tempList.Add(Files_temp[i].files);
                         }
 
-                        int number = int.Parse(File.ReadAllText(pathTonumberPlan));
+                        int number = CurrentDatas[0].SelectedPlan_1;
                         Task_temp.Add(new TaskItem()
                         {
                             ColorPriority = TaskItems[number].ColorPriority,
@@ -641,7 +626,7 @@ namespace PLANSA.ViewModel.Windows
                             tempList.Add(Files_temp[i].files);
                         }
 
-                        int number = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                        int number = CurrentDatas[0].SelectedPlan_2;
                         Task_temp.Add(new TaskItem()
                         {
                             ColorPriority = TaskItems[number].ColorPriority,
@@ -669,7 +654,7 @@ namespace PLANSA.ViewModel.Windows
                             tempList.Add(Files_temp[i].files);
                         }
 
-                        int number = int.Parse(File.ReadAllText(pathTonumberPlan_2));
+                        int number = CurrentDatas[0].SelectedPlan_2;
                         Task_temp.Add(new TaskItem()
                         {
                             ColorPriority = TaskItems[number].ColorPriority,
@@ -695,188 +680,121 @@ namespace PLANSA.ViewModel.Windows
         #region LoadOperaions
         void StartApp()
         {
-            #region Flat_1
-            if (File.Exists(pathTonumberPlan))
-            {
-                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
-                if (NumberPlan == -1)
+            #region Flat_1                          
+                if (CurrentDatas[0].SelectedPlan_1 == -1)
                 {
-                    NumberPlan = 0;
+                    CurrentDatas[0].SelectedPlan_1 = 0;
                 }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan, "0");
-                NumberPlan = 0;
-            }
 
+            Clip_1 = CurrentDatas[0].Clipping_1;
+            Clip_2 = CurrentDatas[0].Clipping_2;
             Files = new ObservableCollection<FileItem>();
             TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
-                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].files.Count; i++)
                 {
-                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                    Files.Add(new FileItem() { files = TaskItems[CurrentDatas[0].SelectedPlan_1].files[i] });
                 }
-                PlanContent = TaskItems[NumberPlan].PlanContent;
-                DeadLine = TaskItems[NumberPlan].DateComplete;
+                PlanContent = TaskItems[CurrentDatas[0].SelectedPlan_1].PlanContent;
+                DeadLine = TaskItems[CurrentDatas[0].SelectedPlan_1].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header = TaskItems[NumberPlan].HeaderPlan;
-                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
+                Header = TaskItems[CurrentDatas[0].SelectedPlan_1].HeaderPlan;
+                NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
                 CalculateDeadLine();
             }
             #endregion
 
             #region Flat_2
             Files_2 = new ObservableCollection<FileItem>();
-            TaskItems = DataSaveLoad.LoadJson();
-            if (File.Exists(pathTonumberPlan_2))
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
+
+            if (CurrentDatas[0].SelectedPlan_2 == -1)
             {
-                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
-                if (NumberPlan_2 == -1)
-                {
-                    NumberPlan_2 = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan_2, "0");
-                NumberPlan_2 = 0;
+                CurrentDatas[0].SelectedPlan_2 = 0;
             }
 
             if (TaskItems.Count > 0)
             {
-                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].files.Count; i++)
                 {
-                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
+                    Files_2.Add(new FileItem() { files = TaskItems[CurrentDatas[0].SelectedPlan_2].files[i] });
                 }
-                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
-                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
+                PlanContent_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].PlanContent;
+                DeadLine_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                 TimeOFDay_2 = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
-                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                Header_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].HeaderPlan;
+                NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
 
                 Sorting();
                 PushNotyAsync();
                 colorNoty();
+                Clips();
             }
                 #endregion
 
         }
 
         void Clips()
-        {
-            if (File.Exists(Clipping_1))
-            {
-                Clip_1 = bool.Parse(File.ReadAllText(Clipping_1));
-            }
-            else
-            {
-                Clip_1 = true;
-                File.WriteAllText(Clipping_1, "false");
-            }
-
-            if (File.Exists(Clipping_2))
-            {
-                Clip_2 = bool.Parse(File.ReadAllText(Clipping_2));
-            }
-            else
-            {
-                Clip_2 = true;
-                File.WriteAllText(Clipping_2, "false");
-            }
-
-
-            if (File.Exists(Color_1))
-            {
-                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_1));
-            }
-            else
-            {
-                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                File.WriteAllText(Color_1, "#0D7377");
-            }
-
-            if (File.Exists(Color_2))
-            {
-                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom(File.ReadAllText(Color_2));
-            }
-            else
-            {
-                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                File.WriteAllText(Color_2, "#0D7377");
-            }
+        {                       
+                Clip_1 = CurrentDatas[0].Clipping_1;                      
+                Clip_2 = CurrentDatas[0].Clipping_2;
+                                
+                ClipColor_1 = (Brush)new BrushConverter().ConvertFrom(CurrentDatas[0].Color_1);                                
+                ClipColor_2 = (Brush)new BrushConverter().ConvertFrom(CurrentDatas[0].Color_2);           
         }
 
         public void LoadMainData()
         {
+            CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
             #region Flat_1
-            if (File.Exists(pathTonumberPlan))
-            {
-                NumberPlan = int.Parse(File.ReadAllText(pathTonumberPlan));
-                if (NumberPlan == -1)
+            if (CurrentDatas[0].SelectedPlan_1 == -1)
                 {
-                    NumberPlan = 0;
+                    CurrentDatas[0].SelectedPlan_1 = 0;
                 }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan, "0");
-                NumberPlan = 0;
-            }
-
 
             Files.Clear();
-            TaskItems = DataSaveLoad.LoadJson();
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
-                for (int i = 0; i < TaskItems[NumberPlan].files.Count; i++)
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].files.Count; i++)
                 {
-                    Files.Add(new FileItem() { files = TaskItems[NumberPlan].files[i] });
+                    Files.Add(new FileItem() { files = TaskItems[CurrentDatas[0].SelectedPlan_1].files[i] });
                 }
-                PlanContent = TaskItems[NumberPlan].PlanContent;
-                DeadLine = TaskItems[NumberPlan].DateComplete;
+                PlanContent = TaskItems[CurrentDatas[0].SelectedPlan_1].PlanContent;
+                DeadLine = TaskItems[CurrentDatas[0].SelectedPlan_1].DateComplete;
                 TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header = TaskItems[NumberPlan].HeaderPlan;
-                NumberLabel = $"{int.Parse(File.ReadAllText(pathTonumberPlan)) + 1} из {TaskItems.Count}";
+                Header = TaskItems[CurrentDatas[0].SelectedPlan_1].HeaderPlan;
+                NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
                 CalculateDeadLine();               
             }
             #endregion
 
             #region Flat_2
-            if (File.Exists(pathTonumberPlan_2))
+            if (CurrentDatas[0].SelectedPlan_2 == -1)
             {
-                NumberPlan_2 = int.Parse(File.ReadAllText(pathTonumberPlan_2));
-                if (NumberPlan_2 == -1)
-                {
-                    NumberPlan_2 = 0;
-                }
-            }
-            else
-            {
-                File.WriteAllText(pathTonumberPlan_2, "0");
-                NumberPlan_2 = 0;
+                CurrentDatas[0].SelectedPlan_2 = 0;
             }
 
             Files_2.Clear();
-            TaskItems = DataSaveLoad.LoadJson();
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
-                for (int i = 0; i < TaskItems[NumberPlan_2].files.Count; i++)
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].files.Count; i++)
                 {
-                    Files_2.Add(new FileItem() { files = TaskItems[NumberPlan_2].files[i] });
+                    Files_2.Add(new FileItem() { files = TaskItems[CurrentDatas[0].SelectedPlan_2].files[i] });
                 }
-                PlanContent_2 = TaskItems[NumberPlan_2].PlanContent;
-                DeadLine_2 = TaskItems[NumberPlan_2].DateComplete;
+                PlanContent_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].PlanContent;
+                DeadLine_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].DateComplete;
                 TimeOF_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                 TimeOFDay_2 = Math.Round((DeadLine_2 - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
-                Header_2 = TaskItems[NumberPlan_2].HeaderPlan;
-                NumberLabel_2 = $"{int.Parse(File.ReadAllText(pathTonumberPlan_2)) + 1} из {TaskItems.Count}";
+                Header_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].HeaderPlan;
+                NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
             }
             #endregion
@@ -961,9 +879,8 @@ namespace PLANSA.ViewModel.Windows
                 TaskItems.RemoveAt(numberElement);
 
                 if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
-                {
-                    numberElement--;                    
-                    File.WriteAllText(pathTonumberPlan, numberElement.ToString());
+                {                   
+                    CurrentDatas[0].SelectedPlan_1--;
                 }         
             }
 
@@ -984,8 +901,7 @@ namespace PLANSA.ViewModel.Windows
 
                 if (TaskItems.Count == numberElement && (TaskItems.Count > 0))
                 {
-                    numberElement--;
-                    File.WriteAllText(pathTonumberPlan_2, numberElement.ToString());
+                    CurrentDatas[0].SelectedPlan_2--;
                 }
             }
 
@@ -1013,12 +929,7 @@ namespace PLANSA.ViewModel.Windows
             NumberLabel = "0";
             NumberLabel_2 = "0";
             ClearDeadLine();
-            File.Delete(pathTonumberPlan_2);
-            File.Delete(pathTonumberPlan);
-            File.Delete(Color_2);
-            File.Delete(Color_1);
-            File.Delete(Clipping_1);
-            File.Delete(Clipping_2);
+            CurrentDatas.Clear();            
         }
 
         void Sorting()
@@ -1031,8 +942,9 @@ namespace PLANSA.ViewModel.Windows
             }
 
             Temp.Clear();
-        }          
+        }
 
+        #region Noty
         public void PushNoty()
         {
             while (true)
@@ -1040,7 +952,7 @@ namespace PLANSA.ViewModel.Windows
                 if (File.Exists(SettingsViewModel.settingsPath))
                 {
                     ObservableCollection<Settings> settings = new ObservableCollection<Settings>();
-                    settings = DataSaveLoad.LoadSettings();
+                    settings = DataSaveLoad.LoadData<Settings>(DataSaveLoad.JsonPathSettings);
 
                     for (int i = 0; i < TaskItems.Count; i++)
                     {
@@ -1092,15 +1004,15 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNotyClick()
         {
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
+            if (!TaskItems[CurrentDatas[0].SelectedPlan_1].Noty)
             {
-                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty = true;
+                TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = true;
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
                 LoadMainData();
             }
             else
             {
-                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty = false;
+                TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = false;
                 ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
                 LoadMainData();
             }
@@ -1108,15 +1020,15 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNotyClick_2()
         {
-            if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+            if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
             {
-                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty = true;
+                TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = true;
                 ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
                 LoadMainData();
             }
             else
             {
-                TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty = false;
+                TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = false;
                 ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
                 LoadMainData();
             }
@@ -1126,7 +1038,7 @@ namespace PLANSA.ViewModel.Windows
         {
             try
             {
-                if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan))].Noty)
+                if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
                 {
                     ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
                 }
@@ -1135,7 +1047,7 @@ namespace PLANSA.ViewModel.Windows
                     ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
                 }
 
-                if (!TaskItems[int.Parse(File.ReadAllText(pathTonumberPlan_2))].Noty)
+                if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
                 {
                     ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
                 }
@@ -1150,6 +1062,7 @@ namespace PLANSA.ViewModel.Windows
                 Debug.WriteLine(e.Message);
             }
         }
+        #endregion
         #endregion
     }
 }

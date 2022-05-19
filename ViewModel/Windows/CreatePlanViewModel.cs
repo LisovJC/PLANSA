@@ -3,6 +3,7 @@ using PLANSA.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 
 namespace PLANSA.ViewModel.Windows
@@ -10,8 +11,8 @@ namespace PLANSA.ViewModel.Windows
     internal class CreatePlanViewModel : Observer
     {
 
-        private bool WindowStateFlag { get; set; } = true;
-        
+        private bool WindowStateFlag { get; set; } = true;      
+
         #region Commands
         public RelayCommand CloseWindow { get; set; }
         public RelayCommand Maximize { get; set; }
@@ -69,7 +70,7 @@ namespace PLANSA.ViewModel.Windows
         {
             Files = new ObservableCollection<FileItem>();
             TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
 
             Maximize = new RelayCommand(o =>
             {

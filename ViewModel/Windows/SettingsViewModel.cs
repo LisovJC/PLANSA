@@ -11,9 +11,11 @@ namespace PLANSA.ViewModel.Windows
     {
         public static string settingsPath = $"{Environment.CurrentDirectory}\\Setiings\\Settings.json";
 
+        public static ObservableCollectionEX<Settings> settingsObj { get; set; }
         public RelayCommand CloseWindow { get; set; }
         public SettingsViewModel()
         {
+            settingsObj = new ObservableCollectionEX<Settings>();
             CloseWindow = new RelayCommand(o =>
             {
                 foreach (Window window in Application.Current.Windows)
@@ -34,9 +36,9 @@ namespace PLANSA.ViewModel.Windows
         {
             if(!File.Exists(SettingsViewModel.settingsPath))
             {
-                ObservableCollection<Settings> settingsObj = new ObservableCollection<Settings>();
+                settingsObj = new ObservableCollectionEX<Settings>();
                 settingsObj.Add(new Settings() {Hours1 = true, Hours3 = false, Hours5 = false, PushOn = true });
-                DataSaveLoad.SaveSettings(settingsObj);
+                //DataSaveLoad.SaveSettings(settingsObj);
             }
         }
     }

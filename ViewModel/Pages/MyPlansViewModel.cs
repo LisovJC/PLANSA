@@ -15,7 +15,7 @@ namespace PLANSA.ViewModel.Pages
         public MyPlansViewModel()
         {
             TaskItems = new ObservableCollectionEX<TaskItem>();
-            TaskItems = DataSaveLoad.LoadJson();
+            TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
         }
     }
 }
