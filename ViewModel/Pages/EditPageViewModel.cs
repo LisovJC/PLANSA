@@ -31,21 +31,41 @@ namespace PLANSA.ViewModel.Pages
             set { _planLabel = value; OnPropertyChanged(); }
         }
 
+        private int _index;
+
+        public int Index
+        {
+            get => _index;
+            set { _index = value; OnPropertyChanged(); }
+        }
+
+
 
 
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
+        public RelayCommand DeleteFile { get; set; }
+        public ObservableCollection<FileItem> Files { get; set; }
 
         public EditPageViewModel()
         {
             checkBoxes = new ObservableCollection<CheckBoxItem>();
-
+      
             TaskItems = new ObservableCollectionEX<TaskItem>();
             CurrentDatas = new ObservableCollectionEX<CurrentData>();
             TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
 
-            PlanContent = TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent;
+            Files = new ObservableCollection<FileItem>();
+            if (TaskItems.Count > 0)
+            {
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].files.Count; i++)
+                {
+                    Files.Add(new FileItem() { files = TaskItems[CurrentDatas[0].SelectedPlan_1].files[i] });
+                }
+            }
+
+                PlanContent = TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent;
             PlanLabel = TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan;
 
             AddCheckBox = new RelayCommand(o =>
@@ -58,6 +78,17 @@ namespace PLANSA.ViewModel.Pages
                 TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
                 TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
             });
+
+            DeleteFile = new RelayCommand(o =>
+            {
+                DeleteFiles(Index);
+            });
+        }
+
+        public void DeleteFiles(int selectedFile)
+        {
+            Files.RemoveAt(selectedFile);
+            TaskItems[CurrentDatas[0].numberPlanEdit].files.RemoveAt(selectedFile);
         }
     }
 }

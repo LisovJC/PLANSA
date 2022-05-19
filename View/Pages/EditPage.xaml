@@ -135,6 +135,36 @@
                         Height="280"
                         CornerRadius="30"
                         Margin="10">
+                    <ListBox             Width="740"
+                                         Height="auto"
+                                         HorizontalAlignment="Center"
+                                         Margin="10"
+                                         ItemsSource="{Binding Files}"
+                                         Grid.Row="2"
+                                         Grid.Column="0"
+                                         SelectedIndex="{Binding Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon 
+                                                         Kind="Folder"
+                                                         VerticalAlignment="Center"
+                                                         Height="25"
+                                                         Width="25"
+                                                         Foreground="Yellow"/>
+                                        <TextBlock
+                                                   Margin="5,0,0,0"
+                                                   Text="{Binding files}"
+                                                   Foreground="White"
+                                                   FontSize="20"
+                                                   FontFamily="Bahnschrift">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Border>
             </StackPanel>
         </Border>
@@ -303,6 +333,25 @@
                                         Padding="0"
                                         Command="{Binding AddCheckBox}">
                     <materialDesign:PackIcon    Kind="Plus"
+                                                Width="50"
+                                                Height="50"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"/>
+
+                </Button>
+
+                <Button     materialDesign:ButtonAssist.CornerRadius="50"
+                                        Height="70"
+                                        Width="70"
+                                        Background="#E23E57"
+                                        BorderThickness="0"
+                                        Margin="0,10,0,0"
+                                        Foreground="White"
+                                        Padding="0"
+                                        Command="{Binding DeleteFile}">
+                    <materialDesign:PackIcon    Kind="Delete"
                                                 Width="50"
                                                 Height="50"
                                                 HorizontalAlignment="Center"
