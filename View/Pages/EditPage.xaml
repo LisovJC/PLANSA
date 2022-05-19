@@ -263,7 +263,7 @@
                                         Margin="0,10,0,0"
                                         Foreground="White"
                                         Padding="0"
-                                        Command="{Binding RightPlan}"
+                                        Command="{Binding SaveItCommand}"
                                         IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <materialDesign:PackIcon    Kind="Check"
                                                 Width="50"

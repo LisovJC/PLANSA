@@ -34,6 +34,7 @@ namespace PLANSA.ViewModel.Pages
 
 
         public RelayCommand AddCheckBox { get; set; }
+        public RelayCommand SaveItCommand { get; set; }
 
         public EditPageViewModel()
         {
@@ -50,6 +51,12 @@ namespace PLANSA.ViewModel.Pages
             AddCheckBox = new RelayCommand(o =>
             {
                 checkBoxes.Add(new CheckBoxItem() { MyProperty = true});
+            });
+
+            SaveItCommand = new RelayCommand(o =>
+            {
+                TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
+                TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
             });
         }
     }
