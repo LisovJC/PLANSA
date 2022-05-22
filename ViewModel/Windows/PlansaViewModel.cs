@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Win32;
+using System.Reflection;
 
 namespace PLANSA.ViewModel.Windows
 {
@@ -226,6 +228,7 @@ namespace PLANSA.ViewModel.Windows
         public ObservableCollection<FileItem> Files_2 { get; set; }
         public ObservableCollection<FileItem> Files_temp { get; set; }
         public ObservableCollection<TaskItem> Task_temp { get; set; }
+        public static ObservableCollectionEX<Settings> settingsObj { get; set; }
 
         public static ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
         #endregion
@@ -695,7 +698,10 @@ namespace PLANSA.ViewModel.Windows
         #region LoadOperaions
         void StartApp()
         {
-            #region Flat_1                          
+            #region Flat_1
+            settingsObj = new ObservableCollectionEX<Settings>();
+            settingsObj = DataSaveLoad.LoadData<Settings>(DataSaveLoad.JsonPathSettings);
+            SetAutoRun(settingsObj[0].AutoRun, Assembly.GetExecutingAssembly().Location);
                 if (CurrentDatas[0].SelectedPlan_1 == -1)
                 {
                     CurrentDatas[0].SelectedPlan_1 = 0;
@@ -1080,6 +1086,33 @@ namespace PLANSA.ViewModel.Windows
             }
         }
         #endregion
+
+        public static void SetAutoRun(bool autorun, string path)
+        {
+            const string name = "PLANSA";
+            string ExePath = path;
+            RegistryKey reg;
+            reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+            try
+            {
+                if(autorun)
+                {
+                    reg.SetValue(name, ExePath);
+                }
+                else
+                {
+                    reg.DeleteValue(name);
+                }
+
+                reg.Flush();
+                reg.Close();
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+        }
         #endregion
     }
 }

@@ -36,6 +36,15 @@ namespace PLANSA.Model
             set { _pushOn = value; OnPropertyChanged(); }
         }
 
+        private bool _autorun;
+
+        public bool AutoRun
+        {
+            get => _autorun; 
+            set { _autorun = value; OnPropertyChanged(); }
+        }
+
+
 
 
     }
