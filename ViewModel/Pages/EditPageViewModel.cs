@@ -1,12 +1,8 @@
 ﻿using PLANSA.Model;
 using PLANSA.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLANSA.ViewModel.Pages
 {
@@ -43,10 +39,12 @@ namespace PLANSA.ViewModel.Pages
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
         public RelayCommand DeleteFile { get; set; }
+        public RelayCommand AddFile { get; set; }
         public ObservableCollection<FileItem> Files { get; set; }
 
         public EditPageViewModel()
         {
+            #region LoadData
             try
             {
                 checkBoxes = new ObservableCollection<CheckBoxItem>();
@@ -72,7 +70,8 @@ namespace PLANSA.ViewModel.Pages
             {
 
                 Debug.WriteLine(e.Message);
-            }          
+            }
+            #endregion
 
             AddCheckBox = new RelayCommand(o =>
             {
@@ -81,13 +80,41 @@ namespace PLANSA.ViewModel.Pages
 
             SaveItCommand = new RelayCommand(o =>
             {
+                TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
                 TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
                 TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
+                for (int i = 0; i < Files.Count; i++)
+                {
+                    TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
+                }
+
+                if(TaskItems[CurrentDatas[0].numberPlanEdit].files.Count == 0)
+                {
+                    for (int i = 0; i < Files.Count; i++)
+                    {
+                        TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
+                    }
+                }
+
+                DataSaveLoad.Serialize(TaskItems);
             });
 
             DeleteFile = new RelayCommand(o =>
             {
                 DeleteFiles(Index);
+            });
+
+            AddFile = new RelayCommand(o =>
+            {
+                DefaultDialogService.OpenFileDialog();
+                if (DefaultDialogService.FilePath == null)
+                {
+
+                }
+                else
+                {
+                    Files.Add(new FileItem() { files = DefaultDialogService.FilePath });                    
+                }
             });
         }
 

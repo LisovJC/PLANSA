@@ -382,8 +382,7 @@
                                         Margin="0,10,0,0"
                                         Foreground="White"
                                         Padding="0"
-                                        Command="{Binding RightPlan}"
-                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        Command="{Binding AddFile}">
                     <materialDesign:PackIcon    Kind="Paperclip"
                                                 Width="50"
                                                 Height="50"
