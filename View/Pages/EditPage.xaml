@@ -282,13 +282,17 @@
                             FontSize="35"
                             FontFamily="Bahnschrift"
                             Content="Дата создания:"/>
-                            <Label  
+                            <TextBox
+                            Margin="5,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Foreground="White"
                             FontSize="35"
                             FontFamily="Bahnschrift"
-                            Content="5.06.2022"/>
+                            materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                            Padding="0"
+                            BorderThickness="0"
+                            Text="{Binding DateAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Margin="10,0,10,10">
@@ -299,13 +303,17 @@
                             FontSize="35"
                             FontFamily="Bahnschrift"
                             Content="Срок сдачи:"/>
-                            <Label  
+                            <TextBox
+                            Margin="5,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Foreground="White"
                             FontSize="35"
                             FontFamily="Bahnschrift"
-                            Content="5.06.2022"/>
+                            materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                            Padding="0"
+                            BorderThickness="0"
+                            Text="{Binding DateComplete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Margin="10,0,10,10">

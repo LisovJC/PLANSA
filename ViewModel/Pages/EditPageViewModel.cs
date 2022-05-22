@@ -36,6 +36,23 @@ namespace PLANSA.ViewModel.Pages
             set { _index = value; OnPropertyChanged(); }
         }
 
+        private DateTime _dateAdd;
+
+        public DateTime DateAdd
+        {
+            get => _dateAdd;
+            set { _dateAdd = value; OnPropertyChanged(); }
+        }
+
+        private DateTime _dateComplete;
+
+        public DateTime DateComplete
+        {
+            get => _dateComplete;
+            set { _dateComplete = value; OnPropertyChanged(); }
+        }
+
+
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
         public RelayCommand DeleteFile { get; set; }
@@ -65,6 +82,8 @@ namespace PLANSA.ViewModel.Pages
 
                 PlanContent = TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent;
                 PlanLabel = TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan;
+                DateAdd = TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd;
+                DateComplete = TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete;
             }
             catch (Exception e)
             {
@@ -83,6 +102,8 @@ namespace PLANSA.ViewModel.Pages
                 TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
                 TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
                 TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
+                TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd = DateAdd;
+                TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete = DateComplete;
                 for (int i = 0; i < Files.Count; i++)
                 {
                     TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
