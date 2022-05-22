@@ -52,6 +52,15 @@ namespace PLANSA.ViewModel.Pages
             set { _dateComplete = value; OnPropertyChanged(); }
         }
 
+        private int _countFiles;
+
+        public int CountFiles
+        {
+            get => _countFiles;
+            set { _countFiles = value; OnPropertyChanged(); }
+        }
+
+
 
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
@@ -84,6 +93,7 @@ namespace PLANSA.ViewModel.Pages
                 PlanLabel = TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan;
                 DateAdd = TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd;
                 DateComplete = TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete;
+                CountFiles = Files.Count;
             }
             catch (Exception e)
             {

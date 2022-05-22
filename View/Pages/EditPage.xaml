@@ -330,7 +330,7 @@
                             Foreground="White"
                             FontSize="35"
                             FontFamily="Bahnschrift"
-                            Content="5.06.2022"/>
+                            Content="В РАЗРАБОТКЕ"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Margin="10,0,10,5">
@@ -347,7 +347,7 @@
                             Foreground="White"
                             FontSize="35"
                             FontFamily="Bahnschrift"
-                            Content="10"/>
+                            Content="{Binding CountFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
