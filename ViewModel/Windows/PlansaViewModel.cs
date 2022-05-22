@@ -216,6 +216,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand NotyOnOff_2 { get; set; }
         public RelayCommand OpenReviewWindow { get; set; }
         public RelayCommand OpenEditPlan_1 { get; set; }
+        public RelayCommand OpenEditPlan_2 { get; set; }
         #endregion
 
         #region Collections
@@ -375,13 +376,11 @@ namespace PLANSA.ViewModel.Windows
 
             RightPlan = new RelayCommand(o =>
                 {
-                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan))*/ CurrentDatas[0].SelectedPlan_1, limitRight = TaskItems.Count;
+                    int valuePlan = CurrentDatas[0].SelectedPlan_1, limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
                     {
-                        valuePlan++;
-                        //File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        valuePlan++;                        
                         CurrentDatas[0].SelectedPlan_1 = valuePlan;
-
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                         Files.Clear();
                         for (int i = 0; i < TaskItems[valuePlan].files.Count; i++)
@@ -542,6 +541,15 @@ namespace PLANSA.ViewModel.Windows
                 window.Show();
                 Application.Current.MainWindow.Hide();
             });
+            
+            OpenEditPlan_2 = new RelayCommand(o =>
+            {
+                CurrentDatas[0].numberPlanEdit = CurrentDatas[0].SelectedPlan_2;
+                ReviewWindow window = new ReviewWindow();
+                window.Owner = Application.Current.MainWindow;
+                window.Show();
+                Application.Current.MainWindow.Hide();
+            });
 
             AddFile = new RelayCommand(o =>
             {
@@ -684,7 +692,6 @@ namespace PLANSA.ViewModel.Windows
         }
 
         #region Methods
-
         #region LoadOperaions
         void StartApp()
         {
@@ -878,7 +885,8 @@ namespace PLANSA.ViewModel.Windows
                 ColorPriority_2 = (Brush)new BrushConverter().ConvertFrom("#FFFFFF");
             }
         #endregion
-
+        
+        #region otherOperations
         void DeleteElement(int numberElement)
         {
             
@@ -951,6 +959,7 @@ namespace PLANSA.ViewModel.Windows
 
             Temp.Clear();
         }
+#endregion
 
         #region Noty
         public void PushNoty()
@@ -1046,7 +1055,7 @@ namespace PLANSA.ViewModel.Windows
         {
             try
             {
-                if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
+                if (!TaskItems[CurrentDatas[0].SelectedPlan_1].Noty)
                 {
                     ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
                 }

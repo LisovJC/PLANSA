@@ -141,6 +141,17 @@
                             FontSize="25"
                             Content="ОБЗОР"
                             Command="{Binding OpenReviewWindow}"/>
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
+                            Height="50"
+                            Width="180"
+                            Background="#0D7377"
+                            BorderThickness="0"
+                            Margin="20,0,0,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="25"
+                            Content="НАПОМНИ"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0"
@@ -637,7 +648,8 @@
                                 Padding="0"
                                 materialDesign:ButtonAssist.CornerRadius="100"
                                 Background="Transparent"
-                                BorderThickness="0">
+                                BorderThickness="0"
+                                Command="{Binding OpenEditPlan_2}">
 
                                 <materialDesign:PackIcon Kind="Eye"
                                                          Foreground="#0D7377"
