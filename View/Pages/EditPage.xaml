@@ -92,6 +92,7 @@
                                     materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                     Padding="0"
                                     BorderThickness="0"
+                                    AcceptsReturn="True"
                                     Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
             </StackPanel>
