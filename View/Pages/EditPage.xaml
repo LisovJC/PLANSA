@@ -275,7 +275,8 @@
                         Margin="10">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,20,10,10">
+                                    Margin="10,20,10,10"
+                                    VerticalAlignment="Top">
                             <Label  
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -296,7 +297,8 @@
                             Text="{Binding DateAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,10,10">
+                                    Margin="10,30,10,10"
+                                    VerticalAlignment="Center">
                             <Label  
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -317,24 +319,7 @@
                             Text="{Binding DateComplete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,10,10">
-                            <Label  
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Foreground="White"
-                            FontSize="35"
-                            FontFamily="Bahnschrift"
-                            Content="Приоритет:"/>
-                            <Label  
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Foreground="White"
-                            FontSize="35"
-                            FontFamily="Bahnschrift"
-                            Content="В РАЗРАБОТКЕ"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,10,5">
+                                    Margin="10,30,10,5">
                             <Label  
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
