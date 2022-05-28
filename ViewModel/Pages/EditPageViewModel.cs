@@ -60,12 +60,30 @@ namespace PLANSA.ViewModel.Pages
             set { _countFiles = value; OnPropertyChanged(); }
         }
 
+        private string _textProgress;
+
+        public string textProgress
+        {
+            get => _textProgress; 
+            set { _textProgress = value; OnPropertyChanged(); }
+        }
+
+        private double _progress;
+
+        public double Progress
+        {
+            get => _progress;
+            set { _progress = value; OnPropertyChanged(); }
+        }
+
+
+
 
 
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
         public RelayCommand DeleteFile { get; set; }
-        public RelayCommand AddFile { get; set; }
+        public RelayCommand AddFile { get; set; }     
         public ObservableCollection<FileItem> Files { get; set; }
 
         public EditPageViewModel()
@@ -95,6 +113,7 @@ namespace PLANSA.ViewModel.Pages
                 DateAdd = TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd;
                 DateComplete = TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete;
                 CountFiles = Files.Count;
+                CalculateProgress();
             }
             catch (Exception e)
             {
@@ -105,8 +124,8 @@ namespace PLANSA.ViewModel.Pages
 
             AddCheckBox = new RelayCommand(o =>
             {
-                checkBoxes.Add(new CheckBoxItem() { textCheckBox = "Измени меня"});
-            });
+                checkBoxes.Add(new CheckBoxItem() { textCheckBox = "Какая у нас подзадача?.."});
+            });           
 
             SaveItCommand = new RelayCommand(o =>
             {
@@ -155,6 +174,22 @@ namespace PLANSA.ViewModel.Pages
         {
             Files.RemoveAt(selectedFile);
             TaskItems[CurrentDatas[0].numberPlanEdit].files.RemoveAt(selectedFile);
+        }
+
+        public void CalculateProgress()
+        {
+            double count = 0;
+            double value = 0;
+            for (int i = 0; i < checkBoxes.Count; i++)
+            {
+                if(checkBoxes[i].isCheck == true)
+                {
+                    count++;
+                }
+            }
+            value = (count / checkBoxes.Count) * 100;
+            Progress = value;
+            textProgress = $"Прогресс выполнения({Progress}%)";
         }
     }
 }

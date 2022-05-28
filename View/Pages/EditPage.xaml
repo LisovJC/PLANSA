@@ -226,6 +226,7 @@
                                                   FontSize="15"
                                                   Margin="0,0,0,0"
                                                   FontFamily="Bahnschrift"
+                                                  Command="{Binding Checked}"
                                                   IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                         <TextBox    HorizontalAlignment="Center"
                                                     Foreground="White"
@@ -285,7 +286,7 @@
                         Margin="10">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,20,10,10"
+                                    Margin="10,20,10,20"
                                     VerticalAlignment="Top">
                             <Label  
                             HorizontalAlignment="Left"
@@ -307,7 +308,7 @@
                             Text="{Binding DateAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,30,10,10"
+                                    Margin="10,00,10,20"
                                     VerticalAlignment="Center">
                             <Label  
                             HorizontalAlignment="Left"
@@ -329,7 +330,7 @@
                             Text="{Binding DateComplete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,30,10,5">
+                                    Margin="10,00,10,20">
                             <Label  
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -347,8 +348,22 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,30,10,5">
-                            <ProgressBar/>
+                                    Margin="10,0,10,20">
+                            <Label  
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            FontSize="30"
+                            FontFamily="Bahnschrift"
+                            Content="{Binding textProgress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ProgressBar
+                                Margin="10,0,0,0"
+                                Height="30"
+                                Width="330"
+                                Maximum="100"
+                                Minimum="0"
+                                Foreground="White"
+                                Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
