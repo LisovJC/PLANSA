@@ -220,13 +220,23 @@
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
 
-                                        <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="45"
+                                        <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
                                                   Foreground="White"
-                                                  Background="#0D7377"
-                                                  Content="УВЕДОМЛЯТЬ ЗА 1 ЧАС ДО ИСТЕЧЕНИЯ СРОКА"
-                                                  FontSize="20"
+                                                  Background="White"                                                 
+                                                  FontSize="15"
                                                   Margin="0,0,0,0"
-                                                  FontFamily="Bahnschrift"/>
+                                                  FontFamily="Bahnschrift"
+                                                  IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox    HorizontalAlignment="Center"
+                                                    Foreground="White"
+                                                    Margin="10,0,0,0"
+                                                    FontSize="23"
+                                                    FontFamily="Bahnschrift"
+                                                    VerticalAlignment="Center"
+                                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                                    Padding="0"
+                                                    BorderThickness="0"
+                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -281,15 +291,15 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             Content="Дата создания:"/>
                             <TextBox
                             Margin="5,0,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                             Padding="0"
@@ -303,15 +313,15 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             Content="Срок сдачи:"/>
                             <TextBox
                             Margin="5,0,0,0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                             Padding="0"
@@ -324,16 +334,21 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             Content="Количество прикрепленных файлов:"/>
                             <Label  
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Foreground="White"
-                            FontSize="35"
+                            FontSize="30"
                             FontFamily="Bahnschrift"
                             Content="{Binding CountFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10,30,10,5">
+                            <ProgressBar/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

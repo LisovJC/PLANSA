@@ -1,21 +1,26 @@
 ﻿using PLANSA.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PLANSA.Model
 {
     internal class CheckBoxItem : Observer
     {
-        private bool myVar;
+        private string _textCheckBox;
 
-        public bool MyProperty
+        public string textCheckBox
         {
-            get { return myVar; }
-            set { myVar = value; OnPropertyChanged(); }
+            get  => _textCheckBox;
+            set { _textCheckBox = value; OnPropertyChanged(); }
         }
+
+        private bool _isCheck;
+
+        public bool isCheck
+        {
+            get => _isCheck; 
+            set { _isCheck = value; OnPropertyChanged(); }
+        }
+
+
 
     }
 }

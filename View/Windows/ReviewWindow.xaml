@@ -55,7 +55,7 @@
                             VerticalAlignment="Center"
                             Padding="0"
                             Command="{Binding CloseWindow}">
-                        <materialDesign:PackIcon    Kind="Close"
+                        <materialDesign:PackIcon    Kind="ArrowULeftBottomBold"
                                                     Width="45"
                                                     Height="45"
                                                     Foreground="White"/>
@@ -84,12 +84,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Padding="0"
-                            Command="{Binding Minimize}">
-                        <materialDesign:PackIcon    Kind="WindowMinimize"
-                                                    Width="45"
-                                                    Height="45"
-                                                    Foreground="White"/>
-                    </Button>
+                            Command="{Binding Minimize}"/>
                 </StackPanel>
             </Grid>
         </Border>

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PLANSA.ViewModel.Pages;
 using PLANSA.ViewModel.Windows;
 using System;
 using System.IO;
@@ -11,6 +12,7 @@ namespace PLANSA.Services
         public static string JsonPathTasks = $"{Environment.CurrentDirectory}\\Data\\UserData\\plansData.json";
         public static string JsonPathSettings = $"{Environment.CurrentDirectory}\\Setiings\\settingsData.json";
         public static string JsonPathCurrentData = $"{Environment.CurrentDirectory}\\Data\\CurrentData\\currentData.json";
+        public static string JsonPathCheckBoxData = $"{Environment.CurrentDirectory}\\Data\\UserData\\checkBoxData.json";
 
         public static void Serialize(object o)
         {
@@ -35,6 +37,14 @@ namespace PLANSA.Services
                 if (o.GetType() == PlansaViewModel.CurrentDatas.GetType())
                 {
                     SaveDatas(JsonPathCurrentData, o);
+                }
+            }
+
+            if (EditPageViewModel.checkBoxes != null)
+            {
+                if (o.GetType() == EditPageViewModel.checkBoxes.GetType())
+                {
+                    SaveDatas(JsonPathCheckBoxData, o);
                 }
             }
         }

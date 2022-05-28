@@ -8,7 +8,7 @@ namespace PLANSA.ViewModel.Pages
 {
     internal class EditPageViewModel : Observer
     {
-        public ObservableCollection<CheckBoxItem> checkBoxes { get; set; }
+        public static ObservableCollectionEX<CheckBoxItem> checkBoxes { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
         public ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
 
@@ -73,12 +73,13 @@ namespace PLANSA.ViewModel.Pages
             #region LoadData
             try
             {
-                checkBoxes = new ObservableCollection<CheckBoxItem>();
+                checkBoxes = new ObservableCollectionEX<CheckBoxItem>();
 
                 TaskItems = new ObservableCollectionEX<TaskItem>();
                 CurrentDatas = new ObservableCollectionEX<CurrentData>();
                 TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                 CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
+                checkBoxes = DataSaveLoad.LoadData<CheckBoxItem>(DataSaveLoad.JsonPathCheckBoxData);
 
                 Files = new ObservableCollection<FileItem>();
                 if (TaskItems[CurrentDatas[0].numberPlanEdit].files.Count > 0)
@@ -104,7 +105,7 @@ namespace PLANSA.ViewModel.Pages
 
             AddCheckBox = new RelayCommand(o =>
             {
-                checkBoxes.Add(new CheckBoxItem() { MyProperty = true});
+                checkBoxes.Add(new CheckBoxItem() { textCheckBox = "Измени меня"});
             });
 
             SaveItCommand = new RelayCommand(o =>
@@ -128,6 +129,7 @@ namespace PLANSA.ViewModel.Pages
                 }
 
                 DataSaveLoad.Serialize(TaskItems);
+                DataSaveLoad.Serialize(checkBoxes);
             });
 
             DeleteFile = new RelayCommand(o =>
