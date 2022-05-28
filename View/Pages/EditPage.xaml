@@ -362,7 +362,9 @@
                                 Width="330"
                                 Maximum="100"
                                 Minimum="0"
+                                Background="Gray"
                                 Foreground="White"
+                                BorderThickness="0"
                                 Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
