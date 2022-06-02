@@ -228,6 +228,8 @@ namespace PLANSA.ViewModel.Windows
         public ObservableCollection<FileItem> Files_2 { get; set; }
         public ObservableCollection<FileItem> Files_temp { get; set; }
         public ObservableCollection<TaskItem> Task_temp { get; set; }
+        public ObservableCollectionEX<CheckBoxItem> checkBoxes { get; set; }
+        public ObservableCollectionEX<CheckBoxItem> checkBoxes_2 { get; set; }
         public static ObservableCollectionEX<Settings> settingsObj { get; set; }
 
         public static ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
@@ -274,6 +276,8 @@ namespace PLANSA.ViewModel.Windows
         {
             CurrentDatas = new ObservableCollectionEX<CurrentData>();
             CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
+            checkBoxes = new ObservableCollectionEX<CheckBoxItem>();
+            checkBoxes_2 = new ObservableCollectionEX<CheckBoxItem>();
             if (CurrentDatas.Count == 0)
                 CurrentDatas.Add(new CurrentData() { Clipping_1 = true, Clipping_2 = true, Color_1 = "#0D7377", Color_2 = "#0D7377", numberPlanEdit = -1 });
             
@@ -286,7 +290,7 @@ namespace PLANSA.ViewModel.Windows
 
             #region Commands
             CloseApp = new RelayCommand(o =>
-                {
+                {                 
                     Application.Current.Shutdown();
                 });
 
@@ -356,7 +360,7 @@ namespace PLANSA.ViewModel.Windows
             });
 
             CreatePlanOpenWindow = new RelayCommand(o =>
-                {                  
+                {
                     CreatePlanWindow window = new CreatePlanWindow();
                     window.Owner = Application.Current.MainWindow;
                     window.Show();
@@ -395,6 +399,11 @@ namespace PLANSA.ViewModel.Windows
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                         Header = TaskItems[valuePlan].HeaderPlan;
+                        checkBoxes.Clear();
+                        for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Count; i++)
+                        {
+                            checkBoxes.Add(TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes[i]);
+                        }
                         CalculateDeadLine();
                         colorNoty();
                         NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
@@ -422,6 +431,11 @@ namespace PLANSA.ViewModel.Windows
                         TimeOF = Math.Round((DeadLine - DateTime.Now).TotalHours, 1).ToString() + " Часов. ";
                         Header = TaskItems[valuePlan].HeaderPlan;
                         TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
+                        checkBoxes.Clear();
+                        for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Count; i++)
+                        {
+                            checkBoxes.Add(TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes[i]);
+                        }
                         CalculateDeadLine();
                         colorNoty();
                         NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
@@ -451,6 +465,11 @@ namespace PLANSA.ViewModel.Windows
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
+                        checkBoxes_2.Clear();
+                        for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                        {
+                            checkBoxes_2.Add(TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
+                        }
                         colorNoty();
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
                     }
@@ -478,6 +497,11 @@ namespace PLANSA.ViewModel.Windows
                         CalculateDeadLine_2();
                         Header_2 = TaskItems[valuePlan].HeaderPlan;
                         NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
+                        checkBoxes_2.Clear();
+                        for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                        {
+                            checkBoxes_2.Add(TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
+                        }
                         colorNoty();
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
 
@@ -700,7 +724,7 @@ namespace PLANSA.ViewModel.Windows
         {
             #region Flat_1
             settingsObj = new ObservableCollectionEX<Settings>();
-            settingsObj = DataSaveLoad.LoadData<Settings>(DataSaveLoad.JsonPathSettings);
+            settingsObj = DataSaveLoad.LoadData<Settings>(DataSaveLoad.JsonPathSettings);            
             SetAutoRun(settingsObj[0].AutoRun, Assembly.GetExecutingAssembly().Location);
                 if (CurrentDatas[0].SelectedPlan_1 == -1)
                 {
@@ -725,6 +749,10 @@ namespace PLANSA.ViewModel.Windows
                 Header = TaskItems[CurrentDatas[0].SelectedPlan_1].HeaderPlan;
                 NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
                 CalculateDeadLine();
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Count; i++)
+                {
+                    checkBoxes.Add(TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes[i]);
+                }
             }
             #endregion
 
@@ -750,6 +778,10 @@ namespace PLANSA.ViewModel.Windows
                 Header_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].HeaderPlan;
                 NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                {
+                    checkBoxes_2.Add(TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
+                }
 
                 Sorting();
                 PushNotyAsync();
@@ -779,6 +811,7 @@ namespace PLANSA.ViewModel.Windows
                 }
 
             Files.Clear();
+            checkBoxes.Clear();
             TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
@@ -792,7 +825,11 @@ namespace PLANSA.ViewModel.Windows
                 TimeOFDay = Math.Round((DeadLine - DateTime.Now).TotalDays, 1).ToString() + " Дней. ";
                 Header = TaskItems[CurrentDatas[0].SelectedPlan_1].HeaderPlan;
                 NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {TaskItems.Count}";
-                CalculateDeadLine();               
+                CalculateDeadLine();
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Count; i++)
+                {
+                    checkBoxes.Add(TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes[i]);
+                }
             }
             #endregion
 
@@ -817,6 +854,10 @@ namespace PLANSA.ViewModel.Windows
                 Header_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].HeaderPlan;
                 NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
+                for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                {
+                    checkBoxes_2.Add(TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
+                }
             }
             #endregion
 

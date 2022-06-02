@@ -477,9 +477,41 @@
                                         Foreground="White"
                                         FontSize="20"
                                         FontFamily="Bahnschrift"
-                                        Margin="5"
+                                        Margin="5,25,5,50"
                                         TextWrapping="Wrap"
                                         Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListBox Height="365"
+                                         HorizontalAlignment="Center"
+                                         Margin="10"
+                                         Width="425"                                        
+                                         ItemsSource="{Binding checkBoxes}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
+                                                  Foreground="White"
+                                                  Background="White"                                                 
+                                                  FontSize="15"
+                                                  Margin="0,0,0,0"
+                                                  FontFamily="Bahnschrift"
+                                                  Command="{Binding Checked}"
+                                                  IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <TextBlock    HorizontalAlignment="Center"
+                                                    Foreground="White"
+                                                    Margin="10,0,0,0"
+                                                    FontSize="23"
+                                                    FontFamily="Bahnschrift"
+                                                    VerticalAlignment="Center"
+                                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                                    Padding="0"                       
+                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                         </Border>
 
@@ -819,9 +851,41 @@
                                         Foreground="White"
                                         FontSize="20"
                                         FontFamily="Bahnschrift"
-                                        Margin="5"
+                                        Margin="5,25,5,50"
                                         TextWrapping="Wrap"
                                         Text="{Binding PlanContent_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListBox Height="365"
+                                         HorizontalAlignment="Center"
+                                         Margin="10"
+                                         Width="425"                                        
+                                         ItemsSource="{Binding checkBoxes_2}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
+                                                  Foreground="White"
+                                                  Background="White"                                                 
+                                                  FontSize="15"
+                                                  Margin="0,0,0,0"
+                                                  FontFamily="Bahnschrift"
+                                                  Command="{Binding Checked}"
+                                                  IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <TextBlock    HorizontalAlignment="Center"
+                                                    Foreground="White"
+                                                    Margin="10,0,0,0"
+                                                    FontSize="23"
+                                                    FontFamily="Bahnschrift"
+                                                    VerticalAlignment="Center"
+                                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                                    Padding="0"                       
+                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                         </Border>
 
