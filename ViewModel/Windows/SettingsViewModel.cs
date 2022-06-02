@@ -68,7 +68,7 @@ namespace PLANSA.ViewModel.Windows
             if(!File.Exists(SettingsViewModel.settingsPath))
             {
                 settingsObj = new ObservableCollectionEX<Settings>();
-                settingsObj.Add(new Settings() {Hours1 = true, Hours3 = false, Hours5 = false, PushOn = true, AutoRun = true });
+                settingsObj.Add(new Settings() {Hours1 = true, Hours3 = true, Hours5 = true, PushOn = true, AutoRun = true });
                 //DataSaveLoad.SaveSettings(settingsObj);
             }
         }

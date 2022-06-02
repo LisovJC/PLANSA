@@ -41,7 +41,7 @@
                 <DataGridTextColumn Header="Срок выполнения" Width="180" Binding="{Binding DateComplete}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Осталось дней" Width="180" Binding="{Binding TimeOFDay}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Осталось часов" Width="180" Binding="{Binding TimeOF}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Статус выполнения" Width="200" Binding="{Binding Status}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Статус" Width="200" Binding="{Binding Status}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Цветовой приоритет выполнения" Width="*" Binding="{Binding ColorPriority}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

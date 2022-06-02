@@ -154,7 +154,7 @@ namespace PLANSA.ViewModel.Windows
                     files.Add(Files[i].files);
                 }
 
-                TaskItems.Add(new TaskItem() { files = files, HeaderPlan = HeaderPlan, DateAdd = DateTime.Now, PlanContent = PlanContent, DateComplete = DateForComplete });
+                TaskItems.Add(new TaskItem() { files = files, HeaderPlan = HeaderPlan, DateAdd = DateTime.Now, PlanContent = PlanContent, DateComplete = DateForComplete, checkBoxes = new List<CheckBoxItem>() });
 
                 foreach (Window window in Application.Current.Windows)
                 {

@@ -95,5 +95,14 @@ namespace PLANSA.Model
             get => _TimeOFDay;
             set { _TimeOFDay = Math.Round((DateComplete - DateTime.Now).TotalDays, 1).ToString(); OnPropertyChanged(); }
         }
+
+        private List<CheckBoxItem> _checkBoxes;
+
+        public List<CheckBoxItem> checkBoxes
+        {
+            get => _checkBoxes; 
+            set { _checkBoxes = value; OnPropertyChanged(); }
+        }
+
     }
 }

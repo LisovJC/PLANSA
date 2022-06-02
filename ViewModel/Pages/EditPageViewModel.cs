@@ -1,6 +1,7 @@
 ﻿using PLANSA.Model;
 using PLANSA.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -96,8 +97,7 @@ namespace PLANSA.ViewModel.Pages
                 TaskItems = new ObservableCollectionEX<TaskItem>();
                 CurrentDatas = new ObservableCollectionEX<CurrentData>();
                 TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
-                CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
-                checkBoxes = DataSaveLoad.LoadData<CheckBoxItem>(DataSaveLoad.JsonPathCheckBoxData);
+                CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);                
 
                 Files = new ObservableCollection<FileItem>();
                 if (TaskItems[CurrentDatas[0].numberPlanEdit].files.Count > 0)
@@ -106,6 +106,10 @@ namespace PLANSA.ViewModel.Pages
                     {
                         Files.Add(new FileItem() { files = TaskItems[CurrentDatas[0].numberPlanEdit].files[i] });
                     }
+                }
+                for (int i = 0; i < TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Count; i++)
+                {
+                    checkBoxes.Add(TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes[i]);
                 }
 
                 PlanContent = TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent;
@@ -125,30 +129,49 @@ namespace PLANSA.ViewModel.Pages
             AddCheckBox = new RelayCommand(o =>
             {
                 checkBoxes.Add(new CheckBoxItem() { textCheckBox = "Какая у нас подзадача?.."});
-            });           
+            });
 
             SaveItCommand = new RelayCommand(o =>
             {
-                TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
-                TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
-                TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
-                TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd = DateAdd;
-                TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete = DateComplete;
+            TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
+            TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
+            TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
+            TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd = DateAdd;
+            TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete = DateComplete;
+            for (int i = 0; i < Files.Count; i++)
+            {
+                TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
+            }
+
+            if (TaskItems[CurrentDatas[0].numberPlanEdit].files.Count == 0)
+            {
                 for (int i = 0; i < Files.Count; i++)
                 {
                     TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
                 }
+            }
 
-                if(TaskItems[CurrentDatas[0].numberPlanEdit].files.Count == 0)
+                if (checkBoxes.Count > 0)
                 {
-                    for (int i = 0; i < Files.Count; i++)
+                    try
                     {
-                        TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
+                        if (TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Count == 0)
+                        {
+                            TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes = new List<CheckBoxItem>();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        Debug.WriteLine(e.Message);
+                    }
+                    for (int i = 0; i < checkBoxes.Count; i++)
+                    {
+                        TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Add(checkBoxes[i]);
                     }
                 }
 
-                DataSaveLoad.Serialize(TaskItems);
-                DataSaveLoad.Serialize(checkBoxes);
+                DataSaveLoad.Serialize(TaskItems);                
             });
 
             DeleteFile = new RelayCommand(o =>

@@ -972,7 +972,7 @@ namespace PLANSA.ViewModel.Windows
         {
             while (true)
             {
-                if (File.Exists(SettingsViewModel.settingsPath))
+                if (File.Exists(DataSaveLoad.JsonPathSettings))
                 {
                     ObservableCollection<Settings> settings = new ObservableCollection<Settings>();
                     settings = DataSaveLoad.LoadData<Settings>(DataSaveLoad.JsonPathSettings);
@@ -1015,8 +1015,20 @@ namespace PLANSA.ViewModel.Windows
                             }
                         }
                     }
+                    for (int i = 0; i < TaskItems.Count; i++)
+                    {
+                        if((TaskItems[i].DateComplete - DateTime.Now).TotalMinutes < 0)
+                        {
+                            var notify1 = new ToastContentBuilder();
+                            notify1.AddText($"Наш план: {TaskItems[i].HeaderPlan}, провален! Срочно предпринимай действия!");
+                            notify1.AddAppLogoOverride(new Uri($"{Environment.CurrentDirectory}\\PLANSA.ico"));
+                            notify1.Show();
+                            TaskItems[i].Failed = true;
+                            TaskItems[i].Status = "Просрочено";
+                        }
+                    }
                 }
-                Thread.Sleep(50000);
+                Thread.Sleep(40000);
             }
         }
 

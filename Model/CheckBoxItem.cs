@@ -2,7 +2,7 @@
 
 namespace PLANSA.Model
 {
-    internal class CheckBoxItem : Observer
+    public class CheckBoxItem : Observer
     {
         private string _textCheckBox;
 
@@ -19,8 +19,5 @@ namespace PLANSA.Model
             get => _isCheck; 
             set { _isCheck = value; OnPropertyChanged(); }
         }
-
-
-
     }
 }
