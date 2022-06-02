@@ -445,11 +445,10 @@ namespace PLANSA.ViewModel.Windows
 
             RightPlan_2 = new RelayCommand(o =>
                 {
-                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan_2))*/ CurrentDatas[0].SelectedPlan_2, limitRight = TaskItems.Count;
+                    int valuePlan = CurrentDatas[0].SelectedPlan_2, limitRight = TaskItems.Count;
                     if (valuePlan < limitRight - 1)
                     {
-                        valuePlan++;
-                        //File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
+                        valuePlan++;        
                         CurrentDatas[0].SelectedPlan_2 = valuePlan;
 
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
@@ -477,11 +476,10 @@ namespace PLANSA.ViewModel.Windows
 
             LeftPlan_2 = new RelayCommand(o =>
                 {
-                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan_2))*/ CurrentDatas[0].SelectedPlan_2;
+                    int valuePlan = CurrentDatas[0].SelectedPlan_2;
                     if (valuePlan > 0)
                     {
                         valuePlan--;
-                        //File.WriteAllText(pathTonumberPlan_2, valuePlan.ToString());
                         CurrentDatas[0].SelectedPlan_2 = valuePlan;
 
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
