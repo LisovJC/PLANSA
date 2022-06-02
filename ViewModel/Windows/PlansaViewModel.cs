@@ -809,6 +809,7 @@ namespace PLANSA.ViewModel.Windows
 
             Files.Clear();
             checkBoxes.Clear();
+            checkBoxes_2.Clear();
             TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
@@ -837,7 +838,6 @@ namespace PLANSA.ViewModel.Windows
             }
 
             Files_2.Clear();
-            checkBoxes_2.Clear();
             TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
@@ -852,6 +852,7 @@ namespace PLANSA.ViewModel.Windows
                 Header_2 = TaskItems[CurrentDatas[0].SelectedPlan_2].HeaderPlan;
                 NumberLabel_2 = $"{CurrentDatas[0].SelectedPlan_2 + 1} из {TaskItems.Count}";
                 CalculateDeadLine_2();
+                checkBoxes_2.Clear();
                 for (int i = 0; i < TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
                 {
                     checkBoxes_2.Add(TaskItems[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);

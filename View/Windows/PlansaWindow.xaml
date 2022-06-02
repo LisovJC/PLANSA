@@ -872,7 +872,8 @@
                                                   FontFamily="Bahnschrift"
                                                   Command="{Binding Checked}"
                                                   IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                                    <TextBlock    HorizontalAlignment="Center"
+                                                    <TextBlock    
+                                                    HorizontalAlignment="Center"
                                                     Foreground="White"
                                                     Margin="10,0,0,0"
                                                     FontSize="23"

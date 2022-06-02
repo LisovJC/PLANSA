@@ -13,6 +13,15 @@ namespace PLANSA.ViewModel.Pages
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
         public ObservableCollectionEX<CurrentData> CurrentDatas { get; set; }
 
+        private int _indexCheck;
+
+        public int SelectedIndex
+        {
+            get => _indexCheck; 
+            set { _indexCheck = value; OnPropertyChanged(); }
+        }
+
+
         private string _planContent;
 
         public string PlanContent
@@ -84,7 +93,8 @@ namespace PLANSA.ViewModel.Pages
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
         public RelayCommand DeleteFile { get; set; }
-        public RelayCommand AddFile { get; set; }     
+        public RelayCommand AddFile { get; set; }
+        public RelayCommand DeleteCheckBox { get; set; }
         public ObservableCollection<FileItem> Files { get; set; }
 
         public EditPageViewModel()
@@ -131,6 +141,11 @@ namespace PLANSA.ViewModel.Pages
                 checkBoxes.Add(new CheckBoxItem());
             });
 
+            DeleteCheckBox = new RelayCommand(o =>
+            {
+                checkBoxes.RemoveAt(SelectedIndex);
+            });
+
             SaveItCommand = new RelayCommand(o =>
             {
             TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
@@ -165,6 +180,7 @@ namespace PLANSA.ViewModel.Pages
 
                         Debug.WriteLine(e.Message);
                     }
+                    TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Clear();
                     for (int i = 0; i < checkBoxes.Count; i++)
                     {
                         TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Add(checkBoxes[i]);
