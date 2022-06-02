@@ -413,11 +413,10 @@ namespace PLANSA.ViewModel.Windows
 
             LeftPlan = new RelayCommand(o =>
                 {
-                    int valuePlan = /*int.Parse(File.ReadAllText(pathTonumberPlan))*/ CurrentDatas[0].SelectedPlan_1;
+                    int valuePlan = CurrentDatas[0].SelectedPlan_1;
                     if (valuePlan > 0)
                     {
-                        valuePlan--;
-                        //File.WriteAllText(pathTonumberPlan, valuePlan.ToString());
+                        valuePlan--;                        
                         CurrentDatas[0].SelectedPlan_1 = valuePlan;
 
                         TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
@@ -838,6 +837,7 @@ namespace PLANSA.ViewModel.Windows
             }
 
             Files_2.Clear();
+            checkBoxes_2.Clear();
             TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
             if (TaskItems.Count > 0)
             {
@@ -990,7 +990,9 @@ namespace PLANSA.ViewModel.Windows
             NumberLabel = "0";
             NumberLabel_2 = "0";
             ClearDeadLine();
-            CurrentDatas.Clear();            
+            CurrentDatas.Clear();
+            checkBoxes.Clear();
+            checkBoxes_2.Clear();
         }
 
         void Sorting()
@@ -1078,33 +1080,49 @@ namespace PLANSA.ViewModel.Windows
 
         void colorNotyClick()
         {
-            if (!TaskItems[CurrentDatas[0].SelectedPlan_1].Noty)
+            try
             {
-                TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = true;
-                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
-                LoadMainData();
+                if (!TaskItems[CurrentDatas[0].SelectedPlan_1].Noty)
+                {
+                    TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = true;
+                    ColorNoty = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                    LoadMainData();
+                }
+                else
+                {
+                    TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = false;
+                    ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                    LoadMainData();
+                }
             }
-            else
+            catch (Exception e)
             {
-                TaskItems[CurrentDatas[0].SelectedPlan_1].Noty = false;
-                ColorNoty = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                LoadMainData();
+
+                Debug.WriteLine(e.Message);
             }
         }
 
         void colorNotyClick_2()
         {
-            if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
+            try
             {
-                TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = true;
-                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
-                LoadMainData();
+                if (!TaskItems[CurrentDatas[0].SelectedPlan_2].Noty)
+                {
+                    TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = true;
+                    ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#E23E57");
+                    LoadMainData();
+                }
+                else
+                {
+                    TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = false;
+                    ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
+                    LoadMainData();
+                }
             }
-            else
+            catch (Exception e)
             {
-                TaskItems[CurrentDatas[0].SelectedPlan_2].Noty = false;
-                ColorNoty_2 = (Brush)new BrushConverter().ConvertFrom("#0D7377");
-                LoadMainData();
+
+                Debug.WriteLine(e.Message);
             }
         }
 

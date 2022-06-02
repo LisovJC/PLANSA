@@ -128,7 +128,7 @@ namespace PLANSA.ViewModel.Pages
 
             AddCheckBox = new RelayCommand(o =>
             {
-                checkBoxes.Add(new CheckBoxItem() { textCheckBox = "Какая у нас подзадача?.."});
+                checkBoxes.Add(new CheckBoxItem());
             });
 
             SaveItCommand = new RelayCommand(o =>

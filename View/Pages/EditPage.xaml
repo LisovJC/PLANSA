@@ -237,6 +237,7 @@
                                                     materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                                     Padding="0"
                                                     BorderThickness="0"
+                                                    materialDesign:HintAssist.Hint="Какая у нас подзадача?.."
                                                     Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                 </Grid>
