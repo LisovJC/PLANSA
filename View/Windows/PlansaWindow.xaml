@@ -483,7 +483,8 @@
                                 <ListBox Height="365"
                                          HorizontalAlignment="Center"
                                          Margin="10"
-                                         Width="425"                                        
+                                         Width="425"
+                                         SelectedIndex="{Binding SelectedIndexC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ItemsSource="{Binding checkBoxes}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -496,7 +497,7 @@
                                                   FontSize="15"
                                                   Margin="0,0,0,0"
                                                   FontFamily="Bahnschrift"
-                                                  Command="{Binding Checked}"
+                                                  Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=Checked}"
                                                   IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                                     <TextBlock    HorizontalAlignment="Center"
                                                     Foreground="White"

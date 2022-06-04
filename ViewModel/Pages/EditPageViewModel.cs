@@ -86,10 +86,6 @@ namespace PLANSA.ViewModel.Pages
             set { _progress = value; OnPropertyChanged(); }
         }
 
-
-
-
-
         public RelayCommand AddCheckBox { get; set; }
         public RelayCommand SaveItCommand { get; set; }
         public RelayCommand DeleteFile { get; set; }
@@ -143,51 +139,49 @@ namespace PLANSA.ViewModel.Pages
 
             DeleteCheckBox = new RelayCommand(o =>
             {
-                checkBoxes.RemoveAt(SelectedIndex);
+                try
+                {
+                    checkBoxes.RemoveAt(SelectedIndex);
+                }
+                catch (Exception e)
+                {
+
+                    Debug.WriteLine(e.Message);
+                }
             });
 
             SaveItCommand = new RelayCommand(o =>
             {
-            TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
-            TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
-            TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
-            TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd = DateAdd;
-            TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete = DateComplete;
-            for (int i = 0; i < Files.Count; i++)
-            {
-                TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
-            }
-
-            if (TaskItems[CurrentDatas[0].numberPlanEdit].files.Count == 0)
-            {
+                TaskItems[CurrentDatas[0].numberPlanEdit].files.Clear();
+                TaskItems[CurrentDatas[0].numberPlanEdit].PlanContent = PlanContent;
+                TaskItems[CurrentDatas[0].numberPlanEdit].HeaderPlan = PlanLabel;
+                TaskItems[CurrentDatas[0].numberPlanEdit].DateAdd = DateAdd;
+                TaskItems[CurrentDatas[0].numberPlanEdit].DateComplete = DateComplete;
+                
                 for (int i = 0; i < Files.Count; i++)
                 {
                     TaskItems[CurrentDatas[0].numberPlanEdit].files.Add(Files[i].files);
                 }
-            }
-
-                if (checkBoxes.Count > 0)
-                {
-                    try
-                    {
-                        if (TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Count == 0)
+                    
+                        try
                         {
-                            TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes = new List<CheckBoxItem>();
+                            if (TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Count == 0)
+                            {
+                                TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes = new List<CheckBoxItem>();
+                            }
                         }
-                    }
-                    catch (Exception e)
-                    {
+                        catch (Exception e)
+                        {
 
-                        Debug.WriteLine(e.Message);
-                    }
-                    TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Clear();
-                    for (int i = 0; i < checkBoxes.Count; i++)
-                    {
-                        TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Add(checkBoxes[i]);
-                    }
-                }
+                            Debug.WriteLine(e.Message);
+                        }
+                        TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Clear();
+                        for (int i = 0; i < checkBoxes.Count; i++)
+                        {
+                            TaskItems[CurrentDatas[0].numberPlanEdit].checkBoxes.Add(checkBoxes[i]);
+                        }                    
 
-                DataSaveLoad.Serialize(TaskItems);                
+                    DataSaveLoad.Serialize(TaskItems);                
             });
 
             DeleteFile = new RelayCommand(o =>

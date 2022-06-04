@@ -31,6 +31,14 @@ namespace PLANSA.ViewModel.Windows
             get => _visibility;
             set { _visibility = value; OnPropertyChanged(); }
         }
+
+        private int _indexCheck;
+
+        public int SelectedIndexC
+        {
+            get => _indexCheck;
+            set { _indexCheck = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Flat_1
@@ -219,6 +227,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand OpenReviewWindow { get; set; }
         public RelayCommand OpenEditPlan_1 { get; set; }
         public RelayCommand OpenEditPlan_2 { get; set; }
+        public RelayCommand Checked { get; set; }
         #endregion
 
         #region Collections
@@ -540,6 +549,15 @@ namespace PLANSA.ViewModel.Windows
                         CurrentDatas[0].Color_2 = "#0D7377";
                     }
                 });
+            Checked = new RelayCommand(o =>
+            {
+                TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Clear();
+                for (int i = 0; i < checkBoxes.Count; i++)
+                {
+                    TaskItems[CurrentDatas[0].SelectedPlan_1].checkBoxes.Add(checkBoxes[i]);
+                }
+                DataSaveLoad.Serialize(TaskItems);
+            });
 
             OpenSettings = new RelayCommand(o =>
              {
