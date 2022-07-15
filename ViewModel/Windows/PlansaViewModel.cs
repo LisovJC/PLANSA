@@ -312,19 +312,7 @@ namespace PLANSA.ViewModel.Windows
                 SaveCheckBoxes();
                 CurrentDatas[0].SelectedPlan_2 = CurrentDatas[0].SelectedPlan_1;
                 MindexPlan = CurrentDatas[0].SelectedPlan_2;
-                indexPlan = CurrentDatas[0].SelectedPlan_1;
-                ChoosePlanLoad(MindexPlan);
-                addPrioiry(indexPlan, MindexPlan);
-                checkBoxes.Clear();
-                Files.Clear();
-                for (int i = 0; i < Plans[MindexPlan].checkBoxes.Count; i++)
-                {
-                    checkBoxes.Add(Plans[MindexPlan].checkBoxes[i]);
-                }
-                for (int i = 0; i < Plans[MindexPlan].files.Count; i++)
-                {
-                    Files.Add(new FileItem() { files = Plans[MindexPlan].files[i], FileName = Path.GetFileNameWithoutExtension(Plans[MindexPlan].files[i]) });
-                }
+                indexPlan = CurrentDatas[0].SelectedPlan_1;                                          
                 Loading();
             });
 
@@ -336,16 +324,8 @@ namespace PLANSA.ViewModel.Windows
                     valuePlan++;
                     CurrentDatas[0].SelectedPlan_1 = valuePlan;
                     indexPlan = valuePlan;
-                    MindexPlan = CurrentDatas[0].SelectedPlan_2;
-                    Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);                    
-                    planContent = Plans[valuePlan].PlanContent;
-                    deadLine = Plans[valuePlan].DateComplete;
-                    hoursRemained = Math.Round((deadLine - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-                    daysRemained = Math.Round((deadLine - DateTime.Now).TotalDays, 1).ToString() + " Д";
-                    planHeader = Plans[valuePlan].HeaderPlan;
-                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
-                    addPrioiry(indexPlan, MindexPlan);
-
+                    MindexPlan = CurrentDatas[0].SelectedPlan_2;                    
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";                    
                     Loading();
                 }
             });
@@ -358,16 +338,8 @@ namespace PLANSA.ViewModel.Windows
                     valuePlan--;
                     CurrentDatas[0].SelectedPlan_1 = valuePlan;
                     indexPlan = valuePlan;
-                    MindexPlan = CurrentDatas[0].SelectedPlan_2;
-                    Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);                    
-                    planContent = Plans[valuePlan].PlanContent;
-                    deadLine = Plans[valuePlan].DateComplete;
-                    hoursRemained = Math.Round((deadLine - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-                    planHeader = Plans[valuePlan].HeaderPlan;
-                    daysRemained = Math.Round((deadLine - DateTime.Now).TotalDays, 1).ToString() + " Д";                                    
-                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
-                    addPrioiry(indexPlan, MindexPlan);
-
+                    MindexPlan = CurrentDatas[0].SelectedPlan_2;                                                  
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";                   
                     Loading();
                 }
             });
@@ -400,10 +372,11 @@ namespace PLANSA.ViewModel.Windows
                 {
                     Files.Add(new FileItem() { files = DefaultDialogService.FilePath, FileName = Path.GetFileNameWithoutExtension(DefaultDialogService.FilePath) });
                     Plans[CurrentDatas[0].SelectedPlan_2].files.Clear();
-                    foreach (var item in Files)
+                    for (int i = 0; i < Files.Count; i++)
                     {
-                        Plans[CurrentDatas[0].SelectedPlan_2].files.Add(item.files);
+                        Plans[CurrentDatas[0].SelectedPlan_2].files.Add(Files[i].files);
                     }
+                    DataSaveLoad.SaveDatas(DataSaveLoad.JsonPathTasks, Plans);
                 }           
             });
 
@@ -508,6 +481,11 @@ namespace PLANSA.ViewModel.Windows
 
         public void Loading()
         {
+            if(Files.Count > 0)
+                Files.Clear();
+            if (checkBoxes.Count > 0)
+                checkBoxes.Clear();
+
             Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
 
             CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
@@ -554,18 +532,7 @@ namespace PLANSA.ViewModel.Windows
             addPrioiry(indexPlan, MindexPlan);
             Sorting();
         }
-        #endregion
-
-        #region ChoosePlanLoad
-        public void ChoosePlanLoad(int index)
-        {
-            MplanHeader = Plans[index].HeaderPlan;
-            MhoursRemained = Math.Round((Plans[index].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-            MdaysRemained = Math.Round((Plans[index].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
-            MdeadLine = Plans[index].DateComplete;
-            MplanContent = Plans[indexPlan].PlanContent;
-        }
-        #endregion
+        #endregion       
         #endregion
 
         #region Sorting
