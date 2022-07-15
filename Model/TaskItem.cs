@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace PLANSA.Model
 {
-    public class TaskItem : Observer
+    public class TaskItem : ObserverableObject
     {
         private string _headerPlan;
 

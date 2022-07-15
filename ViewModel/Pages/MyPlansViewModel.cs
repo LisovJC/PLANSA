@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PLANSA.ViewModel.Pages
 {
-    internal class MyPlansViewModel : Observer
+    internal class MyPlansViewModel : ObserverableObject
     {
 
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }

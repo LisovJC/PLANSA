@@ -2,7 +2,7 @@
 
 namespace PLANSA.Model
 {
-    public class CurrentData : Observer
+    public class CurrentData : ObserverableObject
     {
         private int _selectedPlan_1;
 

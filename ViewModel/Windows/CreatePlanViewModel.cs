@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using PLANSA.Command;
+using PLANSA.Model;
 using PLANSA.Services;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace PLANSA.ViewModel.Windows
 {
-    internal class CreatePlanViewModel : Observer
+    internal class CreatePlanViewModel : ObserverableObject
     {
 
         private bool WindowStateFlag { get; set; } = true;      
@@ -154,7 +155,18 @@ namespace PLANSA.ViewModel.Windows
                     files.Add(Files[i].files);
                 }
 
+                try
+                {
+                    TaskItems = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message);
+                }
                 TaskItems.Add(new TaskItem() { files = files, HeaderPlan = HeaderPlan, DateAdd = DateTime.Now, PlanContent = PlanContent, DateComplete = DateForComplete, checkBoxes = new List<CheckBoxItem>() });
+                DataSaveLoad.SaveDatas(DataSaveLoad.JsonPathTasks, TaskItems);
+
 
                 foreach (Window window in Application.Current.Windows)
                 {

@@ -2,7 +2,7 @@
 
 namespace PLANSA.Model
 {
-    public class CheckBoxItem : Observer
+    public class CheckBoxItem : ObserverableObject
     {
         private string _textCheckBox;
 

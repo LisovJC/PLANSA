@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using PLANSA.Command;
+using PLANSA.Model;
 using PLANSA.Services;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Diagnostics;
 
 namespace PLANSA.ViewModel.Pages
 {
-    internal class EditPageViewModel : Observer
+    internal class EditPageViewModel : ObserverableObject
     {
         public static ObservableCollectionEX<CheckBoxItem> checkBoxes { get; set; }
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }

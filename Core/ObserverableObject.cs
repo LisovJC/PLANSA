@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace PLANSA.Services
 {
-    public class Observer : INotifyPropertyChanged
+    public class ObserverableObject : INotifyPropertyChanged
 
     {
         public event PropertyChangedEventHandler PropertyChanged;

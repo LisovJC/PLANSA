@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PLANSA.Services
+namespace PLANSA.Command
 {
     public class RelayCommand : ICommand
     {

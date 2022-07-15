@@ -12,6 +12,8 @@
         
         Height="1000" 
         Width="1700"
+        MinHeight="700"
+        MinWidth="970"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="CanResize"
@@ -27,7 +29,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition 
+                Height="40"/>
+            
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -44,58 +48,59 @@
                 <Label Grid.Column="0"
                        Margin="10,0,0,0"
                        Foreground="White"
-                       FontFamily="Bahnschrift"
-                       FontSize="27"
+                       FontWeight="UltraLight"
+                       FontSize="20"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Content="PLANSA"/>
 
                 <StackPanel Grid.Column="1"
-                            Margin="0,0,10,0"
+                            Margin="0"
                             Orientation="Horizontal"
                             FlowDirection="RightToLeft">
+                    
                     <Button Grid.Column="1"                          
                             Background="Transparent"
                             BorderThickness="0"
-                            Width="50"
-                            Height="50"
+                            Width="40"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Padding="0"
-                            Command="{Binding CloseApp}">
+                            Command="{Binding CloseAppCommand}">
                         <materialDesign:PackIcon    Kind="Close"
-                                                    Width="45"
-                                                    Height="45"
+                                                    Width="15"
+                                                    Height="15"
                                                     Foreground="White"/>
                     </Button>
 
                     <Button Grid.Column="1"                          
                             Background="Transparent"
                             BorderThickness="0"
-                            Width="50"
-                            Height="50"
+                            Width="40"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Padding="0"
-                            Command="{Binding Maximize}">
+                            Command="{Binding MaximizeCommand}">
                         <materialDesign:PackIcon    Kind="WindowMaximize"
-                                                    Width="45"
-                                                    Height="45"
+                                                    Width="15"
+                                                    Height="15"
                                                     Foreground="White"/>
                     </Button>
 
                     <Button Grid.Column="1"                          
                             Background="Transparent"
                             BorderThickness="0"
-                            Width="50"
-                            Height="50"
+                            Width="40"
+                            Height="40"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Padding="0"
-                            Command="{Binding Minimize}">
+                            Command="{Binding MinimizeCommand}">
                         <materialDesign:PackIcon    Kind="WindowMinimize"
-                                                    Width="45"
-                                                    Height="45"
+                                                    Width="15"
+                                                    Height="15"
                                                     Foreground="White"/>
                     </Button>
                 </StackPanel>
@@ -106,399 +111,805 @@
                 Background="#323232">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition  Height="50"/>
+                    <RowDefinition  Height="40"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition   Width="850"/>
-                    <ColumnDefinition   Width="*"/>
+                    <ColumnDefinition MinWidth="500"
+                                      Width="0.45*"/>
+                    <ColumnDefinition Width="1*"
+                                      MinWidth="600"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0"
-                            Orientation="Horizontal"
-                            Margin="10,0,0,0">
-                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
-                            Height="50"
-                            Width="180"
+                <UniformGrid Grid.Row="0"
+                            Rows="1"
+                            Margin="10,0,10,0">
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,10,10"
+                            Height="35"
                             Background="#0D7377"
                             BorderThickness="0"
-                            Margin="0,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="25"
+                            FontSize="17"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
                             Content="СОЗДАТЬ"
-                            Command="{Binding CreatePlanOpenWindow}"/>
+                            Command="{Binding CreatePlanOpenWindowCommand}"/>
 
-                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
-                            Height="50"
-                            Width="180"
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,10,10"
+                            Height="35"
                             Background="#0D7377"
                             BorderThickness="0"
-                            Margin="20,0,0,0"
+                            Margin="10,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="25"
+                            FontWeight="UltraLight"
+                            VerticalAlignment="Top"
+                            FontSize="17"
                             Content="ОБЗОР"
-                            Command="{Binding OpenReviewWindow}"/>
+                            Command=""/>
 
-                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
-                            Height="50"
-                            Width="180"
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,10,10"
+                            Height="35"
                             Background="#0D7377"
                             BorderThickness="0"
-                            Margin="20,0,0,0"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            FontWeight="UltraLight"
+                            VerticalAlignment="Top"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Content="РЕДАКТОР"
+                            Command=""/>
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,10,10"
+                            Height="35"
+                            Background="#0D7377"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="25"
-                            Content="НАПОМНИ"/>
-                </StackPanel>
+                            FontSize="17"
+                            Content="СЕРВИСЫ"
+                            Command=""/>
+                                       
+                </UniformGrid>
 
                 <StackPanel Grid.Row="0"
                             Grid.Column="1"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">
-                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
-                            Height="50"
-                            Width="180"
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="100"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
+                            Background="#e4e3e3"
+                            BorderThickness="0"
+                            Content="{Binding NumberLabel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="10,0,0,0"
+                            Foreground="Black"
+                            FontFamily="Bahnschrift"
+                            FontSize="17">
+                    </Button>
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="70"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
                             Background="#0D7377"
                             BorderThickness="0"
-                            Margin="20,0,0,0"
+                            Margin="10,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="25"
-                            Content="НАСТРОЙКИ"
-                            Command="{Binding OpenSettings}"/>
+                            FontSize="17"
+                            Command="{Binding AddFileCommand}">
+                        <materialDesign:PackIcon Kind="AttachFile"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </Button>
 
-                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,20,20"
-                            Height="50"
-                            Width="180"
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="70"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
+                            Background="#0D7377"
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Command="{Binding CreateCheckBoxCommand}">
+                        <materialDesign:PackIcon Kind="PlusBox"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </Button>
+
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="70"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
+                            Background="#0D7377"
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Command="{Binding RemoveCheckBoxCommand}">
+                        <materialDesign:PackIcon Kind="CloseBox"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </Button>
+
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
+                            Background="#0D7377"
+                            BorderThickness="0"
+                            Margin="10,0,10,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Width="70"
+                            Command="{Binding OpenSettings}">
+                        <materialDesign:PackIcon Kind="Settings"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </Button>
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Padding="20,0,20,0"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
                             Background="#E23E57"
                             BorderThickness="0"
-                            Margin="20,0,10,0"
+                            Margin="0,0,10,0"
+                            Width="70"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="25"
-                            Content="ОЧИСТИТЬ"
-                            Command="{Binding ClearAll}"/>
+                            FontSize="17"
+                            Command="{Binding RemovePlanCommand}">
+                        <materialDesign:PackIcon Kind="DeleteCircle"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </Button>
                 </StackPanel>
 
-                <Border Grid.Column="0"
-                        Grid.Row="1"
-                        Margin="10"
-                        CornerRadius="30"
-                        Background="White">
+                <Border Grid.Row="1"
+                        Grid.Column="0"
+                        MinWidth="480"
+                        CornerRadius="10"
+                        Background="#212121"
+                        Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition  Height="60"/>
-                            <RowDefinition  Height="550"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="0.4*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button HorizontalAlignment="Left"
+                                Margin="10,0,0,0"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Width="60"
+                                Padding="0"
+                                Height="60"
+                                Command="{Binding LeftPlanCommand}">
+                            <materialDesign:PackIcon Kind="ArrowLeft"
+                                                     Width="40"
+                                                     Height="40"/>
+                        </Button>
+
+                        <Button HorizontalAlignment="Right"
+                                Margin="0,0,10,0"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="60"
+                                Height="60"
+                                Command="{Binding RightPlanCommand}">
+                            <materialDesign:PackIcon Kind="ArrowRight"
+                                                     Width="40"
+                                                     Height="40"/>
+                        </Button>
+
+                        <Label HorizontalAlignment="Center"
+                               Content="{Binding planHeader, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                               FontWeight="UltraLight"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               FontSize="25"/>
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.RowSpan="2"
+                                    Orientation="Vertical"
+                                    Margin="0,30,0,0">
+                            <StackPanel  Grid.Row="1"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,10,0,0"
+                                     VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="WarningBox"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ПРИОРИТЕТ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Ellipse Width="30"
+                                     Height="30"
+                                     Margin="10,0,0,0"
+                                     Fill="{Binding Priority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Ellipse Fill="{Binding Priority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding Priority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding Priority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding Priority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="1"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0"
+                                     VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="TimelineAlert"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ДАТА СДАЧИ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10" >
+                                    <Label Content="{Binding deadLine, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="Timelapse"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ОСТАЛОСЬ ЧАСОВ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding hoursRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="2"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     VerticalAlignment="Top"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="TimelineClock"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ОСТАЛОСЬ ДНЕЙ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding daysRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="2"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     VerticalAlignment="Center"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="Text"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="СОДЕРЖАНИЕ:"
+                                   Foreground="White"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   Margin="10,0,0,0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border     Background="#e4e3e3"
+                                        Grid.Row="3"
+                                        Margin="10"
+                                        CornerRadius="10"
+                                        VerticalAlignment="Stretch">
+                            <TextBlock Text="{Binding planContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Foreground="Black"
+                                   FontSize="20"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   Margin="10,10,10,10"
+                                   TextWrapping="Wrap"
+                                   FontFamily="Bahnschrift"
+                                   HorizontalAlignment="Stretch" />
+
+                        </Border>
+
+                            <Button Margin="10,0,10,0"
+                                    Grid.Row="4"
+                                    Background="#0D7377"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    VerticalAlignment="Stretch"
+                                    MinHeight="45"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    Content="ВЫВЕСТИ НА ДИСПЛЕЙ"
+                                    FontWeight="UltraLight"
+                                    FontSize="25"
+                                    FontFamily="Bahnschrift"
+                                    Padding="0,5,0,0"
+                                    Command="{Binding ChoosePlanCommand}"/>
+                       
+                        
+
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Grid.Column="1"
+                        CornerRadius="10"
+                        Background="#212121"
+                        Margin="10">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition   Width="350"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition MinWidth="770"
+                                              Width="3*"/>
+                            <ColumnDefinition MinWidth="0"
+                                              Width="0.01*"/>
+                            <ColumnDefinition MinWidth="0"/>
+                            <ColumnDefinition MinWidth="0"
+                                              Width="1.1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="10,5,10,0"
-                                    Grid.Column="0">
-                            <Button     materialDesign:ButtonAssist.CornerRadius="50"
-                                        Height="50"
-                                        Width="50"
-                                        Background="#0D7377"
-                                        BorderThickness="0"
-                                        Margin="5,0,0,0"
-                                        Foreground="White"
-                                        Padding="0"
-                                        Command="{Binding LeftPlan}"
-                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <materialDesign:PackIcon    Kind="ArrowLeft"
-                                                            Width="40"
-                                                            Height="40"/>
-                            </Button>
+                        <StackPanel  Grid.Row="0"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="3"
+                                     Orientation="Vertical"
+                                     Margin="0,0,250,0">
 
-                            <Label  Content="{Binding NumberLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Margin="15,0,0,0"
-                                    Foreground="Black"
-                                    FontFamily="Bahnschrift"
-                                    FontSize="25"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"/>
-                        </StackPanel>
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,20,0,0">
+                                <materialDesign:PackIcon Kind="Text"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0,5,10,0"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    FlowDirection="RightToLeft">
-                            <Button     materialDesign:ButtonAssist.CornerRadius="50"
-                                        Height="50"
-                                        Width="50"
-                                        Background="#0D7377"
-                                        BorderThickness="0"
-                                        Margin="0,0,5,0"
-                                        Foreground="White"
-                                        Padding="0"
-                                        Command="{Binding RightPlan}"
-                                        IsEnabled="{Binding Clip_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <materialDesign:PackIcon    Kind="ArrowRight"
-                                                            Width="40"
-                                                            Height="40"/>
-                            </Button>
+                                <Label Content="ЗАГОЛОВОК:"
+                                   Foreground="White"    
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   Margin="10,0,0,0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
 
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="10,0,10,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding ClipPlan_1}">
-
-                                <materialDesign:PackIcon Kind="Pin"
-                                                         Foreground="{Binding ClipColor_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding NotyOnOff}">
-
-                                <materialDesign:PackIcon Kind="MessageAlertOutline"
-                                                         Foreground="{Binding ColorNoty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="45"
-                                                         Width="45"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding AddFile}">
-
-                                <materialDesign:PackIcon Kind="Paperclip"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding OpenEditPlan_1}">
-
-                                <materialDesign:PackIcon Kind="Eye"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0">
-
-                                <materialDesign:PackIcon Kind="Done"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding DeletePlan}">
-
-                                <materialDesign:PackIcon Kind="Remove"
-                                                         Foreground="#E23E57"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-                        </StackPanel>
-
-                        <TextBlock  Grid.Column="1"
-                                    Grid.Row="1"
-                                    Margin="10"
-                                    Foreground="Black"
-                                    FontSize="20"
-                                    FontFamily="Bahnschrift"/>
-
-                        <Border Grid.Row="1"
-                                Grid.Column="0"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <StackPanel Orientation="Vertical"
-                                        Margin="10">
-                                <Label  HorizontalAlignment="Center"
-                                        Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="СВЕДЕНИЯ"/>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ПРИОРИТЕТ:"
-                                            Margin="0,0,45,0"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"
-                                                Margin="10,0,0,0"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"
-                                                Margin="10,0,0,0"/>
-                                </StackPanel>
-                                    
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ОСТАЛОСЬ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding TimeOF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ОСТАЛОСЬ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding TimeOFDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="СРОК СДАЧИ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding DeadLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="СТАТУС:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding Status_1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding MplanHeader, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
                             </StackPanel>
-                        </Border>
 
-                        <Border Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <StackPanel Margin="10"
-                                        Orientation="Vertical">
-                                <Label  Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="СОДЕРЖАНИЕ ЗАДАЧИ"
-                                        HorizontalAlignment="Center"/>
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="WarningBox"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
 
-                                <Label  Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="{Binding Header, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        HorizontalAlignment="Center"/>
+                                <Label Content="ПРИОРИТЕТ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
 
-                                <TextBlock  
-                                        Foreground="White"
-                                        FontSize="20"
-                                        FontFamily="Bahnschrift"
-                                        Margin="5,25,5,50"
-                                        TextWrapping="Wrap"
-                                        Text="{Binding PlanContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <ListBox Height="365"
-                                         HorizontalAlignment="Center"
-                                         Margin="10"
-                                         Width="425"
-                                         SelectedIndex="{Binding SelectedIndexC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ItemsSource="{Binding checkBoxes}">
+                                <Ellipse Width="30"
+                                     Height="30"
+                                     Margin="10,0,0,0"
+                                     Fill="{Binding MPriority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Ellipse Fill="{Binding MPriority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding MPriority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding MPriority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                                <Ellipse Fill="{Binding MPriority, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="30"
+                                     Height="30"
+                                     Margin="5,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="TimelineClock"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ОСТАЛОСЬ ДНЕЙ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding MdaysRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="Timelapse"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ОСТАЛОСЬ ЧАСОВ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding MhoursRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="TimelineAlert"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ДАТА СДАЧИ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <Label Content="{Binding MdeadLine, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Foreground="Black"
+                                           FontSize="25"
+                                           Padding="10,0,10,0"
+                                           Margin="0,0,0,0"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="0"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,30,0,0">
+                                <materialDesign:PackIcon Kind="ProgressCheck"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ЗАВЕРШЕННОСТЬ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10">
+                                    <ProgressBar Width="225"
+                                                 Height="15"
+                                                 Margin="10,0,10,0"
+                                                 Background="#0D7377"
+                                                 Value="{Binding MprogressBar, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="1"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Orientation="Horizontal"
+                                     Margin="20,40,0,0"
+                                     VerticalAlignment="Top">
+                                <materialDesign:PackIcon Kind="Subtasks"
+                                                     Width="30"
+                                                     Height="30"
+                                                     Foreground="White"
+                                                     Margin="0,3,0,0"/>
+
+                                <Label Content="ПОДЗАДАЧИ:"
+                                   Foreground="White"
+                                   Margin="10,0,0,0"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+
+                                <Border Background="#e4e3e3"
+                                        Margin="10,0,0,0"
+                                        CornerRadius="10"/>
+                            </StackPanel>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                      Margin="5, 40, 5, 5"
+                                      VerticalAlignment="Center"
+                                      Grid.Row="1"
+                                      Grid.RowSpan="2"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+
+                                <ListBox 
+                                     Margin="5, 0, 5, 5"
+                                     HorizontalAlignment="Stretch"
+                                     Grid.Column="0"
+                                     VerticalAlignment="Top"
+                                     Height="auto"
+                                     Width="auto"
+                                     SelectedIndex="{Binding selectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ItemsSource="{Binding checkBoxes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Horizontal"
+                                                        Margin="0,5,0,0">
 
-                                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
-                                                  Foreground="White"
-                                                  Background="White"                                                 
+                                                <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
+                                                  Foreground="#e4e3e3"
+                                                  Background="#e4e3e3"                                                 
                                                   FontSize="15"
                                                   Margin="0,0,0,0"
                                                   FontFamily="Bahnschrift"
-                                                  Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=Checked}"
+                                                  Command="{Binding Checked}"
                                                   IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                                <TextBox    HorizontalAlignment="Center"
+                                                    Foreground="White"
+                                                    Margin="10,0,0,0"
+                                                    FontSize="23"
+                                                    FontFamily="Bahnschrift"
+                                                    VerticalAlignment="Center"
+                                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                                                    Padding="0"
+                                                    BorderThickness="0"
+                                                    materialDesign:HintAssist.Hint="Какая у нас подзадача?.."
+                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Right"
+                                    Margin="10,20,10,10"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="1"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2">
+
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="CreateNewFolder"
+                                                         Foreground="White"
+                                                         Width="30"
+                                                         Height="30"
+                                                         Margin="0,0,10,0"/>
+
+                                <Label Content="ПРИКРЕПЛЕННЫЕ ФАЙЛЫ:"
+                                   Foreground="White"
+                                   FontSize="25"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   Margin="0,0,20,0"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                      Margin="5, 30, 5, 5"
+                                      VerticalAlignment="Center"
+                                      Grid.Row="1"
+                                      Grid.RowSpan="2"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+
+                                <ListBox 
+                                     Margin="5, 0, 5, 5"
+                                     HorizontalAlignment="Stretch"
+                                     Grid.Column="0"
+                                     VerticalAlignment="Top"
+                                     Height="auto"
+                                     Width="auto"
+                                     SelectedIndex="{Binding selectedIndexFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ItemsSource="{Binding Files, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal"
+                                                        Margin="0,5,0,0">
+
+                                                    <materialDesign:PackIcon Kind="Folder"
+                                                                         Foreground="White"
+                                                                         Width="25"
+                                                                         Height="25"/>
                                                     <TextBlock    HorizontalAlignment="Center"
                                                     Foreground="White"
                                                     Margin="10,0,0,0"
@@ -506,430 +917,38 @@
                                                     FontFamily="Bahnschrift"
                                                     VerticalAlignment="Center"
                                                     materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                                                    Padding="0"                       
-                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    Padding="0"
+                                                    materialDesign:HintAssist.Hint="Какая у нас подзадача?.."
+                                                    Text="{Binding FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </StackPanel>
+                                                <Grid.InputBindings>
+                                                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=OpenFileCommand}"/>
+                                                </Grid.InputBindings>
                                             </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="2"
-                                Grid.ColumnSpan="2"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <ListBox     Width="790"
-                                         Height="auto"
-                                         HorizontalAlignment="Center"
-                                         Margin="10"
-                                         ItemsSource="{Binding Files}"
-                                         Grid.Row="2"
-                                         Grid.Column="0"
-                                         SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon 
-                                                         Kind="Folder"
-                                                         VerticalAlignment="Center"
-                                                         Height="25"
-                                                         Width="25"
-                                                         Foreground="Yellow"/>
-                                                <TextBlock
-                                                   Margin="5,0,0,0"
-                                                   Text="{Binding files}"
-                                                   Foreground="White"
-                                                   FontSize="20"
-                                                   FontFamily="Bahnschrift">
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <Grid.InputBindings>
-                                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=OpenFile}"/>
-                                            </Grid.InputBindings>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </Grid>
-                </Border>
-
-                <Border Grid.Column="1"
-                        Grid.Row="1"
-                        Margin="10"
-                        CornerRadius="30"
-                        Background="White">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="60"/>
-                            <RowDefinition  Height="550"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition   Width="350"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="10,5,10,0"
-                                    Grid.Column="0">
-                            <Button     materialDesign:ButtonAssist.CornerRadius="50"
-                                        Height="50"
-                                        Width="50"
-                                        Background="#0D7377"
-                                        BorderThickness="0"
-                                        Margin="5,0,0,0"
-                                        Foreground="White"
-                                        Padding="0"
-                                        Command="{Binding LeftPlan_2}"
-                                        IsEnabled="{Binding Clip_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <materialDesign:PackIcon    Kind="ArrowLeft"
-                                                            Width="40"
-                                                            Height="40"/>
-                            </Button>
-
-                            <Label  Content="{Binding NumberLabel_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Margin="15,0,0,0"
-                                    Foreground="Black"
-                                    FontFamily="Bahnschrift"
-                                    FontSize="25"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"/>
+                            </ScrollViewer>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0,5,10,0"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    FlowDirection="RightToLeft">
-                            <Button     materialDesign:ButtonAssist.CornerRadius="50"
-                                        Height="50"
-                                        Width="50"
-                                        Background="#0D7377"
-                                        BorderThickness="0"
-                                        Margin="0,0,5,0"
-                                        Foreground="White"
-                                        Padding="0"
-                                        Command="{Binding RightPlan_2}"
-                                        IsEnabled="{Binding Clip_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <materialDesign:PackIcon    Kind="ArrowRight"
-                                                            Width="40"
-                                                            Height="40"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="10,0,10,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding ClipPlan_2}">
-
-                                <materialDesign:PackIcon Kind="Pin"
-                                                         Foreground="{Binding ClipColor_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding NotyOnOff_2}">
-
-                                <materialDesign:PackIcon Kind="MessageAlertOutline"
-                                                         Foreground="{Binding ColorNoty_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="45"
-                                                         Width="45"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding AddFile_2}">
-
-                                <materialDesign:PackIcon Kind="Paperclip"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding OpenEditPlan_2}">
-
-                                <materialDesign:PackIcon Kind="Eye"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0">
-
-                                <materialDesign:PackIcon Kind="Done"
-                                                         Foreground="#0D7377"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-                           
-                            <Button 
-                                Grid.ColumnSpan="2"
-                                Width="60"
-                                Height="60"
-                                Margin="0,0,0,0"
-                                Padding="0"
-                                materialDesign:ButtonAssist.CornerRadius="100"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Command="{Binding DeletePlan_2}">
-
-                                <materialDesign:PackIcon Kind="Remove"
-                                                         Foreground="#E23E57"
-                                                         Height="50"
-                                                         Width="50"/>
-                            </Button>
-                        </StackPanel>
-
-                        <TextBlock  Grid.Column="1"
-                                    Grid.Row="1"
-                                    Margin="10"
-                                    Foreground="Black"
-                                    FontSize="20"
-                                    FontFamily="Bahnschrift"/>
-
                         <Border Grid.Row="1"
-                                Grid.Column="0"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <StackPanel Orientation="Vertical"
-                                        Margin="10">
-                                <Label  HorizontalAlignment="Center"
-                                        Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="СВЕДЕНИЯ"/>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ПРИОРИТЕТ:"
-                                            Margin="0,0,45,0"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"
-                                                Margin="10,0,0,0"/>
-                                    <Ellipse    Width="25"
-                                                Height="25"
-                                                Fill="{Binding ColorPriority_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Right"
-                                                Margin="10,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ОСТАЛОСЬ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding TimeOF_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="ОСТАЛОСЬ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding TimeOFDay_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="СРОК СДАЧИ:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding DeadLine_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,20,0,0">
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="СТАТУС:"
-                                            Margin="0,0,0,0"/>
-
-                                    <Label  Foreground="White"
-                                            FontSize="25"
-                                            FontFamily="Bahnschrift"
-                                            Content="{Binding Status_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,0,0"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <StackPanel Margin="10"
-                                        Orientation="Vertical">
-                                <Label  Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="СОДЕРЖАНИЕ ЗАДАЧИ"
-                                        HorizontalAlignment="Center"/>
-
-                                <Label  Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="{Binding Header_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        HorizontalAlignment="Center"/>
-
-                                <TextBlock  
-                                        Foreground="White"
-                                        FontSize="20"
-                                        FontFamily="Bahnschrift"
-                                        Margin="5,25,5,50"
-                                        TextWrapping="Wrap"
-                                        Text="{Binding PlanContent_2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <ListBox Height="365"
-                                         HorizontalAlignment="Center"
-                                         Margin="10"
-                                         Width="425"                                        
-                                         ItemsSource="{Binding checkBoxes_2}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal">
-
-                                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
-                                                  Foreground="White"
-                                                  Background="White"                                                 
-                                                  FontSize="15"
-                                                  Margin="0,0,0,0"
-                                                  FontFamily="Bahnschrift"
-                                                  Command="{Binding Checked}"
-                                                  IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                                    <TextBlock    
-                                                    HorizontalAlignment="Center"
-                                                    Foreground="White"
-                                                    Margin="10,0,0,0"
-                                                    FontSize="23"
-                                                    FontFamily="Bahnschrift"
-                                                    VerticalAlignment="Center"
-                                                    materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                                                    Padding="0"                       
-                                                    Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="2"
+                                Grid.Column="2"
                                 Grid.ColumnSpan="2"
-                                Margin="10"
-                                Background="#323232"
-                                CornerRadius="30">
-                            <ListBox     Width="790"
-                                         Height="auto"
-                                         HorizontalAlignment="Center"
-                                         Margin="10"
-                                         ItemsSource="{Binding Files_2}"
-                                         Grid.Row="2"
-                                         Grid.Column="0"
-                                         SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon 
-                                                         Kind="Folder"
-                                                         VerticalAlignment="Center"
-                                                         Height="25"
-                                                         Width="25"
-                                                         Foreground="Yellow"/>
-                                                <TextBlock
-                                                   Margin="5,0,0,0"
-                                                   Text="{Binding files}"
-                                                   Foreground="White"
-                                                   FontSize="20"
-                                                   FontFamily="Bahnschrift">
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <Grid.InputBindings>
-                                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=OpenFile}"/>
-                                            </Grid.InputBindings>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                Background="#e4e3e3"
+                                CornerRadius="10">
+                            <TextBlock Text="{Binding MplanContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Foreground="Black"
+                                   FontSize="20"
+                                   FontWeight="UltraLight"
+                                   Padding="0"
+                                   Margin="10,10,10,10"
+                                   TextWrapping="Wrap"
+                                   FontFamily="Bahnschrift"
+                                   HorizontalAlignment="Stretch" />
+                            
                         </Border>
+
+                        
                     </Grid>
 
                 </Border>

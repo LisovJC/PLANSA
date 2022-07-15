@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using PLANSA.Command;
+using PLANSA.Model;
 using PLANSA.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace PLANSA.ViewModel.Windows
 {
-    internal class SettingsViewModel : Observer
+    internal class SettingsViewModel : ObserverableObject
     {
         public static string settingsPath = $"{Environment.CurrentDirectory}\\Setiings\\Settings.json";
 
@@ -51,14 +52,14 @@ namespace PLANSA.ViewModel.Windows
                     autoRun = false;
                     settingsObj[0].AutoRun = autoRun;
                     DataSaveLoad.Serialize(settingsObj);
-                    PlansaViewModel.SetAutoRun(autoRun, Assembly.GetExecutingAssembly().Location);
+                    //PlansaViewModel.SetAutoRun(autoRun, Assembly.GetExecutingAssembly().Location);
                 }
                 else
                 {
                     autoRun = true;
                     settingsObj[0].AutoRun = autoRun;
                     DataSaveLoad.Serialize(settingsObj);
-                    PlansaViewModel.SetAutoRun(autoRun, Assembly.GetExecutingAssembly().Location);
+                    //PlansaViewModel.SetAutoRun(autoRun, Assembly.GetExecutingAssembly().Location);
                 }
             });
         }

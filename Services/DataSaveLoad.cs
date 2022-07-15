@@ -9,16 +9,19 @@ namespace PLANSA.Services
 {
     public class DataSaveLoad
     {
+        #region Paths
         public static string JsonPathTasks = $"{Environment.CurrentDirectory}\\Data\\UserData\\plansData.json";
         public static string JsonPathSettings = $"{Environment.CurrentDirectory}\\Setiings\\settingsData.json";
         public static string JsonPathCurrentData = $"{Environment.CurrentDirectory}\\Data\\CurrentData\\currentData.json";
         public static string JsonPathCheckBoxData = $"{Environment.CurrentDirectory}\\Data\\UserData\\checkBoxData.json";
+        #endregion
 
+        #region Saves
         public static void Serialize(object o)
         {
-            if(PlansaViewModel.TaskItems != null)
+            if(PlansaViewModel.Plans != null)
             {
-                if (o.GetType() == PlansaViewModel.TaskItems.GetType())
+                if (o.GetType() == PlansaViewModel.Plans.GetType())
                 {
                     SaveDatas(JsonPathTasks, o);
                 }
@@ -49,7 +52,7 @@ namespace PLANSA.Services
             }
         }
 
-        private static void SaveDatas(string path, object o)
+        public static void SaveDatas(string path, object o)
         {
             if (path != null)
             {
@@ -67,7 +70,9 @@ namespace PLANSA.Services
                 }
             }
         }
-     
+        #endregion
+
+        #region Validation
         public static bool IsValidJson(string stringValue)
         {
             if (File.Exists(stringValue))
@@ -89,7 +94,9 @@ namespace PLANSA.Services
             }
             return false;
         }
+        #endregion
 
+        #region Loader
         public static ObservableCollectionEX<T> LoadData<T>(string path)
         {
             if (!IsValidJson(path))
@@ -101,5 +108,6 @@ namespace PLANSA.Services
             string json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<ObservableCollectionEX<T>>(json);
         }
+        #endregion
     }
 }

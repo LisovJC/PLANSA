@@ -1,4 +1,5 @@
-﻿using PLANSA.Model;
+﻿using PLANSA.Command;
+using PLANSA.Model;
 using PLANSA.Services;
 using PLANSA.View.Pages;
 using System.Windows;
@@ -6,7 +7,7 @@ using System.Windows.Controls;
 
 namespace PLANSA.ViewModel.Windows
 {
-    internal class ReviewViewModel : Observer
+    internal class ReviewViewModel : ObserverableObject
     {
         public RelayCommand CloseWindow { get; set; }
         public RelayCommand MainPage { get; set; }

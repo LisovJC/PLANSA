@@ -2,7 +2,7 @@
 
 namespace PLANSA.Model
 {
-    public class Settings : Observer
+    public class Settings : ObserverableObject
     {
         private bool _5hours;
 

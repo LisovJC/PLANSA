@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         Title="CreatePlanWindow" 
         
-        Height="1000" 
-        Width="800"   
+        Height="910" 
+        Width="650"   
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
@@ -39,11 +39,11 @@
                 <Label Grid.Column="0"
                        Margin="10,0,0,0"
                        Foreground="White"
-                       FontFamily="Bahnschrift"
-                       FontSize="27"
+                       FontSize="20"
+                       FontWeight="UltraLight"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Content="ПЛАНИРОВАНИЕ"/>
+                       Content="ПЛАНИРОВАНИЕ" />
 
                 <StackPanel Grid.Column="1"
                             Margin="0,0,10,0"
@@ -52,45 +52,15 @@
                     <Button Grid.Column="1"                          
                             Background="Transparent"
                             BorderThickness="0"
-                            Width="50"
-                            Height="50"
+                            Width="30"
+                            Height="30"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Padding="0"
                             Command="{Binding CloseWindow}">
-                        <materialDesign:PackIcon    Kind="Close"
-                                                    Width="45"
-                                                    Height="45"
-                                                    Foreground="White"/>
-                    </Button>
-
-                    <Button Grid.Column="1"                          
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Width="50"
-                            Height="50"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Padding="0"
-                            Command="{Binding Maximize}">
-                        <materialDesign:PackIcon    Kind="WindowMaximize"
-                                                    Width="45"
-                                                    Height="45"
-                                                    Foreground="White"/>
-                    </Button>
-
-                    <Button Grid.Column="1"                          
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Width="50"
-                            Height="50"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Padding="0"
-                            Command="{Binding Minimize}">
-                        <materialDesign:PackIcon    Kind="WindowMinimize"
-                                                    Width="45"
-                                                    Height="45"
+                        <materialDesign:PackIcon    Kind="ArrowBack"
+                                                    Width="15"
+                                                    Height="15"
                                                     Foreground="White"/>
                     </Button>
                 </StackPanel>
@@ -101,51 +71,52 @@
                 Background="#323232">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition  Height="80"/>
+                    <RowDefinition  Height="55"/>
                     <RowDefinition  Height="80"/>
                     <RowDefinition  Height="80"/>
                     <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition  Height="300"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal"
-                            Margin="10"
+                            Margin="10,5,10,0"
                             Grid.Row="0">
                     <Button Background="#0D7377"
                             materialDesign:ButtonAssist.CornerRadius="100"
-                            Width="55"
-                            Height="55"
+                            Width="45"
+                            Height="45"
                             Padding="0"
                             BorderThickness="0"
                             Command="{Binding CreatePlan}">
                         <materialDesign:PackIcon    Kind="Check"
-                                                    Width="45"
-                                                    Height="45"/>
+                                                    Width="25"
+                                                    Height="25"/>
                     </Button>
 
                     <Button Background="#0D7377"
                             materialDesign:ButtonAssist.CornerRadius="100"
-                            Width="55"
-                            Height="55"
+                            Width="45"
+                            Height="45"
                             Padding="0"
                             BorderThickness="0"
                             Margin="15,0,0,0"
                             Command="{Binding ClearCommand}">
                         <materialDesign:PackIcon    Kind="Remove"
-                                                    Width="45"
-                                                    Height="45"/>
+                                                    Width="25"
+                                                    Height="25"/>
                     </Button>
                 </StackPanel>
 
                 <Border Background="White"
                         Margin="10"
+                        CornerRadius="10"
                         Grid.Row="1">
                     <TextBox    Margin="5"
                                 Foreground="Black"
                                 VerticalContentAlignment="Center"
                                 materialDesign:HintAssist.Hint="Заголовок..."
                                 FontFamily="Bahnschrift"
-                                FontSize="25"
+                                FontSize="20"
                                 materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                 Padding="0"
                                 BorderThickness="0"
@@ -154,13 +125,14 @@
 
                 <Border Background="White"
                         Margin="10"
-                        Grid.Row="2">
+                        Grid.Row="2"
+                        CornerRadius="10">
                     <TextBox    Margin="5"
                                 Foreground="Black"
                                 VerticalContentAlignment="Center"
                                 materialDesign:HintAssist.Hint="Срок выполнения(ЧЧ/ДД/ММ/ГГГГ)..."
                                 FontFamily="Bahnschrift"
-                                FontSize="25"
+                                FontSize="20"
                                 materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                 Padding="0"
                                 BorderThickness="0"
@@ -169,7 +141,7 @@
 
                 <Grid   Grid.Row="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition   Width="500"/>
+                        <ColumnDefinition   Width="370"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
@@ -177,11 +149,12 @@
                         Grid.Row="0"
                         Height="auto"
                         Width="auto"
-                        Margin="10"
+                        Margin="10" 
                         Grid.Column="1"
                         Background="White"
                         VerticalAlignment="Top"
                         BorderThickness="0"
+                        BorderBrush="Transparent"
                         materialDesign:CalendarAssist.HeaderBackground="#0D7377"
                         materialDesign:CalendarAssist.HeaderForeground="White"
                         materialDesign:CalendarAssist.IsHeaderVisible="True"
@@ -197,14 +170,15 @@
                     </Calendar>
 
                     <Border Margin="10"
-                            Background="White">
+                            Background="White"
+                            CornerRadius="10">
                         <TextBox    Margin="10"
                                     Foreground="Black"
                                     VerticalContentAlignment="Top"
                                     HorizontalContentAlignment="Left"
                                     materialDesign:HintAssist.Hint="Какой у нас план?.."
                                     FontFamily="Bahnschrift"
-                                    FontSize="25"
+                                    FontSize="20"
                                     materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                                     Padding="0"
                                     TextWrapping="Wrap"
@@ -216,6 +190,7 @@
 
                 <Border Grid.Row="4"
                         Background="White"
+                        CornerRadius="10"
                         Margin="10">
                     <Grid>
                         <ListBox     Width="auto"
