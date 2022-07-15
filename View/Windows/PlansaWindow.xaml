@@ -332,12 +332,23 @@
                                                      Height="40"/>
                         </Button>
 
-                        <Label HorizontalAlignment="Center"
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Label HorizontalAlignment="Center"
                                Content="{Binding planHeader, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                FontWeight="UltraLight"
                                Foreground="White"
                                VerticalAlignment="Center"
                                FontSize="25"/>
+
+                            <materialDesign:PackIcon Kind="Edit"
+                                                     Foreground="White"
+                                                     Height="30"
+                                                     Width="30"
+                                                     Margin="10,3,0,0"
+                                                     Visibility="{Binding VisibilityEditPoint, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
 
                         <StackPanel Grid.Row="1"
                                     Grid.RowSpan="2"
@@ -935,6 +946,7 @@
                                 Grid.Column="2"
                                 Grid.ColumnSpan="2"
                                 Background="#e4e3e3"
+                                Margin="0,0,10,10"
                                 CornerRadius="10">
                             <TextBlock Text="{Binding MplanContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    Foreground="Black"

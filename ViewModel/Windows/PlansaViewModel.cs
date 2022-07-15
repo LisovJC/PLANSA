@@ -30,6 +30,14 @@ namespace PLANSA.ViewModel.Windows
             set { _visibility = value; OnPropertyChanged(); }
         }
 
+        private Visibility _visibilityEditPoint;
+
+        public Visibility VisibilityEditPoint
+        {
+            get => _visibilityEditPoint;
+            set { _visibilityEditPoint = value; OnPropertyChanged(); }
+        }
+
         private int _indexPlan;
 
         public int indexPlan
@@ -317,6 +325,7 @@ namespace PLANSA.ViewModel.Windows
                 {
                     Files.Add(new FileItem() { files = Plans[MindexPlan].files[i], FileName = Path.GetFileNameWithoutExtension(Plans[MindexPlan].files[i]) });
                 }
+                Loading();
             });
 
             RightPlanCommand = new RelayCommand(o =>
@@ -335,7 +344,9 @@ namespace PLANSA.ViewModel.Windows
                     daysRemained = Math.Round((deadLine - DateTime.Now).TotalDays, 1).ToString() + " Д";
                     planHeader = Plans[valuePlan].HeaderPlan;
                     NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
-                    addPrioiry(indexPlan, MindexPlan);                                       
+                    addPrioiry(indexPlan, MindexPlan);
+
+                    Loading();
                 }
             });
 
@@ -355,7 +366,9 @@ namespace PLANSA.ViewModel.Windows
                     planHeader = Plans[valuePlan].HeaderPlan;
                     daysRemained = Math.Round((deadLine - DateTime.Now).TotalDays, 1).ToString() + " Д";                                    
                     NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
-                    addPrioiry(indexPlan, MindexPlan);                                      
+                    addPrioiry(indexPlan, MindexPlan);
+
+                    Loading();
                 }
             });
 
@@ -474,6 +487,15 @@ namespace PLANSA.ViewModel.Windows
                 MdeadLine = Plans[MindexPlan].DateComplete;
                 MplanContent = Plans[indexPlan].PlanContent;
 
+                if(indexPlan == MindexPlan)
+                {
+                    VisibilityEditPoint = Visibility.Visible;
+                }
+                else
+                {
+                    VisibilityEditPoint = Visibility.Hidden;
+                }
+
                 addPrioiry(indexPlan, MindexPlan);
                 Sorting();
             }
@@ -519,6 +541,15 @@ namespace PLANSA.ViewModel.Windows
             MdaysRemained = Math.Round((Plans[MindexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
             MdeadLine = Plans[MindexPlan].DateComplete;
             MplanContent = Plans[indexPlan].PlanContent;
+
+            if (indexPlan == MindexPlan)
+            {
+                VisibilityEditPoint = Visibility.Visible;
+            }
+            else
+            {
+                VisibilityEditPoint = Visibility.Hidden;
+            }
 
             addPrioiry(indexPlan, MindexPlan);
             Sorting();
