@@ -481,11 +481,20 @@ namespace PLANSA.ViewModel.Windows
 
         public void Loading()
         {
-            if(Files.Count > 0)
-                Files.Clear();
-            if (checkBoxes.Count > 0)
-                checkBoxes.Clear();
+            try
+            {
+                if (Files.Count > 0)
+                    Files.Clear();
+                if (checkBoxes.Count > 0)
+                    checkBoxes.Clear();
 
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+            
             Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
 
             CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
