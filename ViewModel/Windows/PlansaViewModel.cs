@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using WK.Libraries.BootMeUpNS;
 using PLANSA.Command;
 
 namespace PLANSA.ViewModel.Windows
@@ -27,7 +26,7 @@ namespace PLANSA.ViewModel.Windows
         public Visibility Visibility
         {
             get => _visibility;
-            set { _visibility = value; OnPropertyChanged(); }
+            set => Set(ref _visibility, value);
         }
 
         private Visibility _visibilityEditPoint;
@@ -35,7 +34,7 @@ namespace PLANSA.ViewModel.Windows
         public Visibility VisibilityEditPoint
         {
             get => _visibilityEditPoint;
-            set { _visibilityEditPoint = value; OnPropertyChanged(); }
+            set => Set(ref _visibilityEditPoint, value);
         }
 
         private int _indexPlan;
@@ -43,15 +42,15 @@ namespace PLANSA.ViewModel.Windows
         public int indexPlan
         {
             get => _indexPlan; 
-            set { _indexPlan = value; OnPropertyChanged(); }
+            set => Set(ref _indexPlan, value);
         }
 
-        private int _MindexPlan;
+        private int _mindexPlan;
 
         public int MindexPlan
         {
-            get => _MindexPlan;
-            set { _MindexPlan = value; OnPropertyChanged(); }
+            get => _mindexPlan;
+            set => Set(ref _mindexPlan, value);
         }
 
         private string _numberLabel;
@@ -59,7 +58,7 @@ namespace PLANSA.ViewModel.Windows
         public string NumberLabel
         {
             get => _numberLabel; 
-            set { _numberLabel = value; OnPropertyChanged(); }
+            set => Set(ref _numberLabel, value);
         }
 
         private int _selectedIndex;
@@ -230,11 +229,11 @@ namespace PLANSA.ViewModel.Windows
         #endregion
 
         #region PriorityColors
-        private readonly string normalColor = "#75a77d";
-        private readonly string lessNormalColor = "#E0F9B5";
-        private readonly string warningColor = "#F9ED69";
-        private readonly string lessWarningColor = "#F08A5D";
-        private readonly string criticalColor = "#D72323";
+        private const string normalColor = "#75a77d";
+        private const string lessNormalColor = "#E0F9B5";
+        private const string warningColor = "#F9ED69";
+        private const string lessWarningColor = "#F08A5D";
+        private const string criticalColor = "#D72323";
 
         private Brush _priority;
 
@@ -325,8 +324,17 @@ namespace PLANSA.ViewModel.Windows
                     CurrentDatas[0].SelectedPlan_1 = valuePlan;
                     indexPlan = valuePlan;
                     MindexPlan = CurrentDatas[0].SelectedPlan_2;                    
-                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";                    
-                    Loading();
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
+                    Swipe(valuePlan);
+                }
+                else
+                {
+                    valuePlan = 0;
+                    CurrentDatas[0].SelectedPlan_1 = valuePlan;
+                    indexPlan = valuePlan;
+                    MindexPlan = CurrentDatas[0].SelectedPlan_2;
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
+                    Swipe(valuePlan);
                 }
             });
 
@@ -339,8 +347,17 @@ namespace PLANSA.ViewModel.Windows
                     CurrentDatas[0].SelectedPlan_1 = valuePlan;
                     indexPlan = valuePlan;
                     MindexPlan = CurrentDatas[0].SelectedPlan_2;                                                  
-                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";                   
-                    Loading();
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
+                    Swipe(valuePlan);
+                }
+                else
+                {
+                    valuePlan = Plans.Count - 1;
+                    CurrentDatas[0].SelectedPlan_1 = valuePlan;
+                    indexPlan = valuePlan;
+                    MindexPlan = CurrentDatas[0].SelectedPlan_2;
+                    NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
+                    Swipe(valuePlan);
                 }
             });
 
@@ -541,6 +558,27 @@ namespace PLANSA.ViewModel.Windows
             addPrioiry(indexPlan, MindexPlan);
             Sorting();
         }
+
+        public void Swipe(int index)
+        {
+            planHeader = Plans[index].HeaderPlan;
+            deadLine = Plans[index].DateComplete;
+            hoursRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
+            daysRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д"; ;
+            planContent = Plans[index].PlanContent;
+
+            Sorting();
+            addPrioiry(index, 0);
+
+            if (indexPlan == MindexPlan)
+            {
+                VisibilityEditPoint = Visibility.Visible;
+            }
+            else
+            {
+                VisibilityEditPoint = Visibility.Hidden;
+            }
+        }        
         #endregion       
         #endregion
 
@@ -561,35 +599,40 @@ namespace PLANSA.ViewModel.Windows
         #region colorityPriority
         public void addPrioiry(int index1, int index2)
         {          
-            if ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 96 )
-                Priority = (Brush)new BrushConverter().ConvertFrom(normalColor);
+            if(index1 != 0)
+            {
+                if ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 96)
+                    Priority = (Brush)new BrushConverter().ConvertFrom(normalColor);
 
-            if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 96) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 72))
-                Priority = (Brush)new BrushConverter().ConvertFrom(lessNormalColor);
+                if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 96) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 72))
+                    Priority = (Brush)new BrushConverter().ConvertFrom(lessNormalColor);
 
-            if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 72) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 48))
-                Priority = (Brush)new BrushConverter().ConvertFrom(warningColor);
+                if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 72) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 48))
+                    Priority = (Brush)new BrushConverter().ConvertFrom(warningColor);
 
-            if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 48) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 32))
-                Priority = (Brush)new BrushConverter().ConvertFrom(lessWarningColor);
+                if (((Plans[index1].DateComplete - DateTime.Now).TotalHours < 48) && ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 32))
+                    Priority = (Brush)new BrushConverter().ConvertFrom(lessWarningColor);
 
-            if ((Plans[index1].DateComplete - DateTime.Now).TotalHours < 32)
-                Priority = (Brush)new BrushConverter().ConvertFrom(criticalColor);
+                if ((Plans[index1].DateComplete - DateTime.Now).TotalHours < 32)
+                    Priority = (Brush)new BrushConverter().ConvertFrom(criticalColor);
+            }
+            if(index2 != 0)
+            {
+                if ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 96)
+                    MPriority = (Brush)new BrushConverter().ConvertFrom(normalColor);
 
-            if ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 96)
-                MPriority = (Brush)new BrushConverter().ConvertFrom(normalColor);
+                if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 96) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 72))
+                    MPriority = (Brush)new BrushConverter().ConvertFrom(lessNormalColor);
 
-            if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 96) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 72))
-                MPriority = (Brush)new BrushConverter().ConvertFrom(lessNormalColor);
+                if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 72) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 48))
+                    MPriority = (Brush)new BrushConverter().ConvertFrom(warningColor);
 
-            if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 72) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 48))
-                MPriority = (Brush)new BrushConverter().ConvertFrom(warningColor);
+                if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 48) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 32))
+                    MPriority = (Brush)new BrushConverter().ConvertFrom(lessWarningColor);
 
-            if (((Plans[index2].DateComplete - DateTime.Now).TotalHours < 48) && ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 32))
-                MPriority = (Brush)new BrushConverter().ConvertFrom(lessWarningColor);
-
-            if ((Plans[index2].DateComplete - DateTime.Now).TotalHours < 32)
-                MPriority = (Brush)new BrushConverter().ConvertFrom(criticalColor);
+                if ((Plans[index2].DateComplete - DateTime.Now).TotalHours < 32)
+                    MPriority = (Brush)new BrushConverter().ConvertFrom(criticalColor);
+            }       
         }
         #endregion
 

@@ -182,6 +182,7 @@
                             Grid.Column="1"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">
+                    
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
                             Height="35"
                             Width="100"
@@ -203,6 +204,27 @@
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
+                            Background="#e4e3e3"
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Command="{Binding AddFileCommand}">
+                        <materialDesign:PackIcon Kind="CheckboxesMarked"
+                                                 Height="30"
+                                                 Width="30"
+                                                 Foreground="#0D7377"/>
+
+                    </Button>
+
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="70"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
                             Background="#0D7377"
                             BorderThickness="0"
                             Margin="10,0,0,0"
@@ -210,7 +232,26 @@
                             FontFamily="Bahnschrift"
                             FontSize="17"
                             Command="{Binding AddFileCommand}">
-                        <materialDesign:PackIcon Kind="AttachFile"
+                        <materialDesign:PackIcon Kind="FileDocumentBoxPlus"
+                                                 Height="30"
+                                                 Width="30"/>
+
+                    </Button>
+
+                    <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
+                            Height="35"
+                            Width="70"
+                            VerticalAlignment="Top"
+                            FontWeight="UltraLight"
+                            Padding="20,0,20,0"
+                            Background="#E23E57"
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            FontFamily="Bahnschrift"
+                            FontSize="17"
+                            Command="{Binding RemoveFileCommand}">
+                        <materialDesign:PackIcon Kind="FileDocumentBoxRemove"
                                                  Height="30"
                                                  Width="30"/>
                     </Button>
@@ -241,7 +282,7 @@
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
-                            Background="#0D7377"
+                            Background="#E23E57"
                             BorderThickness="0"
                             Margin="10,0,0,0"
                             Foreground="White"
@@ -819,7 +860,8 @@
                                         CornerRadius="10"/>
                             </StackPanel>
 
-                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                            <ScrollViewer 
+                                      VerticalScrollBarVisibility="Auto"
                                       Margin="5, 40, 5, 5"
                                       VerticalAlignment="Center"
                                       Grid.Row="1"
@@ -830,11 +872,11 @@
 
                                 <ListBox 
                                      Margin="5, 0, 5, 5"
-                                     HorizontalAlignment="Stretch"
+                                     HorizontalAlignment="Left"
                                      Grid.Column="0"
                                      VerticalAlignment="Top"
-                                     Height="auto"
-                                     Width="auto"
+                                     MaxHeight="850"
+                                     Width="auto" 
                                      SelectedIndex="{Binding selectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      ItemsSource="{Binding checkBoxes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
@@ -893,7 +935,8 @@
                                    HorizontalContentAlignment="Center"/>
                             </StackPanel>
 
-                            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                            <ScrollViewer 
+                                      VerticalScrollBarVisibility="Auto"
                                       Margin="5, 30, 5, 5"
                                       VerticalAlignment="Center"
                                       Grid.Row="1"
@@ -904,10 +947,10 @@
 
                                 <ListBox 
                                      Margin="5, 0, 5, 5"
-                                     HorizontalAlignment="Stretch"
+                                     HorizontalAlignment="Right"
                                      Grid.Column="0"
                                      VerticalAlignment="Top"
-                                     Height="auto"
+                                     MaxHeight="500"
                                      Width="auto"
                                      SelectedIndex="{Binding selectedIndexFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      ItemsSource="{Binding Files, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
