@@ -117,15 +117,7 @@ namespace PLANSA.ViewModel.Windows
         {
             get => _WIP;
             set => Set(ref _WIP, value);
-        }
-
-        private int _progressBar;
-
-        public int progressBar
-        {
-            get => _progressBar;
-            set => Set(ref _progressBar, value);
-        }
+        }      
 
         private string _planContent;
 
@@ -215,6 +207,7 @@ namespace PLANSA.ViewModel.Windows
 
         #region OpenCommands
         public RelayCommand CreatePlanOpenWindowCommand { get; set; }
+        public RelayCommand OpenReviewWindowCommand { get; set; }
         #endregion
 
         #region Commands
@@ -226,6 +219,7 @@ namespace PLANSA.ViewModel.Windows
         public RelayCommand RemovePlanCommand { get; set; }
         public RelayCommand AddFileCommand { get; set; }
         public RelayCommand OpenFileCommand { get; set; }
+        public RelayCommand RemoveFileCommand { get; set; }
         #endregion
 
         #region PriorityColors
@@ -303,6 +297,14 @@ namespace PLANSA.ViewModel.Windows
                 window.Show();
                 Application.Current.MainWindow.Hide();
             });
+
+            OpenReviewWindowCommand = new RelayCommand(o =>
+            {
+                ReviewWindow window = new ReviewWindow();
+                window.Owner = Application.Current.MainWindow;
+                window.Show();
+                Application.Current.MainWindow.Hide();
+            });
             #endregion
 
             #region Commands
@@ -363,19 +365,45 @@ namespace PLANSA.ViewModel.Windows
 
             CreateCheckBoxCommand = new RelayCommand(o =>
             {
-                checkBoxes.Add(new CheckBoxItem());
-                SaveCheckBoxes();
+                try
+                {
+                    checkBoxes.Add(new CheckBoxItem());
+                    SaveCheckBoxes();
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message);
+                }
             });
 
             RemoveCheckBoxCommand = new RelayCommand(o =>
             {
-                checkBoxes.RemoveAt(selectedIndex);
-                SaveCheckBoxes();
+                try
+                {
+                    checkBoxes.RemoveAt(selectedIndex);
+                    SaveCheckBoxes();
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message);
+                }
+                
             });
 
             RemovePlanCommand = new RelayCommand(o =>
             {
-            Plans.RemoveAt(MindexPlan);
+                try
+                {
+                    Plans.RemoveAt(MindexPlan);
+                    Loading();
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message);
+                }                
             });
 
             AddFileCommand = new RelayCommand(o =>
@@ -395,6 +423,22 @@ namespace PLANSA.ViewModel.Windows
                     }
                     DataSaveLoad.SaveDatas(DataSaveLoad.JsonPathTasks, Plans);
                 }           
+            });
+
+            RemoveFileCommand = new RelayCommand(o =>
+            {
+                try
+                {
+                    Files.RemoveAt(selectedIndexFiles);
+                    Plans[CurrentDatas[0].SelectedPlan_2].files.RemoveAt(selectedIndexFiles);
+                    Debug.WriteLine(selectedIndexFiles);
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message);
+                }
+                
             });
 
             OpenFileCommand = new RelayCommand(o =>
@@ -440,70 +484,79 @@ namespace PLANSA.ViewModel.Windows
             try
             {
                 Plans = new ObservableCollectionEX<TaskItem>();
-                Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);               
-
-                CurrentDatas = new ObservableCollectionEX<CurrentData>();
-                CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
-                if (CurrentDatas.Count == 0)
-                    CurrentDatas.Add(new CurrentData() { SelectedPlan_1 = 0, SelectedPlan_2 = 0 });
-
-                checkBoxes = new ObservableCollection<CheckBoxItem>();
-                if (Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count > 0)
-                for (int i = 0; i < Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                Plans = DataSaveLoad.LoadData<TaskItem>(DataSaveLoad.JsonPathTasks);
+                if(Plans.Count > 0)
                 {
-                    checkBoxes.Add(Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
-                }
-
-                Files = new ObservableCollection<FileItem>();
-                if (Plans[CurrentDatas[0].SelectedPlan_2].files.Count > 0)
-                    for (int i = 0; i < Plans[CurrentDatas[0].SelectedPlan_2].files.Count; i++)
+                    try
                     {
-                        Files.Add(new FileItem() { files = Plans[CurrentDatas[0].SelectedPlan_2].files[i], FileName = Path.GetFileNameWithoutExtension(Plans[CurrentDatas[0].SelectedPlan_2].files[i]) });
+                        CurrentDatas = new ObservableCollectionEX<CurrentData>();
+                        CurrentDatas = DataSaveLoad.LoadData<CurrentData>(DataSaveLoad.JsonPathCurrentData);
+                        if (CurrentDatas.Count == 0)
+                            CurrentDatas.Add(new CurrentData() { SelectedPlan_1 = 0, SelectedPlan_2 = 0 });
+
+                        checkBoxes = new ObservableCollection<CheckBoxItem>();
+                        if (Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count > 0)
+                            for (int i = 0; i < Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes.Count; i++)
+                            {
+                                checkBoxes.Add(Plans[CurrentDatas[0].SelectedPlan_2].checkBoxes[i]);
+                            }
+                        Files = new ObservableCollection<FileItem>();
+                        if (Plans[CurrentDatas[0].SelectedPlan_2].files.Count > 0)
+                            for (int i = 0; i < Plans[CurrentDatas[0].SelectedPlan_2].files.Count; i++)
+                            {
+                                Files.Add(new FileItem() { files = Plans[CurrentDatas[0].SelectedPlan_2].files[i], FileName = Path.GetFileNameWithoutExtension(Plans[CurrentDatas[0].SelectedPlan_2].files[i]) });
+                            }
+
+                        indexPlan = CurrentDatas[0].SelectedPlan_1;
+                        MindexPlan = CurrentDatas[0].SelectedPlan_2;
+
+                        planHeader = Plans[indexPlan].HeaderPlan;
+                        hoursRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
+                        daysRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
+                        deadLine = Plans[indexPlan].DateComplete;
+                        planContent = Plans[indexPlan].PlanContent;
+                        NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
+
+                        MplanHeader = Plans[MindexPlan].HeaderPlan;
+                        MhoursRemained = Math.Round((Plans[MindexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
+                        MdaysRemained = Math.Round((Plans[MindexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
+                        MdeadLine = Plans[MindexPlan].DateComplete;
+                        MplanContent = Plans[indexPlan].PlanContent;
+
+                        if (indexPlan == MindexPlan)
+                        {
+                            VisibilityEditPoint = Visibility.Visible;
+                        }
+                        else
+                        {
+                            VisibilityEditPoint = Visibility.Hidden;
+                        }
+
+                        addPrioiry(indexPlan, MindexPlan);
+                        Sorting();
+                        MprogressBar = (int)ProgressBar(MindexPlan);
                     }
+                    catch (Exception ex)
+                    {
 
-                indexPlan = CurrentDatas[0].SelectedPlan_1;
-                MindexPlan = CurrentDatas[0].SelectedPlan_2;
-
-                planHeader = Plans[indexPlan].HeaderPlan;
-                hoursRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-                daysRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
-                deadLine = Plans[indexPlan].DateComplete;
-                planContent = Plans[indexPlan].PlanContent;
-                NumberLabel = $"{CurrentDatas[0].SelectedPlan_1 + 1} из {Plans.Count}";
-                
-                MplanHeader = Plans[MindexPlan].HeaderPlan;
-                MhoursRemained = Math.Round((Plans[MindexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-                MdaysRemained = Math.Round((Plans[MindexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д";
-                MdeadLine = Plans[MindexPlan].DateComplete;
-                MplanContent = Plans[indexPlan].PlanContent;
-
-                if(indexPlan == MindexPlan)
-                {
-                    VisibilityEditPoint = Visibility.Visible;
+                        Debug.WriteLine(ex.Message);
+                    }
                 }
-                else
-                {
-                    VisibilityEditPoint = Visibility.Hidden;
-                }
-
-                addPrioiry(indexPlan, MindexPlan);
-                Sorting();
             }
             catch (Exception ex)
             {
 
                 Debug.WriteLine(ex.Message);
-            }            
+            }
+                    
         }
 
         public void Loading()
         {
             try
             {
-                if (Files.Count > 0)
-                    Files.Clear();
-                if (checkBoxes.Count > 0)
-                    checkBoxes.Clear();
+                Files.Clear();
+                checkBoxes.Clear();
 
             }
             catch (Exception ex)
@@ -557,27 +610,37 @@ namespace PLANSA.ViewModel.Windows
 
             addPrioiry(indexPlan, MindexPlan);
             Sorting();
+            MprogressBar = (int)ProgressBar(MindexPlan);
         }
 
         public void Swipe(int index)
         {
-            planHeader = Plans[index].HeaderPlan;
-            deadLine = Plans[index].DateComplete;
-            hoursRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
-            daysRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д"; ;
-            planContent = Plans[index].PlanContent;
-
-            Sorting();
-            addPrioiry(index, 0);
-
-            if (indexPlan == MindexPlan)
+            try
             {
-                VisibilityEditPoint = Visibility.Visible;
+                planHeader = Plans[index].HeaderPlan;
+                deadLine = Plans[index].DateComplete;
+                hoursRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalHours, 1).ToString() + " Ч";
+                daysRemained = Math.Round((Plans[indexPlan].DateComplete - DateTime.Now).TotalDays, 1).ToString() + " Д"; ;
+                planContent = Plans[index].PlanContent;
+
+                Sorting();
+                addPrioiry(index, -1);
+
+                if (indexPlan == MindexPlan)
+                {
+                    VisibilityEditPoint = Visibility.Visible;
+                }
+                else
+                {
+                    VisibilityEditPoint = Visibility.Hidden;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                VisibilityEditPoint = Visibility.Hidden;
+
+                Debug.WriteLine(ex.Message);
             }
+            
         }        
         #endregion       
         #endregion
@@ -596,10 +659,29 @@ namespace PLANSA.ViewModel.Windows
         }
         #endregion
 
+        #region Calculations
+        public decimal ProgressBar(int index)
+        {
+            if (Plans[index].checkBoxes.Count > 0)
+            {
+                decimal countPlans = Plans[index].checkBoxes.Count, succesPlans = 0;
+                foreach (var item in Plans[index].checkBoxes)
+                {
+                    if (item.isCheck)
+                        succesPlans += 1;
+                }
+
+                decimal result = (succesPlans / countPlans) * 100;
+                return decimal.Round(result);
+            }
+            else return 0;
+        }
+        #endregion
+
         #region colorityPriority
         public void addPrioiry(int index1, int index2)
         {          
-            if(index1 != 0)
+            if(index1 != -1)
             {
                 if ((Plans[index1].DateComplete - DateTime.Now).TotalHours >= 96)
                     Priority = (Brush)new BrushConverter().ConvertFrom(normalColor);
@@ -616,7 +698,7 @@ namespace PLANSA.ViewModel.Windows
                 if ((Plans[index1].DateComplete - DateTime.Now).TotalHours < 32)
                     Priority = (Brush)new BrushConverter().ConvertFrom(criticalColor);
             }
-            if(index2 != 0)
+            if(index2 != -1)
             {
                 if ((Plans[index2].DateComplete - DateTime.Now).TotalHours >= 96)
                     MPriority = (Brush)new BrushConverter().ConvertFrom(normalColor);
@@ -748,24 +830,6 @@ namespace PLANSA.ViewModel.Windows
         //    await Task.Run(() => PushNoty());
         //}
 
-        //#endregion
-
-        //public static void SetAutorunValue(bool autorun)
-        //{
-        //    if(autorun)
-        //    {
-        //        var bootMeUp = new BootMeUp();
-
-        //        bootMeUp.UseAlternativeOnFail = true;
-        //        bootMeUp.RunWhenDebugging = true;
-        //        bootMeUp.CreateShortcut();
-        //        bootMeUp.BootArea = BootMeUp.BootAreas.StartupFolder;
-        //        bootMeUp.BootArea = BootMeUp.BootAreas.Registry;
-        //        bootMeUp.TargetUser = BootMeUp.TargetUsers.AllUsers;
-
-
-        //        bootMeUp.Enabled = true;
-        //    }
-        //}      
+        //#endregion            
     }
 }

@@ -32,7 +32,7 @@
                     Margin="10,25,10,10"
                     CornerRadius="30"
                     Background="White"
-                    Height="550">
+                    Height="495">
 
                 <StackPanel VerticalAlignment="Top">
                     <Border Grid.Column="0"
@@ -45,9 +45,9 @@
                         <Label  HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Foreground="White"
-                                FontSize="35"
-                                FontFamily="Bahnschrift"
-                                Content="СТАТИСТИКА ЗА МЕСЯЦ"/>
+                                FontSize="25"
+                                FontWeight="UltraLight"
+                                Content="СТАТИСТИКА ЗА НЕДЕЛЮ"/>
                     </Border>
 
                     <Border Grid.Column="0"
@@ -55,83 +55,93 @@
                             Margin="10"
                             CornerRadius="30"
                             Background="#323232"
-                            Height="400">
+                            Height="355">
 
                         <StackPanel Orientation="Vertical">
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="Assignment"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВСЕГО ПЛАНОВ:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="AssignmentTurnedIn"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВЫПОЛНЕНО УСПЕШНО:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="AssignmentLate"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВЫПОЛНЕНО С ОПАЗДАНИЕМ:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="Dangerous"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ПРОСРОЧЕНО:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="TrendingUp"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ТЕНДЕНЦИЯ:"/>
                                 <Label/>
+                                <Button Margin="20,0,0,0"
+                                        Width="130"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
+                                        FontFamily="Bahnschrift"
+                                        FontWeight="UltraLight"
+                                        Content="ПОКАЗАТЬ"
+                                        FontSize="20"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -161,8 +171,8 @@
                         <Label  HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Foreground="White"
-                                FontSize="35"
-                                FontFamily="Bahnschrift"
+                                FontSize="25"
+                                FontWeight="UltraLight"
                                 Content="ОБРАТИТЕ ВНИМАНИЕ"/>
                     </Border>
 
@@ -176,16 +186,16 @@
                         <StackPanel Orientation="Vertical">
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="FireCircle"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ИСТЕКАЕТ СРОК:"/>
                                 <Button Margin="20,0,0,0"
                                         Width="130"
@@ -194,26 +204,28 @@
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         Foreground="Black"
                                         FontFamily="Bahnschrift"
+                                        FontWeight="UltraLight"
                                         Content="ПОКАЗАТЬ"
                                         FontSize="20"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="AlertBox"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="СРЕДНИЙ ПРИОРИТЕТ:"/>
                                 <Button Margin="20,0,0,0"
                                         Width="130"
                                         Background="White"
                                         BorderThickness="0"
+                                        FontWeight="UltraLight"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         Foreground="Black"
                                         FontFamily="Bahnschrift"
@@ -222,16 +234,16 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="Dangerous"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ПРОСРОЧЕНО:"/>
                                 <Button Margin="20,0,0,0"
                                         Width="130"
@@ -239,24 +251,34 @@
                                         BorderThickness="0"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         Foreground="Black"
+                                        FontWeight="UltraLight"
                                         FontFamily="Bahnschrift"
                                         Content="ПОКАЗАТЬ"
                                         FontSize="20"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
-                                <materialDesign:PackIcon    Kind="TrendingUp"
-                                                            Width="50"
-                                                            Height="50"
+                                        Margin="20,20,10,10">
+                                <materialDesign:PackIcon    Kind="HelpCircle"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
+                                        Content="СООБЩИТЬ ОБ ОШИБКЕ:"/>
+                                <Button Margin="20,0,0,0"
+                                        Width="120"
+                                        Background="White"
+                                        BorderThickness="0"
+                                        FontWeight="UltraLight"
+                                        materialDesign:ButtonAssist.CornerRadius="10"
+                                        Foreground="Black"
                                         FontFamily="Bahnschrift"
-                                        Content="ТЕНДЕНЦИЯ:"/>
-                                <Label/>
+                                        Content="ЖАЛОБА"
+                                        FontSize="20"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -273,7 +295,7 @@
                     Margin="10"
                     CornerRadius="30"
                     Background="White"
-                    Height="550">
+                    Height="495">
 
                 <StackPanel VerticalAlignment="Top">
                     <Border Grid.Column="0"
@@ -286,8 +308,8 @@
                         <Label  HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Foreground="White"
-                                FontSize="35"
-                                FontFamily="Bahnschrift"
+                                FontSize="25"
+                                FontWeight="UltraLight"
                                 Content="СТАТИСТИКА ЗА ВСЁ ВРЕМЯ"/>
                     </Border>
 
@@ -296,90 +318,92 @@
                             Margin="10"
                             CornerRadius="30"
                             Background="#323232"
-                            Height="400">
+                            Height="355">
 
                         <StackPanel Orientation="Vertical">
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="10,25,10,10">
                                 <materialDesign:PackIcon    Kind="Assignment"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВСЕГО ПЛАНОВ:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="10,25,10,10">
                                 <materialDesign:PackIcon    Kind="AssignmentTurnedIn"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВЫПОЛНЕНО УСПЕШНО:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="10,25,10,10">
                                 <materialDesign:PackIcon    Kind="AssignmentLate"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ВЫПОЛНЕНО С ОПАЗДАНИЕМ:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
+                                        Margin="20,20,10,10">
                                 <materialDesign:PackIcon    Kind="Dangerous"
-                                                            Width="50"
-                                                            Height="50"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
                                         Content="ПРОСРОЧЕНО:"/>
                                 <Label/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal"
-                                        Margin="10">
-                                <materialDesign:PackIcon    Kind="HelpCircle"
-                                                            Width="50"
-                                                            Height="50"
+                                        Margin="20,20,10,10">
+                                <materialDesign:PackIcon    Kind="TrendingUp"
+                                                            Width="35"
+                                                            Height="35"
                                                             Foreground="White"/>
                                 <Label  HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Foreground="White"
-                                        FontSize="25"
-                                        FontFamily="Bahnschrift"
-                                        Content="СООБЩИТЬ ОБ ОШИБКЕ:"/>
+                                        FontSize="20"
+                                        FontWeight="UltraLight"
+                                        Content="ТЕНДЕНЦИЯ:"/>
+                                <Label/>
                                 <Button Margin="20,0,0,0"
-                                        Width="120"
+                                        Width="130"
                                         Background="White"
                                         BorderThickness="0"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         Foreground="Black"
                                         FontFamily="Bahnschrift"
-                                        Content="ЖАЛОБА"
+                                        FontWeight="UltraLight"
+                                        Content="ПОКАЗАТЬ"
                                         FontSize="20"/>
                             </StackPanel>
                         </StackPanel>
@@ -400,7 +424,7 @@
 
             <Border CornerRadius="30"
                     Background="#323232"
-                    Width="1170"
+                    Width="1180"
                     Height="100">
                 <Label  HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -408,8 +432,8 @@
                         Grid.ColumnSpan="3"
                         Grid.Row="1"
                         Foreground="White"
-                        FontSize="55"
-                        FontFamily="Bahnschrift"
+                        FontSize="45"
+                        FontWeight="UltraLight"
                         Content="PLANSA - ЗАБОТИТСЯ О ВАШЕМ ВРЕМЕНИ"/>
             </Border>
         </Border>

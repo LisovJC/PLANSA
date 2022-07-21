@@ -148,7 +148,7 @@
                             VerticalAlignment="Top"
                             FontSize="17"
                             Content="ОБЗОР"
-                            Command=""/>
+                            Command="{Binding OpenReviewWindowCommand}"/>
 
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,10,10"
                             Height="35"
@@ -194,6 +194,7 @@
                             Content="{Binding NumberLabel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             Margin="10,0,0,0"
                             Foreground="Black"
+                            ToolTip="Количество ваших планов"
                             FontFamily="Bahnschrift"
                             FontSize="17">
                     </Button>
@@ -201,6 +202,7 @@
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
                             Height="35"
                             Width="70"
+                            ToolTip="Завершить этот план"
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
@@ -209,8 +211,7 @@
                             Margin="10,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
-                            FontSize="17"
-                            Command="{Binding AddFileCommand}">
+                            FontSize="17">
                         <materialDesign:PackIcon Kind="CheckboxesMarked"
                                                  Height="30"
                                                  Width="30"
@@ -223,6 +224,7 @@
                             Height="35"
                             Width="70"
                             VerticalAlignment="Top"
+                            ToolTip="Прикрепить файл"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
                             Background="#0D7377"
@@ -242,15 +244,17 @@
                             Height="35"
                             Width="70"
                             VerticalAlignment="Top"
+                            ToolTip="Открепить файл"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
                             Background="#E23E57"
                             BorderThickness="0"
                             Margin="10,0,0,0"
                             Foreground="White"
+                            Command="{Binding RemoveFileCommand}"
                             FontFamily="Bahnschrift"
-                            FontSize="17"
-                            Command="{Binding RemoveFileCommand}">
+                            FontSize="17" Cursor="Hand"
+                            >
                         <materialDesign:PackIcon Kind="FileDocumentBoxRemove"
                                                  Height="30"
                                                  Width="30"/>
@@ -268,6 +272,7 @@
                             Margin="10,0,0,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
+                            ToolTip="Добавить подзадачу"
                             FontSize="17"
                             Command="{Binding CreateCheckBoxCommand}">
                         <materialDesign:PackIcon Kind="PlusBox"
@@ -278,6 +283,7 @@
 
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
                             Height="35"
+                            ToolTip="Удалить подзадачу"
                             Width="70"
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
@@ -305,6 +311,7 @@
                             Margin="10,0,10,0"
                             Foreground="White"
                             FontFamily="Bahnschrift"
+                            ToolTip="Настройки"
                             FontSize="17"
                             Width="70"
                             Command="{Binding OpenSettings}">
@@ -316,6 +323,7 @@
                     <Button materialDesign:ButtonAssist.CornerRadius="0,0,15,15"
                             Height="35"
                             Padding="20,0,20,0"
+                            ToolTip="Удалить этот план (Редактируемый)"
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Background="#E23E57"
@@ -827,9 +835,9 @@
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <ProgressBar Width="225"
-                                                 Height="15"
+                                                 Height="25"
                                                  Margin="10,0,10,0"
-                                                 Background="#0D7377"
+                                                 Background="#8B9298"
                                                  Value="{Binding MprogressBar, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Border>
                             </StackPanel>
@@ -875,16 +883,18 @@
                                      HorizontalAlignment="Left"
                                      Grid.Column="0"
                                      VerticalAlignment="Top"
+                                     Height="350"
                                      MaxHeight="850"
                                      Width="auto" 
                                      SelectedIndex="{Binding selectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      ItemsSource="{Binding checkBoxes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal"
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal"
                                                         Margin="0,5,0,0">
 
-                                                <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
+                                                    <CheckBox materialDesign:CheckBoxAssist.CheckBoxSize="27"
                                                   Foreground="#e4e3e3"
                                                   Background="#e4e3e3"                                                 
                                                   FontSize="15"
@@ -892,7 +902,7 @@
                                                   FontFamily="Bahnschrift"
                                                   Command="{Binding Checked}"
                                                   IsChecked="{Binding isCheck, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                                <TextBox    HorizontalAlignment="Center"
+                                                    <TextBox    HorizontalAlignment="Center"
                                                     Foreground="White"
                                                     Margin="10,0,0,0"
                                                     FontSize="23"
@@ -903,7 +913,8 @@
                                                     BorderThickness="0"
                                                     materialDesign:HintAssist.Hint="Какая у нас подзадача?.."
                                                     Text="{Binding textCheckBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                            </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
@@ -976,6 +987,7 @@
                                                     Text="{Binding FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </StackPanel>
                                                 <Grid.InputBindings>
+                                                    <MouseBinding Gesture="LeftClick"/>
                                                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Source={x:Static vm:PlansaViewModel.Instance}, Path=OpenFileCommand}"/>
                                                 </Grid.InputBindings>
                                             </Grid>
