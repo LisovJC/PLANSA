@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLANSA.View.Pages" 
-      xmlns:pages="clr-namespace:PLANSA.ViewModel.Pages"
+      xmlns:pages="clr-namespace:PLANSA.ViewModel.Pages" 
+      xmlns:converters="clr-namespace:PLANSA.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="900" 
       d:DesignWidth="1700"
@@ -13,6 +14,10 @@
     <Page.DataContext>
         <pages:MyPlansViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <converters:BackgroundConverter x:Key="DTBC"/>
+    </Page.Resources>
 
     <Grid   Background="#323232">
         <Grid.ColumnDefinitions>
@@ -36,13 +41,19 @@
                   
                   SelectedIndex="{Binding numberTask, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Задача" Width="400" Binding="{Binding HeaderPlan}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Задача" Width="300" Binding="{Binding HeaderPlan}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Дата добавления" Width="180" Binding="{Binding DateAdd}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Срок выполнения" Width="180" Binding="{Binding DateComplete}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Осталось дней" Width="180" Binding="{Binding TimeOFDay}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Осталось часов" Width="180" Binding="{Binding TimeOF}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Статус" Width="200" Binding="{Binding Status}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Цветовой приоритет выполнения" Width="*" Binding="{Binding ColorPriority}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Осталось дней" Width="130" Binding="{Binding TimeOFDay}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Осталось часов" Width="130" Binding="{Binding TimeOF}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Status}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Приоритет выполнения" Width="*" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="{Binding DateComplete, Converter={StaticResource DTBC}}"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

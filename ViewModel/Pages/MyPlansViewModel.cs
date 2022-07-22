@@ -12,6 +12,14 @@ namespace PLANSA.ViewModel.Pages
     {
 
         public ObservableCollectionEX<TaskItem> TaskItems { get; set; }
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
         public MyPlansViewModel()
         {
             TaskItems = new ObservableCollectionEX<TaskItem>();

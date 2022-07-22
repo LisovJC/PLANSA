@@ -189,7 +189,7 @@
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
-                            Background="#e4e3e3"
+                            Background="#DFD3D3"
                             BorderThickness="0"
                             Content="{Binding NumberLabel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             Margin="10,0,0,0"
@@ -206,7 +206,7 @@
                             VerticalAlignment="Top"
                             FontWeight="UltraLight"
                             Padding="20,0,20,0"
-                            Background="#e4e3e3"
+                            Background="#DFD3D3"
                             BorderThickness="0"
                             Margin="10,0,0,0"
                             Foreground="White"
@@ -363,7 +363,7 @@
                                 Padding="0"
                                 Height="60"
                                 Command="{Binding LeftPlanCommand}">
-                            <materialDesign:PackIcon Kind="ArrowLeft"
+                            <materialDesign:PackIcon Kind="ChevronLeft"
                                                      Width="40"
                                                      Height="40"/>
                         </Button>
@@ -376,7 +376,7 @@
                                 Width="60"
                                 Height="60"
                                 Command="{Binding RightPlanCommand}">
-                            <materialDesign:PackIcon Kind="ArrowRight"
+                            <materialDesign:PackIcon Kind="ChevronRight"
                                                      Width="40"
                                                      Height="40"/>
                         </Button>
@@ -467,7 +467,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10" >
                                     <Label Content="{Binding deadLine, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -500,7 +500,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding hoursRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -534,7 +534,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding daysRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -570,13 +570,16 @@
                             </StackPanel>
                         </StackPanel>
 
-                        <Border     Background="#e4e3e3"
+                        <Border     Background="#DFD3D3"
                                         Grid.Row="3"
                                         Margin="10"
                                         CornerRadius="10"
                                         VerticalAlignment="Stretch">
-                            <TextBlock Text="{Binding planContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Foreground="Black"
+                            <Border Background="#212121"
+                                    Margin="10"
+                                    CornerRadius="10">
+                                <TextBlock Text="{Binding planContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Foreground="White"
                                    FontSize="20"
                                    FontWeight="UltraLight"
                                    Padding="0"
@@ -584,6 +587,7 @@
                                    TextWrapping="Wrap"
                                    FontFamily="Bahnschrift"
                                    HorizontalAlignment="Stretch" />
+                            </Border>
 
                         </Border>
 
@@ -657,7 +661,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding MplanHeader, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -732,7 +736,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding MdaysRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -765,7 +769,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding MhoursRemained, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -798,7 +802,7 @@
                                    HorizontalAlignment="Center"
                                    HorizontalContentAlignment="Center"/>
 
-                                <Border Background="#e4e3e3"
+                                <Border Background="#DFD3D3"
                                         Margin="10,0,0,0"
                                         CornerRadius="10">
                                     <Label Content="{Binding MdeadLine, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -1000,19 +1004,30 @@
                         <Border Grid.Row="1"
                                 Grid.Column="2"
                                 Grid.ColumnSpan="2"
-                                Background="#e4e3e3"
+                                Background="#DFD3D3"
                                 Margin="0,0,10,10"
                                 CornerRadius="10">
-                            <TextBlock Text="{Binding MplanContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Foreground="Black"
-                                   FontSize="20"
-                                   FontWeight="UltraLight"
-                                   Padding="0"
-                                   Margin="10,10,10,10"
-                                   TextWrapping="Wrap"
-                                   FontFamily="Bahnschrift"
-                                   HorizontalAlignment="Stretch" />
-                            
+                            <Border Background="#212121"
+                                    Margin="10"
+                                    CornerRadius="10">
+                                <StackPanel Orientation="Vertical">
+                                    <materialDesign:PackIcon Kind="CircleEditOutline"
+                                                             Foreground="White"
+                                                             Margin="10,15,0,0"
+                                                             Width="30"
+                                                             Height="30"/>
+
+                                    <TextBlock Text="{Binding MplanContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                               Foreground="White"
+                                               FontSize="20"
+                                               FontWeight="UltraLight"
+                                               Padding="0"
+                                               Margin="10,10,10,10"
+                                               TextWrapping="Wrap"
+                                               FontFamily="Bahnschrift"
+                                               HorizontalAlignment="Stretch" />
+                                </StackPanel>
+                            </Border>
                         </Border>
 
                         

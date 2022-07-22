@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converter\BackgroundConverter.cs" />
     <Compile Include="Model\CheckBoxItem.cs" />
     <Compile Include="Model\CurrentData.cs" />
     <Compile Include="Model\Settings.cs" />
