@@ -223,11 +223,11 @@ namespace PLANSA.ViewModel.Windows
         #endregion
 
         #region PriorityColors
-        private const string normalColor = "#75a77d";
-        private const string lessNormalColor = "#E0F9B5";
-        private const string warningColor = "#F9ED69";
-        private const string lessWarningColor = "#F08A5D";
-        private const string criticalColor = "#D72323";
+        public static string normalColor = "#75a77d";
+        public static string lessNormalColor = "#E0F9B5";
+        public static string warningColor = "#F9ED69";
+        public static string lessWarningColor = "#F08A5D";
+        public static string criticalColor = "#D72323";
 
         private Brush _priority;
 

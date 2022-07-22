@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLANSA.ViewModel.Windows;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -15,16 +16,22 @@ namespace PLANSA.Converter
         {
             if (value is DateTime date)
             {
-                int daysLeft = (date - DateTime.Today).Days;
+                double hoursLeft = (date - DateTime.Today).TotalHours;
 
-                //return new SolidColorBrush(daysLeft switch
-                //{
-                //    <= 2 and > 0 => Colors.LightCoral,
-                //    <= 4 and > 2 => Colors.Khaki,
-                //    > 4 => Colors.LightGreen,
-                //    _ => Colors.Red
-                //});
-                return new SolidColorBrush(Colors.Red);
+                if (hoursLeft >= 96)
+                    return (Brush)new BrushConverter().ConvertFrom(PlansaViewModel.normalColor);
+
+                if ((hoursLeft < 96) && (hoursLeft >= 72))
+                    return (Brush)new BrushConverter().ConvertFrom(PlansaViewModel.lessNormalColor);
+
+                if ((hoursLeft < 72) && (hoursLeft >= 48))
+                    return (Brush)new BrushConverter().ConvertFrom(PlansaViewModel.warningColor);
+
+                if ((hoursLeft < 48) && (hoursLeft >= 32))
+                    return (Brush)new BrushConverter().ConvertFrom(PlansaViewModel.lessWarningColor);
+
+                if (hoursLeft < 32)
+                    return (Brush)new BrushConverter().ConvertFrom(PlansaViewModel.criticalColor);
             }
             return new ArgumentException(null, nameof(value));
         }
